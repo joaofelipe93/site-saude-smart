@@ -1,0 +1,6 @@
+# pacote gerado para upload; refaca com Compress-Archive
+*.zip
+
+# lixo de sistema
+Thumbs.db
+.DS_Store
