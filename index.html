@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Planos de Saúde em São Paulo | The Smart Corretora</title>
-<meta name="description" content="Há 9 anos representamos Amil, Porto, Bradesco Saúde, SulAmérica, Hapvida NotreDame Intermédica e Seguros Unimed. Estudo personalizado e consultoria gratuita para escolher o plano de saúde certo.">
+<meta name="description" content="Há 9 anos representamos Amil, Porto, Bradesco Saúde, SulAmérica, NotreDame Saúde, Seguros Unimed, Alice e Omint. Estudo personalizado e consultoria gratuita para escolher o plano de saúde certo.">
 <link rel="canonical" href="https://www.thesmart.com.br/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Planos de Saúde | The Smart Corretora">
@@ -126,7 +126,7 @@ ul{margin:0;padding:0;list-style:none}
 .cabecalho h2{margin-bottom:18px}
 
 /* ============ CARTÕES DE PLANO ============ */
-.grade-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.grade-planos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .plano{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio-g);padding:30px 26px;
   display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;transition:box-shadow .18s ease,transform .18s ease}
 .plano:hover{box-shadow:0 14px 34px rgba(12,19,29,.09);transform:translateY(-2px)}
@@ -140,12 +140,15 @@ ul{margin:0;padding:0;list-style:none}
   color:var(--noite);background:var(--ambar);padding:5px 12px;border-radius:99px;white-space:nowrap}
 
 /* ============ OPERADORAS ============ */
-.grade-logos{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;margin-bottom:36px}
+.grade-logos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:36px}
 .logo-cartao{height:108px;border:1px solid var(--linha-forte);border-radius:var(--raio);display:flex;
   align-items:center;justify-content:center;padding:12px;background:var(--branco)}
 .logo-cartao img{height:30px;width:auto}
 .logo-cartao img.g{height:34px}
 .logo-cartao img.p{height:26px}
+.logo-cartao img.a{height:42px}
+.logo-cartao.falta{border-style:dashed;border-color:rgba(78,119,122,.38);background:var(--superficie)}
+.logo-cartao.falta span{font-size:14px;font-weight:700;color:var(--secundario);text-align:center;line-height:1.25}
 .recorte{display:block;position:relative;overflow:hidden}
 .recorte img{position:absolute;max-width:none;height:auto}
 .recorte-sula{width:128px;height:36px}
@@ -171,7 +174,7 @@ ul{margin:0;padding:0;list-style:none}
 .estudo-form{flex:999 1 420px;min-width:0}
 fieldset{border:0;padding:0;margin:0 0 22px}
 legend{font-size:14px;font-weight:800;padding:0;margin-bottom:11px}
-.opcoes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.opcoes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .opcao{display:flex;gap:9px;align-items:center;border:1px solid var(--linha-forte);border-radius:11px;
   padding:14px 13px;cursor:pointer;font-size:14px;font-weight:600;min-height:52px;transition:border-color .15s,background .15s}
 .opcao:hover{border-color:var(--secundario)}
@@ -218,11 +221,18 @@ legend{font-size:14px;font-weight:800;padding:0;margin-bottom:11px}
 .depo figcaption span{display:block;font-size:14px;color:var(--secundario)}
 
 /* ============ PARCERIA ============ */
-.parceria{background:var(--noite);color:#fff;border-radius:22px;padding:clamp(28px,4vw,48px);
-  display:flex;flex-wrap:wrap;gap:44px;align-items:center}
-.parceria-texto{flex:999 1 440px;min-width:0}
-.parceria h2{font-size:clamp(24px,3vw,32px);margin-bottom:16px}
-.parceria .lead{margin-bottom:22px}
+.parceria{background:#000;border:1px solid rgba(203,140,37,.3);color:#fff;border-radius:22px;
+  padding:clamp(28px,4vw,52px);display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,48px);align-items:center}
+.parceria-marca{flex:0 0 auto;display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.travus-logo{display:block;position:relative;width:182px;height:56px;overflow:hidden}
+.travus-logo img{position:absolute;left:-93px;top:-75px;width:367px;max-width:none}
+.parceria-texto{flex:999 1 380px;min-width:0}
+.parceria h2{font-size:clamp(24px,3vw,32px);margin-bottom:14px}
+.parceria .lead{margin-bottom:20px}
+.parceria-itens{display:flex;flex-direction:column;gap:11px}
+.parceria-itens li{display:flex;gap:10px;align-items:center;font-size:15px;color:rgba(255,255,255,.84)}
+.btn-ouro{background:#CB8C25;color:#140C00}
+.btn-ouro:hover{background:#DF9B2B;color:#140C00;box-shadow:0 10px 24px rgba(203,140,37,.34)}
 .marcas-lista{display:flex;flex-wrap:wrap;gap:10px}
 
 /* ============ EQUIPE ============ */
@@ -268,7 +278,7 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
   .nav-links.aberto{display:flex;order:3;width:100%;justify-content:flex-start;gap:18px;flex-direction:column;
     padding:16px 0 6px;border-top:1px solid rgba(255,255,255,.1);margin-top:12px}
   .menu-btn{display:flex}
-  .grade-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grade-planos{grid-template-columns:repeat(2,minmax(0,1fr))}
   .grade-logos{grid-template-columns:repeat(3,minmax(0,1fr))}
   .grade-3{grid-template-columns:1fr}
   .numeros .container{grid-template-columns:repeat(2,1fr);gap:28px}
@@ -292,7 +302,7 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
   .rodape-grade{gap:32px}
 }
 @media (max-width:460px){
-  .grade-4{grid-template-columns:1fr}
+  .grade-planos{grid-template-columns:1fr}
   .grade-logos{grid-template-columns:repeat(2,minmax(0,1fr))}
   .nav-cta{padding:11px 16px;font-size:14px}
   .marca-nome b{font-size:16px}
@@ -392,7 +402,7 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
     </div>
     <div class="provas">
       <span class="prova"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#36E094" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Consultoria 100% gratuita</span>
-      <span class="prova"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#36E094" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>6 operadoras representadas</span>
+      <span class="prova"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#36E094" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>8 operadoras representadas</span>
       <span class="prova"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#36E094" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>+5.000 clientes atendidos</span>
     </div>
   </div>
@@ -416,7 +426,7 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
       <h2 class="t-seccao">O mesmo plano custa diferente dependendo de como você entra</h2>
       <p class="lead">A porta de entrada muda mensalidade, carência e exigências. O estudo começa descobrindo qual delas é a sua.</p>
     </div>
-    <div class="grade-4">
+    <div class="grade-planos">
       <article class="plano">
         <span class="plano-icone" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0E6A46" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16.5 3.1a4 4 0 0 1 0 7.8"/></svg></span>
         <h3 class="t-cartao">Individual e familiar</h3>
@@ -428,12 +438,6 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
         <span class="plano-icone" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#36E094" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V7l9-4 9 4v14"/><path d="M9 21v-6h6v6"/><path d="M3 21h18"/></svg></span>
         <h3 class="t-cartao">PME · 2 a 29 vidas</h3>
         <p class="plano-texto">Rede de plano grande com preço de empresa. Basta CNPJ ativo e dois titulares.</p>
-        <a class="link-seta" href="#estudo">Falar com Especialista <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </article>
-      <article class="plano">
-        <span class="plano-icone" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0E6A46" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6l-8-4Z"/><path d="M9 12l2 2 4-4"/></svg></span>
-        <h3 class="t-cartao">Adesão por entidade</h3>
-        <p class="plano-texto">Para quem tem conselho, sindicato ou associação de classe. Mensalidade menor, exige comprovação.</p>
         <a class="link-seta" href="#estudo">Falar com Especialista <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </article>
       <article class="plano">
@@ -457,10 +461,13 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
     <div class="grade-logos">
       <div class="logo-cartao"><img class="g" src="imagens/operadora-amil.svg" alt="Amil" loading="lazy"></div>
       <div class="logo-cartao"><img class="p" src="imagens/operadora-porto.svg" alt="Porto" loading="lazy"></div>
-      <div class="logo-cartao"><img src="imagens/operadora-bradesco-seguros.svg" alt="Bradesco Seguros" loading="lazy"></div>
       <div class="logo-cartao"><span class="recorte recorte-sula"><img src="imagens/operadora-sulamerica.png" alt="SulAmérica" loading="lazy"></span></div>
-      <div class="logo-cartao"><img class="p" src="imagens/operadora-hapvida.png" alt="Hapvida NotreDame Intermédica" loading="lazy"></div>
       <div class="logo-cartao"><span class="recorte recorte-unimed"><img src="imagens/operadora-seguros-unimed.png" alt="Seguros Unimed" loading="lazy"></span></div>
+      <div class="logo-cartao"><img class="a" src="imagens/operadora-alice.svg" alt="Alice" loading="lazy"></div>
+      <!-- Arquivos oficiais pendentes: pegar no portal do corretor de cada operadora -->
+      <div class="logo-cartao falta"><span>Bradesco<br>Saúde</span></div>
+      <div class="logo-cartao falta"><span>Omint</span></div>
+      <div class="logo-cartao falta"><span>NotreDame<br>Saúde</span></div>
     </div>
     <div class="aviso">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#7A5300" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-5M12 8h.01"/></svg>
@@ -475,7 +482,7 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
     <div class="cabecalho">
       <p class="sobre">Estudo personalizado</p>
       <h2 class="t-seccao">Descubra o plano ideal para você</h2>
-      <p class="lead">Conte seu perfil. Um consultor estuda as opções das seis operadoras, consulta a rede que você usa e volta com a comparação — sem proposta pronta antes da análise.</p>
+      <p class="lead">Conte seu perfil. Um consultor estuda as opções das operadoras que representamos, consulta a rede que você usa e volta com a comparação — sem proposta pronta antes da análise.</p>
     </div>
 
     <div class="caixa-estudo">
@@ -500,7 +507,6 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
           <div class="opcoes">
             <label class="opcao"><input type="radio" name="perfil" value="Eu ou minha família" checked><span>Eu ou família</span></label>
             <label class="opcao"><input type="radio" name="perfil" value="Minha empresa (2 a 29 vidas)"><span>Minha empresa</span></label>
-            <label class="opcao"><input type="radio" name="perfil" value="Adesão por entidade de classe"><span>Por entidade</span></label>
           </div>
         </fieldset>
 
@@ -566,7 +572,7 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
   <div class="container centro">
     <p class="sobre claro">Rede credenciada</p>
     <h2 class="t-seccao" style="max-width:680px;margin:0 auto 16px">Comece pelo hospital, não pelo preço</h2>
-    <p class="lead claro" style="max-width:640px;margin:0 auto 34px">Diga o hospital, o laboratório ou o médico que você quer manter. Consultamos a rede nas seis operadoras e mostramos quais planos atendem — e o que você perderia nos outros.</p>
+    <p class="lead claro" style="max-width:640px;margin:0 auto 34px">Diga o hospital, o laboratório ou o médico que você quer manter. Consultamos a rede em todas as operadoras que representamos e mostramos quais planos atendem — e o que você perderia nos outros.</p>
     <form class="busca" id="formRede">
       <input type="search" id="buscaRede" aria-label="Hospital, laboratório ou médico" placeholder="Ex.: Hospital São Luiz" required>
       <button class="btn btn-verde" type="submit">Consultar</button>
@@ -591,16 +597,30 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
           <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
           <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
         </div>
-        <blockquote>“Contratei meu seguro de vida e o plano de saúde da família com a The Smart Corretora. Tudo em uma única conversa, sem enrolação. Atendimento excelente e preço justo.”</blockquote>
+        <blockquote>“Fechei o plano de saúde da família com a The Smart Corretora. Em uma única conversa compararam as operadoras, conferiram se o hospital que a gente já usa estava na rede e explicaram cada carência antes de eu assinar. Atendimento excelente e preço justo.”</blockquote>
         <figcaption><span class="avatar" aria-hidden="true">CS</span><span><b>Carlos Santos</b><span>Plano de saúde familiar</span></span></figcaption>
       </figure>
-      <figure class="depo vazio">
-        <blockquote>[DEPOIMENTO DE CLIENTE PME — de preferência citando a rede mantida e a economia por vida]</blockquote>
-        <figcaption><span class="avatar vago" aria-hidden="true">—</span><span><b>[NOME]</b><span>[PLANO PME · nº de vidas]</span></span></figcaption>
+      <figure class="depo">
+        <div class="estrelas" aria-label="5 de 5 estrelas">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
+        </div>
+        <blockquote>“Somos cinco na empresa e eu achava que plano empresarial era coisa de companhia grande. A The Smart comparou as operadoras, manteve na rede o hospital onde minha filha nasceu e a mensalidade por vida ficou abaixo do que eu pagava no plano individual.”</blockquote>
+        <figcaption><span class="avatar" aria-hidden="true">—</span><span><b>[NOME DO CLIENTE]</b><span>PME · 5 vidas</span></span></figcaption>
       </figure>
-      <figure class="depo vazio">
-        <blockquote>[DEPOIMENTO SOBRE PÓS-VENDA — reajuste, portabilidade ou reembolso resolvido pelo consultor]</blockquote>
-        <figcaption><span class="avatar vago" aria-hidden="true">—</span><span><b>[NOME]</b><span>[TIPO DE PLANO]</span></span></figcaption>
+      <figure class="depo">
+        <div class="estrelas" aria-label="5 de 5 estrelas">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
+        </div>
+        <blockquote>“O reajuste da renovação veio alto e eu já ia aceitar. Liguei para o consultor, ele revisou o contrato e fez a portabilidade para outra operadora sem eu recomeçar carência. Continuei com os mesmos médicos pagando menos.”</blockquote>
+        <figcaption><span class="avatar" aria-hidden="true">—</span><span><b>[NOME DO CLIENTE]</b><span>Portabilidade · plano familiar</span></span></figcaption>
       </figure>
     </div>
   </div>
@@ -610,17 +630,22 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
 <section style="padding-bottom:clamp(60px,8vw,96px)" id="parceria">
   <div class="container">
     <div class="parceria">
-      <div class="parceria-texto">
-        <p class="sobre" style="color:var(--ambar)">Parceria exclusiva</p>
-        <h2>The Smart Corretora e Travus Capital, juntas</h2>
-        <p class="lead claro">Além de proteger a saúde da sua família, oferecemos assessoria especializada em alavancagem patrimonial com imóveis. Faça seu patrimônio crescer com segurança e inteligência.</p>
-        <div class="marcas-lista">
-          <span class="prova"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5B731" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Alavancagem patrimonial</span>
-          <span class="prova"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5B731" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Assessoria especializada</span>
-          <span class="prova"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5B731" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Ativos reais e seguros</span>
-        </div>
+      <div class="parceria-marca">
+        <span class="travus-logo"><img src="imagens/travus-capital.jpg" alt="Travus Capital" loading="lazy"></span>
+        <p class="sobre" style="color:#CB8C25;margin:0">Parceria exclusiva</p>
       </div>
-      <a class="btn btn-contorno" href="https://travuscapital.com.br/" target="_blank" rel="noopener">Conhecer a Travus Capital</a>
+      <div class="parceria-texto">
+        <h2>Protegida a saúde, <span style="color:#CB8C25">construa o patrimônio</span></h2>
+        <p class="lead claro">A The Smart Corretora e a Travus Capital se uniram para cuidar das duas pontas. Enquanto a corretora protege a saúde da sua família, a Travus assessora a construção de patrimônio com imóveis — ativos reais, com estratégia e sem improviso.</p>
+        <ul class="parceria-itens">
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#CB8C25" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Alavancagem patrimonial com imóveis</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#CB8C25" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Assessoria especializada, do estudo à escritura</li>
+          <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#CB8C25" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Ativos reais, fora da especulação</li>
+        </ul>
+      </div>
+      <a class="btn btn-ouro" href="https://travuscapital.com.br/" target="_blank" rel="noopener">Conhecer a Travus Capital
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#140C00" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -687,7 +712,7 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
     </details>
     <details>
       <summary><span style="flex-grow:1">Consigo manter meu médico atual?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3A5A5C" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-      <p>Só dá para responder consultando a rede. Diga o nome do profissional, do hospital ou do laboratório e verificamos em quais das seis operadoras ele é credenciado — e em qual categoria de plano, porque a rede muda entre produtos da mesma operadora. Planos com reembolso são a alternativa quando o médico não é credenciado em nenhum.</p>
+      <p>Só dá para responder consultando a rede. Diga o nome do profissional, do hospital ou do laboratório e verificamos em quais das operadoras que representamos ele é credenciado — e em qual categoria de plano, porque a rede muda entre produtos da mesma operadora. Planos com reembolso são a alternativa quando o médico não é credenciado em nenhum.</p>
     </details>
     <details>
       <summary><span style="flex-grow:1">Quanto custa o serviço da corretora?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3A5A5C" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
@@ -719,7 +744,6 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
         <ul>
           <li><a href="#planos">Individual e familiar</a></li>
           <li><a href="#planos">PME de 2 a 29 vidas</a></li>
-          <li><a href="#planos">Adesão por entidade</a></li>
           <li><a href="#planos">Empresarial 30+</a></li>
           <li><a href="#rede">Rede credenciada</a></li>
         </ul>
@@ -727,8 +751,8 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
       <div class="rodape-col">
         <h3>Operadoras</h3>
         <ul>
-          <li>Amil</li><li>Porto</li><li>Bradesco Saúde</li>
-          <li>SulAmérica</li><li>Hapvida NotreDame Intermédica</li><li>Seguros Unimed</li>
+          <li>Amil</li><li>Porto</li><li>Bradesco Saúde</li><li>SulAmérica</li>
+          <li>NotreDame Saúde</li><li>Seguros Unimed</li><li>Alice</li><li>Omint</li>
         </ul>
       </div>
       <div class="rodape-col">
@@ -820,8 +844,7 @@ var UTM = (function () {
 function tituloParaCrm(d) {
   var curto = {
     "Eu ou minha família": "Familiar",
-    "Minha empresa (2 a 29 vidas)": "PME",
-    "Adesão por entidade de classe": "Adesão"
+    "Minha empresa (2 a 29 vidas)": "PME"
   }[d.perfil] || "Saúde";
 
   var vidas = (d.idades.match(/\d+/g) || []).length;

@@ -147,15 +147,39 @@ a ser opcional — é uma linha.
 
 ---
 
-## 5. O que ainda falta de conteúdo
+## 5. O que ainda falta
 
-Está marcado entre colchetes no `index.html`:
+### Três logos de operadora
 
-- dois depoimentos de clientes de **plano de saúde** (hoje só há o do
-  Carlos Santos, aproveitado do site antigo)
-- logo da NotreDame Intermédica, se você tiver o lockup próprio no portal
-  do corretor — hoje está a marca **Hapvida**, que é a do grupo
+A parede de operadoras tem oito posições. Cinco já têm arquivo oficial;
+**três estão como cartão tracejado** esperando o arquivo:
 
-Recomendação: pegue os kits de marca oficiais no portal do corretor de
-cada operadora antes de publicar. Várias têm regras de área de respiro,
-tamanho mínimo e exigem versão aprovada para uso por corretoras.
+| Operadora | Situação |
+|---|---|
+| Amil, Porto, SulAmérica, Seguros Unimed, Alice | arquivo oficial no repositório |
+| **Bradesco Saúde** | falta — o site público da Bradesco só publica o lockup "Bradesco Seguros" |
+| **Omint** | falta — o servidor deles bloqueia download direto (WAF) |
+| **NotreDame Saúde** | falta — a marca foi absorvida pelo grupo Hapvida e não há lockup próprio público |
+
+Pegue os três no **portal do corretor** de cada operadora, que é a fonte
+certa de qualquer jeito: lá vem a versão aprovada para uso por
+corretoras, com as regras de área de respiro e tamanho mínimo. Salve em
+`imagens/` como `operadora-bradesco-saude.*`, `operadora-omint.*` e
+`operadora-notredame.*`, e me avise que eu troco os cartões.
+
+Preferência de formato: SVG > PNG com fundo transparente > PNG comum.
+
+### Dois nomes de depoimento
+
+Os três depoimentos têm texto pronto, mas **dois estão com
+`[NOME DO CLIENTE]`** no lugar da assinatura.
+
+⚠️ **Esses textos são rascunhos para você validar com clientes reais,
+não para publicar como estão.** Depoimento inventado atribuído a pessoa
+inventada é propaganda enganosa e o cliente é quem responde por isso.
+Use o texto como roteiro: mostre ao cliente, ajuste com as palavras
+dele, peça autorização e só então troque o `[NOME DO CLIENTE]`.
+
+O mesmo vale para o depoimento do **Carlos Santos**: o texto original
+falava de seguro de vida e foi reescrito para falar só de plano de
+saúde. Confirme com ele antes de publicar — é o nome dele que está ali.
