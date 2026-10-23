@@ -238,7 +238,9 @@ legend{font-size:14px;font-weight:800;padding:0;margin-bottom:11px}
 /* ============ EQUIPE ============ */
 .grade-equipe{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;max-width:880px;margin:0 auto}
 .pessoa{text-align:center;background:var(--superficie);border:1px solid var(--linha);border-radius:var(--raio-g);padding:30px 24px}
-.pessoa .avatar{width:76px;height:76px;font-size:24px;margin:0 auto 16px}
+.pessoa-foto{position:relative;width:104px;height:104px;border-radius:50%;overflow:hidden;
+  margin:0 auto 18px;background:var(--linha);display:block;box-shadow:0 0 0 1px rgba(78,119,122,.25)}
+.pessoa-foto img{position:absolute;max-width:none;display:block}
 .pessoa h3{font-size:18px;margin-bottom:5px}
 .pessoa p{font-size:14px;color:var(--secundario)}
 
@@ -659,9 +661,18 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
       <p class="lead">Cada cliente é único. Por isso, nossos especialistas analisam seu perfil e objetivos antes de apresentar qualquer proposta — garantindo a solução certa, não a mais cara.</p>
     </div>
     <div class="grade-equipe">
-      <article class="pessoa"><span class="avatar" aria-hidden="true">LM</span><h3>Luiz Filippe Muniz</h3><p>Consultor Sênior</p></article>
-      <article class="pessoa"><span class="avatar" aria-hidden="true">SO</span><h3>Samara Oliveira</h3><p>Especialista em Saúde e Seguros</p></article>
-      <article class="pessoa"><span class="avatar" aria-hidden="true">CT</span><h3>Cleiton Teixeira</h3><p>Especialista em Veículos</p></article>
+      <article class="pessoa">
+        <span class="pessoa-foto"><img src="imagens/equipe-1.jpg" alt="" loading="lazy" style="width:142px;left:-15px;top:0"></span>
+        <h3>[NOME]</h3><p>[CARGO]</p>
+      </article>
+      <article class="pessoa">
+        <span class="pessoa-foto"><img src="imagens/equipe-2.jpg" alt="" loading="lazy" style="width:265px;left:-46px;top:-21px"></span>
+        <h3>[NOME]</h3><p>[CARGO]</p>
+      </article>
+      <article class="pessoa">
+        <span class="pessoa-foto"><img src="imagens/equipe-3.jpg" alt="" loading="lazy" style="width:266px;left:-69px;top:-7px"></span>
+        <h3>[NOME]</h3><p>[CARGO]</p>
+      </article>
     </div>
   </div>
 </section>
