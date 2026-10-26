@@ -174,11 +174,14 @@ ficam iguais.
 Trocando qualquer uma dessas fotos, me avise: o recorte é medido no
 arquivo e precisa ser refeito.
 
-**Falta o cargo de dois deles.** Você mandou os nomes, mas não os
-títulos do Cesar e do Rodrigo. Os dois estão aparecendo como
-"Especialista", que é rótulo de espera — me diga como cada um deve ser
-apresentado. O Cleiton continua como "Especialista em Veículos", que já
-estava na página.
+**Os cargos saíram.** A página mostra só os nomes, acompanhando a
+decisão que já estava no repositório. Se quiser os títulos de volta,
+me mande como cada um deve ser apresentado.
+
+Esses três arquivos substituem `equipe-1.jpg`, `equipe-2.jpg` e
+`equipe-3.jpg`, que estavam no repositório: eram **exatamente as mesmas
+fotos** (conferido byte a byte), só sem compressão e com nome que não
+dizia de quem era. As versões aqui pesam um terço.
 
 ### Fotos em uso
 
@@ -194,7 +197,7 @@ não comprimi essa porque não vai para a tela. Se quiser que eu apague,
 ### Compressão: já feita
 
 As imagens já foram comprimidas. A pasta `imagens/` saiu de **4,4 MB
-para 420 KB** nas imagens que a página carrega — 90% a menos, sem
+para 433 KB** nas imagens que a página carrega — 90% a menos, sem
 diferença visível na tela.
 
 | Arquivo | Antes | Agora |
@@ -206,15 +209,19 @@ diferença visível na tela.
 | `rodrigofrancheli.jpeg` | 55 KB | **19 KB**, 400x401 |
 | `cleitonteixeira.jpeg` | 43 KB | **16 KB**, 400x406 |
 | `cesarnieto.jpeg` | 43 KB | **15 KB**, 400x400 |
+| `travus-capital.jpg` | 41 KB, 2000x1125 | **9 KB**, 364x115 |
 
 Cada arquivo foi reduzido para pouco mais que o dobro do tamanho em que
 aparece na tela, que é o que uma tela de celular de alta densidade
 precisa. Formato e nome continuam os mesmos, então nada mudou na
 publicação.
 
-`operadora-seguros-unimed.png` e `operadora-hapvida.png` ficaram como
-estavam: recomprimir a primeira deixava o arquivo **maior**, e a
-segunda já tem 4 KB.
+A `travus-capital.jpg` era uma peça inteira de fundo preto, 2000x1125,
+com a logo ocupando um pedaço do meio. Ela foi **recortada na logo**:
+o que vai para a tela é só o lockup, com uma margem de preto em volta.
+
+`operadora-seguros-unimed.png` ficou como estava: recomprimir deixava o
+arquivo **maior** que o original.
 
 **Se um dia você trocar alguma dessas imagens**, mande o arquivo
 original e me avise, em vez de subir direto: o arquivo que sai da
@@ -231,24 +238,37 @@ A pedido seu, "Nossas soluções em saúde" ficou com **três cartões**:
 "PME · 2 a 29 vidas", "Individual e familiar" e "Empresarial 30+".
 Saiu só o cartão de **"Adesão por entidade"**.
 
-Esse produto **não sumiu do site**: continua nos links do rodapé, e
-"Adesão por entidade de classe" segue como uma das três opções do
-formulário, então o lead continua chegando no CRM com esse perfil. O que
-saiu foi a explicação dele nessa seção.
+⚠️ **Atenção, isso mudou.** Quando eu tirei o cartão, deixei o produto
+no rodapé e no formulário de propósito, para o lead desse perfil
+continuar chegando. Mas no `main` do repositório ele já tinha sido
+removido **também do formulário** e do rodapé, e eu segui essa decisão
+para não desfazer o que estava lá.
 
-Se quiser o cartão de volta, é rápido — é só pedir.
+Na prática: o formulário tem **duas** opções de perfil, "Eu ou família"
+e "Minha empresa". Ninguém consegue mais se identificar como adesão por
+entidade, e o CRM não recebe mais esse perfil. Se isso não era para ter
+acontecido, me peça que eu devolvo as três opções — é uma linha.
 
-### Depoimentos
+### Dois nomes de depoimento
 
-Faltam dois: um de cliente **PME** (de preferência citando a rede
-mantida e a economia por vida) e um sobre **pós-venda** (reajuste,
-portabilidade ou reembolso resolvido pelo consultor). Hoje a página
-mostra só o do Carlos Santos, tratado como citação em destaque.
+A página tem três depoimentos: o do Carlos Santos como citação em
+destaque e, abaixo de um fio, dois menores — um de cliente PME e um
+sobre portabilidade. Os textos desses dois vieram prontos do
+repositório, mas a assinatura está como **`[NOME DO CLIENTE]`**.
 
-Os cartões vazios com texto entre colchetes **saíram do ar**: cartão
-tracejado dizendo `[NOME]` passa impressão de site inacabado. O lugar
-deles está marcado num comentário dentro da seção `#prova` no
-`index.html`, com a instrução de como voltar para duas colunas.
+⚠️ **Esses textos são rascunhos para validar com clientes reais, não
+para publicar como estão.** Depoimento inventado atribuído a pessoa
+inventada é propaganda enganosa, e quem responde é a corretora. Use o
+texto como roteiro: mostre ao cliente, ajuste com as palavras dele,
+peça autorização e só então troque o `[NOME DO CLIENTE]`.
+
+Enquanto os colchetes estiverem ali, a página não deve ir para o ar.
+
+Sobre o **Carlos Santos**: no repositório o texto dele tinha sido
+reescrito para falar só de plano de saúde. Aqui ficou o **texto
+original**, o mesmo do site antigo, porque é o que ele de fato disse e
+é o nome dele que está embaixo. Se a versão reescrita foi combinada com
+ele, me avise que eu troco.
 
 ### Logo da The Smart para fundo claro
 
@@ -265,14 +285,29 @@ Se você tiver no material da marca a **versão para fundo claro** (a que
 tem o símbolo em verde-escuro ou preto, sem branco), me mande: eu troco
 o arquivo e tiro a plaquinha.
 
-### Logo da NotreDame Intermédica
+### Três logos de operadora
 
-Se você tiver o lockup próprio no portal do corretor, ele substitui a
-marca **Hapvida** que está lá hoje, que é a do grupo.
+A parede de operadoras tem **oito** posições. Cinco têm arquivo
+oficial; três estão como **cartão tracejado**, esperando o arquivo:
 
-Recomendação: pegue os kits de marca oficiais no portal do corretor de
-cada operadora antes de publicar. Várias têm regras de área de respiro,
-tamanho mínimo e exigem versão aprovada para uso por corretoras.
+| Operadora | Situação |
+|---|---|
+| Amil, Porto, SulAmérica, Seguros Unimed, Alice | arquivo oficial no repositório |
+| **Bradesco Saúde** | falta — o site público só publica o lockup "Bradesco Seguros" |
+| **Omint** | falta — o servidor deles bloqueia download direto |
+| **NotreDame Saúde** | falta — a marca foi absorvida pelo grupo Hapvida e não há lockup próprio público |
+
+Pegue os três no **portal do corretor** de cada operadora, que é a
+fonte certa de qualquer jeito: lá vem a versão aprovada para uso por
+corretoras, com as regras de área de respiro e tamanho mínimo. Salve em
+`imagens/` como `operadora-bradesco-saude.*`, `operadora-omint.*` e
+`operadora-notredame.*`, e me avise que eu troco os cartões.
+
+Preferência de formato: SVG > PNG com fundo transparente > PNG comum.
+
+O cartão tracejado é melhor que logo errado: ele registra que a
+operadora é representada sem exibir a marca de outra empresa. O logo da
+**Hapvida**, que estava no lugar da NotreDame, saiu por isso.
 
 ---
 

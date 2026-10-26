@@ -53,6 +53,13 @@ Duas consequências a respeitar em qualquer alteração:
 - **Fail-open:** o lead nunca se perde por causa do CRM. Widget desligado,
   ausente, ou sem atributo `action` → aviso no console e segue direto para
   o WhatsApp. Todo o envio ao CRM está dentro de `try/catch`.
+- **`perfil` tem dois valores**, não três: `Eu ou minha família` e
+  `Minha empresa (2 a 29 vidas)`. São chave de busca em
+  `tituloParaCrm()` — mexer na string muda o título da oportunidade.
+  `Adesão por entidade de classe` **saiu** junto com o produto, do
+  cartão, do rodapé e do mapa de `tituloParaCrm()`; a remoção veio do
+  `main` do repositório e foi seguida na reconciliação. Esse perfil já
+  não chega ao CRM.
 - **A qualificação viaja no campo `Tag`.** O widget tem só nome, e-mail e
   telefone (mais os personalizados `Idades`, `cep` e um `textarea` de
   hospital) e nenhum campo de observação. `tituloParaCrm()` monta uma
@@ -159,13 +166,23 @@ contrato com o CRM.
 - **Saiu um cartão a pedido do cliente**: "Adesão por entidade".
   Ficaram PME, Individual e familiar e Empresarial 30+. O Empresarial
   chegou a sair junto e voltou no pedido seguinte, com o texto e a
-  classe `.plano-tinta` originais. O produto removido continua no
-  rodapé e no formulário — "Adesão por entidade de classe" é um dos
-  três valores de `perfil`, que são **contrato com o CRM** e não podem
-  sumir. Não "limpe" essas sobras achando que são resto: elas são o que
-  ainda registra esse produto na página.
+  classe `.plano-tinta` originais. O produto saiu **inteiro** da
+  página na reconciliação com o `main` do repositório: cartão, link do
+  rodapé, opção do formulário e entrada em `tituloParaCrm()`.
+- A parede de operadoras (`.muro`) tem **oito** posições em quatro
+  colunas. Cinco têm arquivo; três são `.muro-item.falta`, cartão
+  tracejado com o nome da operadora, à espera do arquivo oficial do
+  portal do corretor. O tracejado registra a representação sem exibir
+  marca de outra empresa — foi o que aconteceu com o logo da Hapvida
+  no lugar da NotreDame, e por isso ele saiu.
 - O verde é o **único acento**. O âmbar não é um segundo acento: cobre
   dois usos semânticos, o aviso da ANS e as estrelas da avaliação.
+- `imagens/travus-capital.jpg` é dourado sobre **preto**: o arquivo
+  original era uma peça de fundo preto inteiro, 2000x1125, recortada na
+  logo. Sobre o cartão claro da parceria ela leva placa de
+  `--profundo`, pelo mesmo motivo da logo da nav. O cartão da parceria
+  **continua claro**: o preto e ouro que está no `main` do repositório
+  não foi trazido, porque o cliente recusou bloco escuro três vezes.
 - Um sistema de formas só: interativo = pílula (`--r-pilula`),
   contêiner = `--r-caixa` (16px), campo = `--r-campo` (12px).
 - Acessibilidade é explícita no markup existente (link "pular",
@@ -191,8 +208,10 @@ contrato com o CRM.
   manter a ausência silenciosa, nunca uma imagem quebrada. Hoje as três
   existem: Cleiton Teixeira (`cleitonteixeira.jpeg`), Cesar Nieto
   (`cesarnieto.jpeg`) e Rodrigo Francheli (`rodrigofrancheli.jpeg`).
-  O cargo do Cesar e do Rodrigo é **"Especialista", rótulo de espera**:
-  o cliente mandou só os nomes. Não invente título para eles.
+  **Ninguém tem cargo**: a lista é só de nomes, acompanhando a decisão
+  que veio do `main` do repositório. `.pessoa p` foi removida junto.
+  Os três arquivos substituem `equipe-1/2/3.jpg`, que eram as mesmas
+  fotos (idênticas por SHA-256) sem compressão.
 - Duas dessas fotos não são retratos de rosto: a do Cleiton é de meio
   corpo e a do Cesar é um card de marca com fundo roxo e logotipo ao
   lado. Arquivo quadrado em avatar quadrado significa que o `cover` não
@@ -238,13 +257,13 @@ contrato com o CRM.
 - Ícone dentro de botão usa `stroke="currentColor"`, nunca hex: assim
   acompanha a cor do botão quando o tema muda. Já houve ícone branco
   invisível em nav claro por causa disso.
-- `.hero` é `display:flex` e o `.container` precisa de `width:100%`, ou
-  encolhe para o conteúdo e o `margin:0 auto` o centraliza, quebrando a
-  margem esquerda que todas as seções compartilham.
-- Faltam dois depoimentos, marcados num comentário dentro de `#prova`.
-  São lacunas a preencher com material real, não texto a inventar.
-- O logo exibido para a NotreDame Intermédica é o da **Hapvida** (marca do
-  grupo), à espera do lockup próprio do portal do corretor.
+- `#prova` tem três depoimentos: a citação editorial do Carlos Santos
+  e, abaixo de um fio, o par `.depo-par`. Os dois do par vieram escritos
+  do `main` do repositório **com `[NOME DO CLIENTE]` na assinatura** e
+  são rascunho para validar com cliente real — não publique assim, e
+  não invente o nome. É a única coisa entre colchetes na página.
+  O texto do Carlos Santos aqui é o **original**, não a reescrita que
+  está no `main`: é o nome de uma pessoa real embaixo.
 - `imagens/logo-thesmart.png` é um lockup para **fundo escuro**: 64% dos
   pixels opacos são brancos e 28% são o verde da marca. Sobre a nav
   clara sobravam só os traços verdes e a logo sumia. Por isso
