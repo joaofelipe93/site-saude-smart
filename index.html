@@ -6,6 +6,7 @@
 <title>Planos de Saúde em São Paulo | The Smart Corretora</title>
 <meta name="description" content="Há 9 anos representamos Amil, Porto, Bradesco Saúde, SulAmérica, Hapvida NotreDame Intermédica e Seguros Unimed. Estudo personalizado e consultoria gratuita para escolher o plano de saúde certo.">
 <link rel="canonical" href="https://www.thesmart.com.br/">
+<meta name="theme-color" content="#0C131D">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Planos de Saúde | The Smart Corretora">
 <meta property="og:description" content="Plano de saúde escolhido com estudo, não com pressa. Consultoria gratuita com quem representa as operadoras há 9 anos.">
@@ -19,282 +20,464 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
 
 <style>
-/* ============ TOKENS ============ */
+/* =====================================================================
+   TOKENS
+   Tema claro, sempre: não existe modo escuro e a página também não
+   segue o do navegador. É um site de saúde e a leitura é branca,
+   arejada e com verde. Não há bloco escuro nenhum; o verde-petróleo
+   sobrou em detalhes pequenos (fita, avatares, texto de botão).
+
+   Duas famílias de cor:
+   1. MARCA - verde e verde-petróleo, usadas como tinta de detalhe.
+   2. SEMÂNTICA - superfície, menta, texto, linha: o esqueleto claro.
+
+   O verde é o único acento. O âmbar não é um segundo acento: serve a
+   dois usos semânticos, o aviso da ANS e as estrelas da avaliação.
+   Formas: um sistema só, seguido em toda a página.
+      interativo = pílula | contêiner = 16px | campo = 12px
+   Camadas (z-index): nav 40, WhatsApp flutuante 60. Nada mais empilha.
+   ===================================================================== */
 :root{
-  --noite:#0C131D;
-  --tinta:#0F1821;
-  --tinta-2:#16222E;
-  --superficie:#F7FBFA;
-  --branco:#FFFFFF;
+  /* A página é clara sempre, mesmo com o navegador no modo escuro.
+     Isto não é só estética: sem esta linha o Chrome em modo escuro
+     pinta por conta própria os campos, as listas, a barra de rolagem
+     e o preenchimento automático, e o formulário fica com caixas
+     escuras no meio de uma página branca.                            */
+  color-scheme:light;
+
+  /* marca */
   --verde:#36E094;
-  --verde-texto:#0E6A46;
-  --ambar:#F5B731;
-  --ambar-texto:#4A3400;
-  --secundario:#3A5A5C;
-  --linha:rgba(78,119,122,.18);
-  --linha-forte:rgba(78,119,122,.30);
+  --verde-forte:#2ACB84;
+  --profundo:#1A5547;          /* verde-petróleo: fita, avatares, botão */
   --zap:#25D366;
+
+  /* semântica - modo claro */
+  --superficie:#EEF5F1;        /* fundo da página: menta bem diluída */
+  --cartao:#FFFFFF;            /* cartão e faixa branca sobem sobre ela */
+  --menta:#E3F0E9;             /* faixas e painéis suaves */
+  --menta-forte:#CFE8DA;       /* cartão em destaque */
+  --texto:#102420;
+  --texto-2:#456159;           /* firme o bastante sobre a menta forte */
+  --marcador:#55736A;
+  --linha:rgba(16,36,31,.14);
+  --linha-forte:rgba(16,36,31,.24);
+  --acento-texto:#0B6342;      /* verde legível sobre fundo claro */
+  --nav:rgba(255,255,255,.90);
+  --atencao:rgba(245,183,49,.18);
+  --atencao-texto:#4A3400;
+  --erro:#B3261E;
+
   --container:1120px;
   --fonte:Manrope,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  --raio:14px;
-  --raio-g:18px;
+  --r-caixa:16px;
+  --r-campo:12px;
+  --r-pilula:999px;
 }
 
 /* ============ BASE ============ */
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  margin:0;font-family:var(--fonte);background:var(--superficie);color:var(--tinta);
+  margin:0;font-family:var(--fonte);background:var(--superficie);color:var(--texto);
   -webkit-font-smoothing:antialiased;font-size:17px;line-height:1.6;
 }
 img{max-width:100%;display:block}
-a{color:var(--verde-texto);text-decoration:none}
-a:hover{color:var(--noite)}
+a{color:var(--acento-texto);text-decoration:none}
+a:hover{color:var(--texto)}
 h1,h2,h3{margin:0;letter-spacing:-.03em;line-height:1.1;font-weight:800}
 p{margin:0}
 ul{margin:0;padding:0;list-style:none}
 :focus-visible{outline:2px solid var(--verde);outline-offset:3px;border-radius:4px}
 .container{max-width:var(--container);margin:0 auto;padding:0 32px}
-.centro{text-align:center}
-.pular{position:absolute;left:-9999px;top:0;background:var(--verde);color:var(--noite);padding:12px 18px;border-radius:0 0 10px 0;font-weight:800;z-index:100}
+.pular{position:absolute;left:-9999px;top:0;background:var(--verde);color:var(--profundo);padding:12px 18px;border-radius:0 0 10px 0;font-weight:800;z-index:100}
 .pular:focus{left:0}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 
+/* Revelação na entrada. A classe .revelar é aplicada pelo JavaScript,
+   nunca na marcação: sem JS o conteúdo aparece normalmente, em vez de
+   ficar invisível para sempre.                                        */
+.revelar{opacity:0;transform:translateY(14px);transition:opacity .55s ease,transform .55s ease}
+.revelar.visto{opacity:1;transform:none}
+
 /* ============ TIPOGRAFIA ============ */
-.sobre{font-size:12px;font-weight:700;letter-spacing:.17em;color:var(--verde-texto);text-transform:uppercase;margin-bottom:16px}
-.sobre.claro{color:var(--verde)}
-.t-seccao{font-size:clamp(28px,3.6vw,44px)}
+.sobre{font-size:12px;font-weight:700;letter-spacing:.16em;color:var(--acento-texto);text-transform:uppercase;margin-bottom:14px}
+.t-seccao{font-size:clamp(27px,3.4vw,42px);text-wrap:balance}
 .t-cartao{font-size:20px}
-.lead{font-size:clamp(16px,1.6vw,18px);line-height:1.65;color:var(--secundario)}
-.lead.claro{color:rgba(255,255,255,.78)}
+.lead{font-size:clamp(16px,1.5vw,18px);line-height:1.65;color:var(--texto-2);max-width:62ch}
 
 /* ============ BOTÕES ============ */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:99px;
-  font-family:var(--fonte);font-size:17px;font-weight:800;padding:18px 30px;cursor:pointer;min-height:56px;
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:0;border-radius:var(--r-pilula);
+  font-family:var(--fonte);font-size:16px;font-weight:800;padding:17px 28px;cursor:pointer;min-height:56px;
+  white-space:nowrap;text-align:center;
   transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
 .btn:hover{transform:translateY(-1px)}
-.btn-verde{background:var(--verde);color:var(--noite)}
-.btn-verde:hover{background:#2ACB84;color:var(--noite);box-shadow:0 10px 24px rgba(54,224,148,.3)}
-.btn-contorno{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.26);color:#fff}
-.btn-contorno:hover{background:rgba(255,255,255,.14);color:#fff}
+.btn:active{transform:translateY(0) scale(.985)}
+.btn-verde{background:var(--verde);color:var(--profundo)}
+.btn-verde:hover{background:var(--verde-forte);color:var(--profundo);box-shadow:0 12px 26px -10px rgba(54,224,148,.5)}
+.btn-contorno{background:var(--cartao);border:1px solid var(--linha-forte);color:var(--texto)}
+.btn-contorno:hover{background:var(--menta);color:var(--texto)}
 .btn-bloco{width:100%}
-.link-seta{display:inline-flex;align-items:center;gap:7px;font-size:15px;font-weight:700}
+.link-seta{display:inline-flex;align-items:center;gap:7px;font-size:15px;font-weight:700;margin-top:auto}
 .link-seta svg{transition:transform .15s ease}
 .link-seta:hover svg{transform:translateX(3px)}
 
 /* ============ NAV ============ */
-.nav{position:sticky;top:0;z-index:40;background:rgba(12,19,29,.85);backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.08)}
-.nav .container{display:flex;align-items:center;gap:24px;padding-top:14px;padding-bottom:14px}
+.nav{position:sticky;top:0;z-index:40;background:var(--nav);backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--linha)}
+.nav .container{display:flex;align-items:center;gap:24px;padding-top:13px;padding-bottom:13px}
 .marca{display:flex;align-items:center;gap:11px;flex-shrink:0}
-.marca img{width:40px;height:40px;object-fit:contain}
+/* O PNG da logo é um lockup para fundo ESCURO: 64% dele é branco e
+   desaparece sobre a nav clara, sobrando só os traços verdes. Até
+   chegar a versão para fundo claro, o símbolo ganha uma placa de
+   verde-petróleo. Não é cor nova: é a mesma tinta da fita e dos
+   círculos de iniciais. O box-sizing global mantém a placa em 38px,
+   então a altura da nav não muda.                                    */
+.marca img{width:38px;height:38px;object-fit:contain;
+  background:var(--profundo);border-radius:var(--r-campo);padding:5px}
 .marca-nome{display:flex;flex-direction:column;gap:1px}
-.marca-nome b{font-size:17px;font-weight:800;letter-spacing:-.03em;color:#fff;line-height:1}
-.marca-nome span{font-size:8px;font-weight:700;letter-spacing:.2em;color:var(--verde)}
-.nav-links{display:flex;flex-wrap:wrap;gap:26px;flex-grow:1;justify-content:center}
-.nav-links a{font-size:15px;font-weight:600;color:rgba(255,255,255,.78)}
-.nav-links a:hover{color:#fff}
-.nav-cta{background:var(--verde);color:var(--noite);font-size:15px;font-weight:800;padding:12px 22px;border-radius:99px;flex-shrink:0;white-space:nowrap}
-.nav-cta:hover{background:#2ACB84;color:var(--noite)}
-.menu-btn{display:none;width:46px;height:46px;background:transparent;border:1px solid rgba(255,255,255,.24);
-  border-radius:11px;cursor:pointer;align-items:center;justify-content:center;flex-shrink:0}
+.marca-nome b{font-size:17px;font-weight:800;letter-spacing:-.03em;color:var(--texto);line-height:1}
+.marca-nome span{font-size:8px;font-weight:700;letter-spacing:.2em;color:var(--acento-texto)}
+.nav-links{display:flex;gap:24px;flex-grow:1;justify-content:center}
+.nav-links a{font-size:15px;font-weight:600;color:var(--texto-2);white-space:nowrap}
+.nav-links a:hover{color:var(--texto)}
+.nav-cta{background:var(--verde);color:var(--profundo);font-size:15px;font-weight:800;padding:12px 22px;
+  border-radius:var(--r-pilula);flex-shrink:0;white-space:nowrap;transition:background .15s ease}
+.nav-cta:hover{background:var(--verde-forte);color:var(--profundo)}
+.menu-btn svg{stroke:var(--texto)}
+.menu-btn{display:none;width:46px;height:46px;background:transparent;border:1px solid var(--linha-forte);
+  border-radius:var(--r-campo);cursor:pointer;align-items:center;justify-content:center;flex-shrink:0}
 
-/* ============ HERO ============ */
-.hero{position:relative;min-height:860px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--noite)}
-.hero-fundo{position:absolute;inset:0;width:100%;height:100%}
-.hero-conteudo{position:relative;z-index:1;max-width:728px;margin:0 auto;padding:120px 24px 92px;text-align:center;color:#fff}
-.hero h1{font-size:clamp(34px,5.4vw,62px);line-height:1.04;margin-bottom:26px}
-.hero h1 em{font-style:normal;color:var(--verde)}
-.selo{display:inline-flex;gap:9px;align-items:center;font-size:clamp(10px,1.1vw,12px);font-weight:700;letter-spacing:.14em;
-  color:var(--verde);background:rgba(54,224,148,.12);border:1px solid rgba(54,224,148,.3);padding:9px 18px;border-radius:99px;margin-bottom:28px}
-.hero-botoes{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin:38px 0 42px}
-.provas{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.prova{display:flex;gap:8px;align-items:center;font-size:14px;font-weight:600;color:rgba(255,255,255,.86);
-  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);padding:10px 17px;border-radius:99px}
+/* ============ HERO ============
+   Divisão de verdade: a foto ocupa a metade esquerda inteira, sangrando
+   até a borda da tela, e a mensagem ocupa a metade direita sobre um
+   degradê de menta. Sem cartão e sem moldura.
+
+   O bloco de texto é alinhado à esquerda da sua metade e limitado a
+   meio contêiner, para a margem direita bater exatamente com a das
+   outras seções sem depender de 100vw (que conta a barra de rolagem).
+
+   Quatro elementos de texto, nada mais: selo, título, linha de apoio e
+   os dois botões.                                                     */
+.hero{position:relative;background:var(--superficie);color:var(--texto);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  min-height:clamp(500px,74dvh,660px);overflow:hidden}
+.hero-texto-area{display:flex;align-items:center;justify-content:flex-start;
+  background:linear-gradient(215deg,var(--menta),var(--superficie) 64%)}
+.hero-texto{width:100%;max-width:calc(var(--container)/2);
+  padding:clamp(44px,5.5vw,76px) 32px clamp(44px,5.5vw,76px) clamp(24px,2.8vw,44px)}
+/* A coluna é metade do contêiner, então o título é dimensionado para
+   fechar em duas linhas nessa medida, não na largura da página.      */
+.hero h1{font-size:clamp(26px,2.6vw,35px);line-height:1.12;margin-bottom:18px;text-wrap:balance}
+.hero h1 em{font-style:normal;color:var(--acento-texto)}
+.selo{display:inline-flex;gap:9px;align-items:center;font-size:clamp(10px,1vw,11.5px);font-weight:700;letter-spacing:.14em;
+  color:var(--acento-texto);background:var(--cartao);border:1px solid var(--linha-forte);
+  padding:9px 16px;border-radius:var(--r-pilula);margin-bottom:26px}
+.selo svg{stroke:var(--acento-texto)}
+.hero .lead{max-width:52ch}
+.hero-botoes{display:flex;flex-wrap:wrap;gap:13px;margin-top:34px}
+
+/* A foto preenche a metade inteira. A coluna é quase quadrada e a
+   foto é deitada (3:2), então sobra largura: o recorte centrado tira
+   cerca de um quarto das laterais e mantém a família inteira no
+   quadro, da filha mais velha ao bebê.                                */
+.hero-foto{position:relative;overflow:hidden;background:var(--menta)}
+.hero-foto img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
 
 /* ============ NÚMEROS ============ */
-.numeros{background:var(--tinta);border-top:1px solid rgba(255,255,255,.07);padding:44px 0}
-.numeros .container{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
-.numeros b{display:block;font-size:clamp(26px,3.2vw,38px);font-weight:800;letter-spacing:-.035em;color:var(--verde);line-height:1.1}
-.numeros span{display:block;font-size:14px;color:rgba(255,255,255,.64);margin-top:4px}
+.numeros{background:var(--cartao);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+.numeros .container{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:0}
+.numero{padding:30px 26px;border-left:1px solid var(--linha)}
+.numero:first-child{border-left:0;padding-left:32px}
+.numero b{display:block;font-size:clamp(27px,3.1vw,38px);font-weight:800;letter-spacing:-.04em;
+  color:var(--acento-texto);line-height:1;font-variant-numeric:tabular-nums}
+.numero span{display:block;font-size:14px;line-height:1.45;color:var(--texto-2);margin-top:9px;max-width:20ch}
 
 /* ============ SEÇÕES ============ */
-.seccao{padding:clamp(60px,8vw,100px) 0}
-.seccao-branca{background:var(--branco);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
-.seccao-escura{background:var(--tinta);color:#fff}
-.cabecalho{max-width:740px;margin:0 auto clamp(36px,5vw,52px);text-align:center}
-.cabecalho h2{margin-bottom:18px}
+.seccao{padding:clamp(58px,7.5vw,100px) 0}
+.seccao-clara{background:var(--cartao);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha)}
+.seccao-menta{background:var(--menta)}
+.cabecalho{max-width:720px;margin-bottom:clamp(30px,4.2vw,50px)}
+.cabecalho h2{margin-bottom:15px}
+.cabecalho-centro{max-width:660px;margin-left:auto;margin-right:auto;text-align:center}
+.cabecalho-centro .lead{margin-left:auto;margin-right:auto}
 
-/* ============ CARTÕES DE PLANO ============ */
-.grade-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
-.plano{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio-g);padding:30px 26px;
-  display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;transition:box-shadow .18s ease,transform .18s ease}
-.plano:hover{box-shadow:0 14px 34px rgba(12,19,29,.09);transform:translateY(-2px)}
-.plano-destaque{background:var(--noite);color:#fff;border-color:var(--noite)}
-.plano-destaque .plano-texto{color:rgba(255,255,255,.76)}
-.plano-destaque .link-seta{color:var(--verde)}
-.plano-icone{width:54px;height:54px;border-radius:15px;background:rgba(54,224,148,.14);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
-.plano h3{margin-bottom:10px}
-.plano-texto{font-size:15px;line-height:1.6;color:var(--secundario);margin-bottom:20px;flex-grow:1}
-.fita{position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:800;letter-spacing:.1em;
-  color:var(--noite);background:var(--ambar);padding:5px 12px;border-radius:99px;white-space:nowrap}
-
-/* ============ OPERADORAS ============ */
-.grade-logos{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;margin-bottom:36px}
-.logo-cartao{height:108px;border:1px solid var(--linha-forte);border-radius:var(--raio);display:flex;
-  align-items:center;justify-content:center;padding:12px;background:var(--branco)}
-.logo-cartao img{height:30px;width:auto}
-.logo-cartao img.g{height:34px}
-.logo-cartao img.p{height:26px}
+/* ============ MURO DE OPERADORAS ============
+   Logos e nada mais. A placa é branca e fixa em #fff, não no token de
+   cartão: a arte das operadoras é feita para fundo claro.             */
+.muro{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(10px,1.6vw,18px);margin-bottom:30px}
+.muro-item{height:88px;background:#fff;border:1px solid var(--linha-forte);border-radius:var(--r-campo);
+  display:flex;align-items:center;justify-content:center;padding:14px}
+.muro-item img{height:30px;width:auto}
+.muro-item img.g{height:34px}
+.muro-item img.p{height:26px}
+/* Recortes que corrigem o excesso de margem embutido nos dois PNGs. */
 .recorte{display:block;position:relative;overflow:hidden}
 .recorte img{position:absolute;max-width:none;height:auto}
 .recorte-sula{width:128px;height:36px}
 .recorte-sula img{left:-10px;top:-3px;width:286px}
 .recorte-unimed{width:150px;height:40px}
 .recorte-unimed img{left:-15px;top:-13px;width:179px}
-.aviso{display:flex;gap:11px;align-items:center;justify-content:center;background:rgba(245,183,49,.14);
-  border-radius:12px;padding:15px 20px;max-width:780px;margin:0 auto}
-.aviso p{font-size:14px;line-height:1.5;color:var(--ambar-texto)}
-.aviso svg{flex-shrink:0}
+.aviso{display:flex;gap:11px;align-items:center;background:var(--atencao);
+  border-radius:var(--r-campo);padding:15px 20px;max-width:820px}
+.aviso p{font-size:14px;line-height:1.5;color:var(--atencao-texto)}
+.aviso svg{flex-shrink:0;stroke:var(--atencao-texto)}
 
-/* ============ FORMULÁRIO ============ */
-.caixa-estudo{background:var(--branco);border:1px solid var(--linha);border-radius:22px;padding:clamp(24px,3.4vw,40px);
-  display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,48px);box-shadow:0 18px 50px rgba(12,19,29,.07)}
-.estudo-lado{flex:0 1 300px}
-.estudo-lado h3{font-size:22px;margin-bottom:18px}
-.checklist{display:flex;flex-direction:column;gap:15px;margin-bottom:26px}
-.checklist li{display:flex;gap:11px;align-items:flex-start;font-size:15px;line-height:1.55}
-.checklist svg{flex-shrink:0;margin-top:3px}
-.nota-custo{border-top:1px solid var(--linha);padding-top:20px}
-.nota-custo b{display:block;font-size:15px;font-weight:800;color:var(--verde-texto);margin-bottom:6px}
-.nota-custo p{font-size:14px;line-height:1.55;color:var(--secundario)}
-.estudo-form{flex:999 1 420px;min-width:0}
-fieldset{border:0;padding:0;margin:0 0 22px}
-legend{font-size:14px;font-weight:800;padding:0;margin-bottom:11px}
-.opcoes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.opcao{display:flex;gap:9px;align-items:center;border:1px solid var(--linha-forte);border-radius:11px;
-  padding:14px 13px;cursor:pointer;font-size:14px;font-weight:600;min-height:52px;transition:border-color .15s,background .15s}
-.opcao:hover{border-color:var(--secundario)}
-.opcao input{accent-color:var(--verde-texto);width:17px;height:17px;flex-shrink:0;margin:0}
-.opcao:has(input:checked){border:1.5px solid var(--tinta);background:rgba(54,224,148,.08);font-weight:700}
+/* ============ PLANOS ============
+   Grade de três colunas: os três cartões numa linha e a foto embaixo,
+   ocupando a largura toda. É por a foto ser DEITADA que o motivo
+   aparece em tamanho natural.
+
+   Esta seção já foi dividida ao meio e já teve a foto como célula em
+   pé. Nos dois casos a foto, que é 3:2, precisava preencher uma caixa
+   alta e estreita, e o `cover` ampliava até sobrar um terço da
+   largura: virava um close de dedo. Numa faixa deitada acontece o
+   contrário — a largura inteira aparece e o corte é no alto e embaixo,
+   que é o que a foto tem de sobra. Ao mexer na altura da faixa,
+   lembre-se disso: estreitar volta a ampliar a mão.                 */
+.planos-grade{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(13px,1.7vw,20px)}
+/* 16/5 é mais ou menos a altura de um cartão na largura do contêiner,
+   então a faixa tem a altura de uma fileira de cartões.
+   O corte agora é vertical, e `62%` desce a janela o bastante para a
+   aliança caber inteira sem cortar o entrelace. Testados 35/50/62/75
+   lado a lado: em 35% a aliança some, em 75% o alto do gesto sai.   */
+.planos-foto{grid-column:1/-1;position:relative;overflow:hidden;
+  border-radius:var(--r-caixa);aspect-ratio:16/5;background:var(--menta)}
+.planos-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 62%}
+.plano{position:relative;display:flex;flex-direction:column;background:var(--cartao);
+  border:1px solid var(--linha);border-radius:var(--r-caixa);padding:clamp(24px,2.5vw,32px);
+  transition:box-shadow .18s ease,transform .18s ease}
+.plano:hover{transform:translateY(-2px);box-shadow:0 18px 38px -22px rgba(16,36,31,.2)}
+/* O destaque não precisa de um bloco escuro para ser destaque: a tinta
+   mais forte, o fio verde e a fita já fazem isso, e a página fica muito
+   mais clara sem um retângulo escuro no meio dela.                   */
+.plano-destaque{background:var(--menta-forte);border-color:rgba(11,99,66,.34)}
+.plano-destaque .plano-icone{background:rgba(11,99,66,.13)}
+.plano-tinta{background:linear-gradient(150deg,rgba(54,224,148,.09),rgba(54,224,148,0) 58%),var(--cartao)}
+.plano-icone{width:50px;height:50px;border-radius:var(--r-campo);background:rgba(54,224,148,.14);
+  display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+.plano-icone svg{stroke:var(--acento-texto)}
+.plano h3{margin-bottom:10px}
+.plano-texto{font-size:15px;line-height:1.6;color:var(--texto-2);margin-bottom:22px;max-width:46ch}
+.fita{display:inline-flex;align-self:flex-start;font-size:10px;font-weight:800;letter-spacing:.1em;
+  color:#fff;background:var(--profundo);padding:5px 11px;border-radius:var(--r-pilula);margin-bottom:16px}
+
+/* ============ ESTUDO ============
+   Cartão único partido: painel de menta com o que o consultor analisa,
+   formulário no branco. A diferença de tinta entre os dois lados ancora
+   a seção e destaca os campos, que são o ponto de conversão da página. */
+.caixa-estudo{display:grid;grid-template-columns:minmax(0,.76fr) minmax(0,1.24fr);
+  border:1px solid var(--linha);border-radius:var(--r-caixa);overflow:hidden;background:var(--cartao);
+  box-shadow:0 24px 54px -34px rgba(16,36,31,.2)}
+.estudo-lado{background:var(--menta);padding:clamp(26px,3vw,38px)}
+.estudo-lado h3{font-size:19px;margin-bottom:20px}
+.checklist{display:flex;flex-direction:column;gap:14px;margin-bottom:26px}
+.checklist li{display:flex;gap:11px;align-items:flex-start;font-size:15px;line-height:1.5;color:var(--texto-2)}
+.checklist b{color:var(--texto);font-weight:800}
+.checklist svg{flex-shrink:0;margin-top:3px;stroke:var(--acento-texto)}
+.nota-custo{border-top:1px solid var(--linha-forte);padding-top:20px}
+.nota-custo b{display:block;font-size:15px;font-weight:800;color:var(--acento-texto);margin-bottom:6px}
+.nota-custo p{font-size:14px;line-height:1.55;color:var(--texto-2)}
+.estudo-form{padding:clamp(24px,3vw,38px);min-width:0}
+fieldset{border:0;padding:0;margin:0 0 20px}
+legend{font-size:14px;font-weight:800;padding:0;margin-bottom:10px}
+.opcoes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.opcao{display:flex;gap:9px;align-items:center;border:1px solid var(--linha-forte);border-radius:var(--r-campo);
+  padding:14px 13px;cursor:pointer;font-size:14px;font-weight:600;min-height:52px;
+  transition:border-color .15s ease,background .15s ease}
+.opcao:hover{border-color:var(--texto-2)}
+.opcao input{accent-color:var(--acento-texto);width:17px;height:17px;flex-shrink:0;margin:0}
+.opcao:has(input:checked){border-color:var(--texto);background:rgba(54,224,148,.09);font-weight:700}
 .linha-campos{display:flex;gap:14px;margin-bottom:16px}
 .campo{flex:1 1 0;min-width:0}
-.campo-curto{flex:0 1 160px}
+.campo-curto{flex:0 1 158px}
 .campo label{display:block;font-size:14px;font-weight:800;margin-bottom:8px}
-.campo label .opt{font-weight:500;color:var(--secundario)}
-.campo input{width:100%;border:1px solid var(--linha-forte);border-radius:11px;padding:14px 13px;
-  font-family:var(--fonte);font-size:15px;color:var(--tinta);background:var(--branco);min-height:52px}
-.campo input::placeholder{color:#8AA3A5}
-.campo input:focus{border-color:var(--verde-texto);outline:none;box-shadow:0 0 0 3px rgba(14,106,70,.12)}
-.campo input[aria-invalid="true"]{border-color:#B3261E;box-shadow:0 0 0 3px rgba(179,38,30,.1)}
-.erro{display:none;font-size:13px;color:#B3261E;margin-top:6px;font-weight:600}
+.campo label .opt{font-weight:500;color:var(--texto-2)}
+.campo input{width:100%;border:1px solid var(--linha-forte);border-radius:var(--r-campo);padding:14px 13px;
+  font-family:var(--fonte);font-size:15px;color:var(--texto);background:var(--superficie);min-height:52px;
+  transition:border-color .15s ease,box-shadow .15s ease}
+.campo input::placeholder{color:var(--marcador)}
+.campo input:focus{border-color:var(--acento-texto);outline:none;box-shadow:0 0 0 3px rgba(11,99,66,.16)}
+.campo input[aria-invalid="true"]{border-color:var(--erro);box-shadow:0 0 0 3px rgba(179,38,30,.12)}
+.erro{display:none;font-size:13px;color:var(--erro);margin-top:6px;font-weight:600}
 .campo.invalido .erro{display:block}
 .consent{display:flex;gap:11px;align-items:flex-start;cursor:pointer;margin-bottom:20px}
-.consent input{accent-color:var(--verde-texto);width:18px;height:18px;margin-top:2px;flex-shrink:0}
-.consent span{font-size:13px;line-height:1.5;color:var(--secundario)}
-.rodape-form{margin-top:14px;font-size:13px;line-height:1.55;color:var(--secundario);text-align:center}
-.recibo{display:none;background:rgba(54,224,148,.12);border:1px solid rgba(54,224,148,.4);border-radius:12px;
-  padding:16px 18px;margin-top:16px;font-size:15px;line-height:1.55;color:var(--tinta)}
+.consent input{accent-color:var(--acento-texto);width:18px;height:18px;margin-top:2px;flex-shrink:0}
+.consent span{font-size:13px;line-height:1.5;color:var(--texto-2)}
+.rodape-form{margin-top:14px;font-size:13px;line-height:1.55;color:var(--texto-2);text-align:center}
+.recibo{display:none;background:rgba(54,224,148,.12);border:1px solid rgba(54,224,148,.45);border-radius:var(--r-campo);
+  padding:16px 18px;margin-top:16px;font-size:15px;line-height:1.55;color:var(--texto)}
 .recibo.visivel{display:block}
 
 /* ============ REDE ============ */
 .busca{max-width:620px;margin:0 auto;display:flex;gap:11px}
-.busca input{flex:1 1 0;min-width:0;border:0;border-radius:99px;padding:17px 24px;
-  font-family:var(--fonte);font-size:16px;color:var(--tinta);background:var(--branco);min-height:58px}
+.busca input{flex:1 1 0;min-width:0;border:1px solid var(--linha-forte);border-radius:var(--r-pilula);
+  padding:17px 24px;font-family:var(--fonte);font-size:16px;color:var(--texto);background:var(--cartao);min-height:58px}
+.busca input::placeholder{color:var(--marcador)}
 .busca .btn{padding:0 30px;flex-shrink:0}
+.nota-rede{margin-top:16px;font-size:14px;color:var(--texto-2);text-align:center}
 
-/* ============ DEPOIMENTOS ============ */
-.grade-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
-.depo{background:var(--branco);border:1px solid var(--linha);border-radius:var(--raio-g);padding:30px;display:flex;flex-direction:column;margin:0}
-.depo.vazio{border-style:dashed;border-color:var(--linha-forte)}
+/* ============ DEPOIMENTO ============
+   Um depoimento real, tratado como citação editorial. Cartões vazios
+   com texto entre colchetes não vão para o ar: os próximos entram no
+   lugar marcado na marcação.                                          */
+.citacao{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(22px,3.4vw,44px);
+  align-items:start;max-width:940px}
+.citacao-marca{font-size:72px;line-height:.7;font-weight:800;color:var(--verde);user-select:none}
+.citacao blockquote{margin:0;font-size:clamp(19px,2.1vw,26px);line-height:1.42;font-weight:600;letter-spacing:-.02em}
 .estrelas{display:flex;gap:3px;margin-bottom:18px}
-.depo blockquote{margin:0 0 24px;font-size:17px;line-height:1.65;flex-grow:1}
-.depo.vazio blockquote{color:var(--secundario)}
-.depo figcaption{display:flex;gap:13px;align-items:center}
-.avatar{width:42px;height:42px;border-radius:50%;background:var(--noite);color:var(--verde);display:flex;
-  align-items:center;justify-content:center;font-size:15px;font-weight:800;flex-shrink:0}
-.avatar.vago{background:transparent;border:1px dashed var(--linha-forte);color:var(--secundario)}
-.depo figcaption b{display:block;font-size:15px;font-weight:800}
-.depo figcaption span{display:block;font-size:14px;color:var(--secundario)}
+.citacao figcaption{display:flex;gap:13px;align-items:center;margin-top:26px;padding-top:22px;border-top:1px solid var(--linha)}
+.avatar{width:44px;height:44px;border-radius:var(--r-pilula);background:var(--profundo);color:var(--verde);
+  display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;flex-shrink:0}
+.citacao figcaption b{display:block;font-size:15px;font-weight:800}
+.citacao figcaption .papel{display:block;font-size:14px;color:var(--texto-2)}
 
 /* ============ PARCERIA ============ */
-.parceria{background:var(--noite);color:#fff;border-radius:22px;padding:clamp(28px,4vw,48px);
-  display:flex;flex-wrap:wrap;gap:44px;align-items:center}
-.parceria-texto{flex:999 1 440px;min-width:0}
-.parceria h2{font-size:clamp(24px,3vw,32px);margin-bottom:16px}
-.parceria .lead{margin-bottom:22px}
+.parceria{background:linear-gradient(150deg,rgba(54,224,148,.14),rgba(54,224,148,0) 62%),var(--cartao);
+  border:1px solid var(--linha-forte);border-radius:var(--r-caixa);padding:clamp(28px,3.6vw,48px);
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,4vw,48px);align-items:center}
+.parceria h2{font-size:clamp(23px,2.8vw,32px);margin-bottom:14px}
+.parceria .lead{margin-bottom:20px}
 .marcas-lista{display:flex;flex-wrap:wrap;gap:10px}
+.prova{display:flex;gap:8px;align-items:center;font-size:14px;font-weight:600;color:var(--texto);
+  background:var(--menta);border:1px solid var(--linha);padding:9px 16px;border-radius:var(--r-pilula)}
+.prova svg{stroke:var(--acento-texto);flex-shrink:0}
 
-/* ============ EQUIPE ============ */
-.grade-equipe{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;max-width:880px;margin:0 auto}
-.pessoa{text-align:center;background:var(--superficie);border:1px solid var(--linha);border-radius:var(--raio-g);padding:30px 24px}
-.pessoa .avatar{width:76px;height:76px;font-size:24px;margin:0 auto 16px}
-.pessoa h3{font-size:18px;margin-bottom:5px}
-.pessoa p{font-size:14px;color:var(--secundario)}
+/* ============ EQUIPE ============
+   Lista, não cartões: a hierarquia aqui é o nome, e uma caixa com
+   sombra em volta de cada pessoa não acrescenta nada.
+   A foto entra em .pessoa-foto img; sem o arquivo, ficam as iniciais. */
+.equipe{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.6vw,30px)}
+.pessoa{display:grid;grid-template-columns:72px minmax(0,1fr);gap:16px;align-items:center;
+  border-top:1px solid var(--linha-forte);padding-top:22px}
+.pessoa-foto{position:relative;width:72px;height:72px;border-radius:var(--r-pilula);overflow:hidden;background:var(--profundo);
+  color:var(--verde);display:flex;align-items:center;justify-content:center;
+  font-size:21px;font-weight:800;flex-shrink:0}
+.pessoa-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* Retrato de rosto entra pela regra acima e pronto. Esta classe é para
+   arquivo que NÃO é retrato de rosto: card de marca, foto de meio
+   corpo. Como o arquivo é quadrado e o círculo também, o `cover` não
+   corta nada e a pessoa sai minúscula dentro do avatar. Aqui a imagem
+   entra ampliada e deslocada, enquadrando a cabeça.
+
+   Os três valores vêm no `style` de cada foto porque são medidos
+   naquele arquivo, não são preferência: `--foto-zoom` é o quanto a
+   imagem cresce e `--foto-x`/`--foto-y` deslocam para a cabeça cair no
+   meio do círculo. Trocando o arquivo, remeça.
+
+   `max-width:none` é obrigatório: sem ele o `img{max-width:100%}` da
+   base trava a largura em 72px e a foto sai esticada. Mesma armadilha
+   que `.recorte img` já resolve nos logos das operadoras.            */
+.pessoa-foto-rosto img{inset:auto;left:var(--foto-x);top:var(--foto-y);
+  width:var(--foto-zoom);height:var(--foto-zoom);max-width:none}
+.pessoa h3{font-size:17px;margin-bottom:4px}
+.pessoa p{font-size:14px;line-height:1.45;color:var(--texto-2)}
+
+/* ============ FECHO ============ */
+.fecho{background:var(--menta)}
+.fecho .container{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(26px,4vw,52px);align-items:center}
+.fecho h2{font-size:clamp(27px,3.4vw,42px);margin-bottom:14px;text-wrap:balance}
+.fecho-botoes{display:flex;flex-wrap:wrap;gap:13px}
 
 /* ============ FAQ ============ */
-.faq{max-width:820px}
+/* A largura de leitura é da lista, não do contêiner: assim a FAQ
+   começa na mesma margem esquerda das outras seções.               */
+.faq details{max-width:860px}
 details{border-bottom:1px solid var(--linha)}
-summary{display:flex;gap:16px;align-items:center;padding:22px 0;font-size:clamp(16px,1.8vw,18px);font-weight:700;cursor:pointer;list-style:none}
+summary{display:flex;gap:16px;align-items:center;padding:21px 0;font-size:clamp(16px,1.7vw,18px);
+  font-weight:700;cursor:pointer;list-style:none}
+summary:hover{color:var(--acento-texto)}
 summary::-webkit-details-marker{display:none}
-summary svg{flex-shrink:0;transition:transform .18s ease}
+summary span{flex-grow:1}
+summary svg{flex-shrink:0;stroke:var(--texto-2);transition:transform .18s ease}
 details[open] summary svg{transform:rotate(180deg)}
-details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secundario)}
+details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2);max-width:68ch}
 
 /* ============ RODAPÉ ============ */
-.rodape{background:#080E16;color:rgba(255,255,255,.72);padding:64px 0 36px}
-.rodape-grade{display:flex;flex-wrap:wrap;gap:48px;margin-bottom:48px}
+.rodape{background:var(--cartao);color:var(--texto-2);border-top:1px solid var(--linha-forte);padding:62px 0 34px}
+.rodape-grade{display:flex;flex-wrap:wrap;gap:48px;margin-bottom:46px}
 .rodape-sobre{flex:0 1 300px}
 .rodape-sobre p{font-size:15px;line-height:1.6;margin-bottom:18px}
 .rodape-col{flex:1 1 170px}
-.rodape-col h3{font-size:11px;font-weight:700;letter-spacing:.14em;color:rgba(255,255,255,.45);margin-bottom:16px;text-transform:uppercase}
-.rodape-col li{margin-bottom:11px;font-size:15px;color:rgba(255,255,255,.78)}
-.rodape-col a{color:rgba(255,255,255,.78)}
-.rodape-col a:hover{color:#fff}
-.rodape-legal{border-top:1px solid rgba(255,255,255,.1);padding-top:28px;display:flex;flex-wrap:wrap;
+.rodape-col h3{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--acento-texto);
+  margin-bottom:16px;text-transform:uppercase}
+.rodape-col li{margin-bottom:11px;font-size:15px;color:var(--texto-2)}
+.rodape-col a{color:var(--texto-2)}
+.rodape-col a:hover{color:var(--texto)}
+.rodape-tel{font-weight:700;color:var(--texto)}
+.rodape-legal{border-top:1px solid var(--linha);padding-top:26px;display:flex;flex-wrap:wrap;
   gap:20px;justify-content:space-between;align-items:flex-start}
-.rodape-legal p{font-size:13px;line-height:1.6;color:rgba(255,255,255,.45);max-width:700px}
-.cnpj{font-size:13px;line-height:1.6;color:rgba(255,255,255,.5)}
+.rodape-legal p{font-size:13px;line-height:1.6;color:var(--texto-2);max-width:700px}
+.cnpj{font-size:13px;line-height:1.6;color:var(--texto-2)}
 
 /* ============ WHATSAPP FLUTUANTE ============ */
-.zap-float{position:fixed;right:28px;bottom:28px;z-index:60;width:60px;height:60px;border-radius:50%;
-  background:var(--zap);box-shadow:0 8px 24px rgba(37,211,102,.4);display:flex;align-items:center;justify-content:center;
-  transition:transform .18s ease}
+.zap-float{position:fixed;right:28px;bottom:28px;z-index:60;width:60px;height:60px;border-radius:var(--r-pilula);
+  background:var(--zap);box-shadow:0 10px 26px -8px rgba(37,211,102,.6);display:flex;align-items:center;
+  justify-content:center;transition:transform .18s ease}
 .zap-float:hover{transform:scale(1.07)}
+.zap-float:active{transform:scale(.98)}
 
-/* ============ RESPONSIVO ============ */
-@media (max-width:1000px){
+/* ============ RESPONSIVO ============
+   Cada layout de várias colunas declara aqui como colapsa. Nada é
+   deixado para o navegador adivinhar.                                 */
+@media (max-width:1040px){
   .nav-links{display:none}
-  .nav-links.aberto{display:flex;order:3;width:100%;justify-content:flex-start;gap:18px;flex-direction:column;
-    padding:16px 0 6px;border-top:1px solid rgba(255,255,255,.1);margin-top:12px}
+  .nav-links.aberto{display:flex;order:3;width:100%;flex-direction:column;justify-content:flex-start;
+    gap:18px;padding:16px 0 6px;border-top:1px solid var(--linha);margin-top:12px}
   .menu-btn{display:flex}
-  .grade-4{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .grade-logos{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .grade-3{grid-template-columns:1fr}
-  .numeros .container{grid-template-columns:repeat(2,1fr);gap:28px}
+  .hero{grid-template-columns:1fr}
+  .hero-texto-area{justify-content:center}
+  .hero-texto{max-width:var(--container);padding:clamp(40px,6vw,64px) 32px}
+  .hero-texto-area{order:1}
+  .hero-foto{aspect-ratio:3/2;order:2}
+  .numeros .container{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .numero{border-left:0;padding:24px 26px}
+  .numero:nth-child(even){border-left:1px solid var(--linha)}
+  .numero:nth-child(n+3){border-top:1px solid var(--linha)}
+  .numero:first-child{padding-left:26px}
+  /* Em duas colunas sobraria um buraco ao lado do terceiro cartão.
+     Ele passa a ocupar a linha inteira e a grade fecha sem vão.      */
+  .planos-grade{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .plano:last-of-type{grid-column:1/-1}
+  .caixa-estudo{grid-template-columns:1fr}
+  .muro{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .equipe{grid-template-columns:1fr}
+  .parceria{grid-template-columns:1fr}
+  .fecho .container{grid-template-columns:1fr}
 }
 @media (max-width:760px){
   body{font-size:16px}
   .container{padding:0 20px}
-  .hero{min-height:720px}
-  .hero-conteudo{padding:92px 4px 72px}
-  .grade-equipe{grid-template-columns:1fr}
+  .hero{min-height:0}
+  .hero-texto{padding-left:20px;padding-right:20px}
+  .planos-grade{grid-template-columns:1fr}
+  .plano:last-of-type{grid-column:auto}
+  /* Numa coluna só, 16/5 viraria uma tira de 130px. A foto volta a
+     ser 3:2, que é a proporção do arquivo: sem corte nenhum.        */
+  .planos-foto{aspect-ratio:3/2}
   .opcoes{grid-template-columns:1fr}
   .linha-campos{flex-direction:column;gap:16px}
   .campo-curto{flex:1 1 auto}
   .btn{width:100%}
-  .hero-botoes .btn{width:100%}
   .busca{flex-direction:column}
   .busca .btn{padding:0;width:100%}
-  .parceria{gap:28px}
-  .parceria .btn{width:100%}
-  .zap-float{right:16px;bottom:16px;width:56px;height:56px}
+  .citacao{grid-template-columns:1fr;gap:14px}
+  .citacao-marca{font-size:56px}
   .rodape-grade{gap:32px}
+  .zap-float{right:16px;bottom:16px;width:56px;height:56px}
+}
+/* Abaixo de 560px a marca, o botão e o menu não cabem na mesma linha.
+   O botão sai: o menu tem os mesmos destinos, o CTA do hero aparece
+   logo abaixo e o botão flutuante do WhatsApp fica sempre à mão.    */
+@media (max-width:560px){
+  .nav .container{gap:14px}
+  .nav-cta{display:none}
 }
 @media (max-width:460px){
-  .grade-4{grid-template-columns:1fr}
-  .grade-logos{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .nav-cta{padding:11px 16px;font-size:14px}
+  .numeros .container{grid-template-columns:1fr}
+  .numero,.numero:nth-child(even){border-left:0}
+  .numero:nth-child(n+2){border-top:1px solid var(--linha)}
+  .muro{grid-template-columns:repeat(2,minmax(0,1fr))}
   .marca-nome b{font-size:16px}
 }
 </style>
@@ -306,12 +489,12 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
 <nav class="nav" aria-label="Principal">
   <div class="container">
     <a class="marca" href="#topo">
-      <img src="imagens/logo-thesmart.png" alt="" width="40" height="40">
+      <img src="imagens/logo-thesmart.png" alt="" width="38" height="38">
       <span class="marca-nome"><b>The Smart</b><span>CORRETORA</span></span>
     </a>
     <div class="nav-links" id="navLinks">
-      <a href="#planos">Planos</a>
       <a href="#operadoras">Operadoras</a>
+      <a href="#planos">Planos</a>
       <a href="#estudo">Estudo</a>
       <a href="#rede">Rede</a>
       <a href="#especialistas">Especialistas</a>
@@ -319,7 +502,7 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
     </div>
     <a class="nav-cta" href="#estudo">Falar com Especialista</a>
     <button class="menu-btn" type="button" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLinks">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
   </div>
 </nav>
@@ -328,72 +511,28 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="topo">
-  <svg class="hero-fundo" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <defs>
-      <radialGradient id="luz" cx="74%" cy="18%" r="62%">
-        <stop offset="0%" stop-color="#2E8F7A" stop-opacity=".62"/>
-        <stop offset="55%" stop-color="#14414A" stop-opacity=".28"/>
-        <stop offset="100%" stop-color="#0C131D" stop-opacity="0"/>
-      </radialGradient>
-      <radialGradient id="base" cx="16%" cy="88%" r="58%">
-        <stop offset="0%" stop-color="#0E3A4A" stop-opacity=".55"/>
-        <stop offset="100%" stop-color="#0C131D" stop-opacity="0"/>
-      </radialGradient>
-      <radialGradient id="scrim" cx="50%" cy="52%" r="58%">
-        <stop offset="0%" stop-color="#0C131D" stop-opacity=".80"/>
-        <stop offset="70%" stop-color="#0C131D" stop-opacity=".50"/>
-        <stop offset="100%" stop-color="#0C131D" stop-opacity=".24"/>
-      </radialGradient>
-      <linearGradient id="pe" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="#0C131D" stop-opacity="0"/>
-        <stop offset="100%" stop-color="#0C131D" stop-opacity="1"/>
-      </linearGradient>
-      <pattern id="pontos" width="34" height="34" patternUnits="userSpaceOnUse">
-        <circle cx="2" cy="2" r="1.4" fill="#fff" fill-opacity=".07"/>
-      </pattern>
-    </defs>
-    <rect width="1440" height="900" fill="#0C131D"/>
-    <rect width="1440" height="900" fill="url(#pontos)"/>
-    <rect width="1440" height="900" fill="url(#luz)"/>
-    <rect width="1440" height="900" fill="url(#base)"/>
-    <g fill="none" stroke="#36E094" stroke-opacity=".13" stroke-width="1.4">
-      <circle cx="1210" cy="742" r="236"/><circle cx="1210" cy="742" r="352"/>
-      <circle cx="1210" cy="742" r="478"/><circle cx="1210" cy="742" r="614"/>
-      <circle cx="1210" cy="742" r="758"/><circle cx="1210" cy="742" r="910"/>
-    </g>
-    <g fill="none" stroke="#7FD8FF" stroke-opacity=".09" stroke-width="1.2">
-      <circle cx="196" cy="162" r="178"/><circle cx="196" cy="162" r="282"/><circle cx="196" cy="162" r="398"/>
-    </g>
-    <path d="M-60 900 C 180 640, 420 616, 596 718 C 742 802, 836 846, 980 900 Z" fill="#102A33" fill-opacity=".72"/>
-    <path d="M-60 900 C 230 724, 470 712, 648 806 C 760 866, 850 884, 980 900 Z" fill="#0D1E27" fill-opacity=".85"/>
-    <path d="M0 596 H 452 l 26 -58 l 30 126 l 34 -176 l 32 118 l 24 -40 H 1440" fill="none" stroke="#36E094"
-          stroke-opacity=".30" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle cx="574" cy="486" r="5.5" fill="#36E094" fill-opacity=".75"/>
-    <rect width="1440" height="900" fill="url(#scrim)"/>
-    <rect x="0" y="618" width="1440" height="282" fill="url(#pe)"/>
-  </svg>
-
-  <div class="hero-conteudo">
-    <p class="selo">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#36E094" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6l-8-4Z"/></svg>
-      PLANOS DE SAÚDE · 9 ANOS REPRESENTANDO AS OPERADORAS
-    </p>
-    <h1>Plano de saúde escolhido com estudo, <em>não com pressa</em></h1>
-    <p class="lead claro">Há 9 anos representamos as principais operadoras do país. Nossos especialistas analisam seu perfil, sua rede e seu orçamento antes de apresentar qualquer proposta — garantindo a solução certa, não a mais cara.</p>
-    <div class="hero-botoes">
-      <a class="btn btn-verde" href="#estudo">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C131D" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>
-        Falar com Especialista
-      </a>
-      <a class="btn btn-contorno" href="#planos">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4V8Z"/></svg>
-        Conheça os planos
-      </a>
-    </div>
-    <div class="provas">
-      <span class="prova"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#36E094" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Consultoria 100% gratuita</span>
-      <span class="prova"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#36E094" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>6 operadoras representadas</span>
-      <span class="prova"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#36E094" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>+5.000 clientes atendidos</span>
+  <!-- Foto decorativa (alt vazio): quem usa leitor de tela já recebe a
+       mensagem pelo título ao lado. Carrega com prioridade por estar
+       acima da dobra. -->
+  <div class="hero-foto">
+    <img src="imagens/hero2.jpg" alt="" width="1600" height="1067"
+         fetchpriority="high" decoding="async">
+  </div>
+  <div class="hero-texto-area">
+    <div class="hero-texto">
+      <p class="selo">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6l-8-4Z"/></svg>
+        9 ANOS REPRESENTANDO AS OPERADORAS
+      </p>
+      <h1>Plano de saúde escolhido com estudo, <em>não com pressa</em></h1>
+      <p class="lead">Representamos as seis maiores operadoras. O consultor estuda sua rede, seu perfil e seu orçamento antes de qualquer proposta.</p>
+      <div class="hero-botoes">
+        <a class="btn btn-verde" href="#estudo">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+          Falar com Especialista
+        </a>
+        <a class="btn btn-contorno" href="#planos">Conheça os planos</a>
+      </div>
     </div>
   </div>
 </section>
@@ -401,70 +540,68 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
 <!-- ============ NÚMEROS ============ -->
 <section class="numeros" aria-label="A corretora em números">
   <div class="container">
-    <div><b>9</b><span>anos representando operadoras</span></div>
-    <div><b>15.000+</b><span>contratos firmados</span></div>
-    <div><b>5.000+</b><span>clientes ativos</span></div>
-    <div><b>98%</b><span>índice de satisfação</span></div>
+    <div class="numero"><b>9</b><span>anos representando operadoras</span></div>
+    <div class="numero"><b>15.000+</b><span>contratos firmados</span></div>
+    <div class="numero"><b>5.000+</b><span>clientes ativos</span></div>
+    <div class="numero"><b>98%</b><span>índice de satisfação</span></div>
+  </div>
+</section>
+
+<!-- ============ OPERADORAS ============ -->
+<section class="seccao seccao-clara" id="operadoras">
+  <div class="container">
+    <div class="cabecalho" data-revelar>
+      <h2 class="t-seccao">Não vendemos uma operadora. Comparamos todas que representamos</h2>
+      <p class="lead">É o credenciamento ativo com todas elas que nos deixa dizer quando a opção mais barata não é a melhor para o seu caso.</p>
+    </div>
+    <div class="muro" data-revelar>
+      <div class="muro-item"><img class="g" src="imagens/operadora-amil.svg" alt="Amil" loading="lazy"></div>
+      <div class="muro-item"><img class="p" src="imagens/operadora-porto.svg" alt="Porto" loading="lazy"></div>
+      <div class="muro-item"><img src="imagens/operadora-bradesco-seguros.svg" alt="Bradesco Seguros" loading="lazy"></div>
+      <div class="muro-item"><span class="recorte recorte-sula"><img src="imagens/operadora-sulamerica.png" alt="SulAmérica" loading="lazy"></span></div>
+      <div class="muro-item"><img class="p" src="imagens/operadora-hapvida.png" alt="Hapvida NotreDame Intermédica" loading="lazy"></div>
+      <div class="muro-item"><span class="recorte recorte-unimed"><img src="imagens/operadora-seguros-unimed.png" alt="Seguros Unimed" loading="lazy"></span></div>
+    </div>
+    <div class="aviso">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-5M12 8h.01"/></svg>
+      <p>Toda contratação é feita junto à operadora, registrada na ANS. A corretora intermedeia, orienta e acompanha o contrato.</p>
+    </div>
   </div>
 </section>
 
 <!-- ============ PLANOS ============ -->
 <section class="seccao" id="planos">
   <div class="container">
-    <div class="cabecalho">
+    <div class="cabecalho" data-revelar>
       <p class="sobre">Nossas soluções em saúde</p>
       <h2 class="t-seccao">O mesmo plano custa diferente dependendo de como você entra</h2>
       <p class="lead">A porta de entrada muda mensalidade, carência e exigências. O estudo começa descobrindo qual delas é a sua.</p>
     </div>
-    <div class="grade-4">
-      <article class="plano">
-        <span class="plano-icone" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0E6A46" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16.5 3.1a4 4 0 0 1 0 7.8"/></svg></span>
-        <h3 class="t-cartao">Individual e familiar</h3>
-        <p class="plano-texto">Você, cônjuge, filhos e pais. Contratação a qualquer momento, sem vínculo com empresa.</p>
-        <a class="link-seta" href="#estudo">Falar com Especialista <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      </article>
+    <div class="planos-grade" data-revelar>
       <article class="plano plano-destaque">
         <span class="fita">MAIS PROCURADO</span>
-        <span class="plano-icone" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#36E094" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V7l9-4 9 4v14"/><path d="M9 21v-6h6v6"/><path d="M3 21h18"/></svg></span>
+        <span class="plano-icone" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V7l9-4 9 4v14"/><path d="M9 21v-6h6v6"/><path d="M3 21h18"/></svg></span>
         <h3 class="t-cartao">PME · 2 a 29 vidas</h3>
-        <p class="plano-texto">Rede de plano grande com preço de empresa. Basta CNPJ ativo e dois titulares.</p>
-        <a class="link-seta" href="#estudo">Falar com Especialista <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <p class="plano-texto">Rede de plano grande com preço de empresa. Basta CNPJ ativo e dois titulares. É a porta de entrada que mais economiza por vida em São Paulo.</p>
+        <a class="link-seta" href="#estudo">Falar com Especialista <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </article>
       <article class="plano">
-        <span class="plano-icone" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0E6A46" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6l-8-4Z"/><path d="M9 12l2 2 4-4"/></svg></span>
-        <h3 class="t-cartao">Adesão por entidade</h3>
-        <p class="plano-texto">Para quem tem conselho, sindicato ou associação de classe. Mensalidade menor, exige comprovação.</p>
-        <a class="link-seta" href="#estudo">Falar com Especialista <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <span class="plano-icone" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16.5 3.1a4 4 0 0 1 0 7.8"/></svg></span>
+        <h3 class="t-cartao">Individual e familiar</h3>
+        <p class="plano-texto">Você, cônjuge, filhos e pais. Contratação a qualquer momento, sem vínculo com empresa.</p>
+        <a class="link-seta" href="#estudo">Falar com Especialista <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </article>
-      <article class="plano">
-        <span class="plano-icone" aria-hidden="true"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#0E6A46" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16"/><path d="M16 9h3a2 2 0 0 1 2 2v10"/><path d="M9 7h3M9 11h3M9 15h3"/></svg></span>
+      <article class="plano plano-tinta">
+        <span class="plano-icone" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v16"/><path d="M16 9h3a2 2 0 0 1 2 2v10"/><path d="M9 7h3M9 11h3M9 15h3"/></svg></span>
         <h3 class="t-cartao">Empresarial 30+</h3>
-        <p class="plano-texto">Gestão de sinistralidade, negociação de reajuste e desenho de coparticipação com o RH.</p>
-        <a class="link-seta" href="#estudo">Falar com Especialista <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <p class="plano-texto">Gestão de sinistralidade, negociação de reajuste e desenho de coparticipação junto com o RH, na renovação e durante o contrato.</p>
+        <a class="link-seta" href="#estudo">Falar com Especialista <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ OPERADORAS ============ -->
-<section class="seccao seccao-branca" id="operadoras">
-  <div class="container">
-    <div class="cabecalho">
-      <p class="sobre">Representamos as operadoras desde 2017</p>
-      <h2 class="t-seccao">Não vendemos uma operadora. Comparamos todas que representamos</h2>
-      <p class="lead">É o credenciamento ativo com todas elas que nos deixa dizer, sem rodeio, quando a opção mais barata não é a melhor para o seu caso.</p>
-    </div>
-    <div class="grade-logos">
-      <div class="logo-cartao"><img class="g" src="imagens/operadora-amil.svg" alt="Amil" loading="lazy"></div>
-      <div class="logo-cartao"><img class="p" src="imagens/operadora-porto.svg" alt="Porto" loading="lazy"></div>
-      <div class="logo-cartao"><img src="imagens/operadora-bradesco-seguros.svg" alt="Bradesco Seguros" loading="lazy"></div>
-      <div class="logo-cartao"><span class="recorte recorte-sula"><img src="imagens/operadora-sulamerica.png" alt="SulAmérica" loading="lazy"></span></div>
-      <div class="logo-cartao"><img class="p" src="imagens/operadora-hapvida.png" alt="Hapvida NotreDame Intermédica" loading="lazy"></div>
-      <div class="logo-cartao"><span class="recorte recorte-unimed"><img src="imagens/operadora-seguros-unimed.png" alt="Seguros Unimed" loading="lazy"></span></div>
-    </div>
-    <div class="aviso">
-      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#7A5300" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-5M12 8h.01"/></svg>
-      <p>Toda contratação é feita junto à operadora, registrada na ANS. A corretora intermedeia, orienta e acompanha o contrato.</p>
+      <!-- Decorativa (alt vazio): o cabeçalho acima já diz do que a
+           seção trata. Ocupa a largura toda, embaixo dos cartões. -->
+      <div class="planos-foto">
+        <img src="imagens/maos.jpg" alt="" loading="lazy" width="1200" height="800">
+      </div>
     </div>
   </div>
 </section>
@@ -472,21 +609,20 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
 <!-- ============ ESTUDO ============ -->
 <section class="seccao" id="estudo">
   <div class="container">
-    <div class="cabecalho">
-      <p class="sobre">Estudo personalizado</p>
+    <div class="cabecalho" data-revelar>
       <h2 class="t-seccao">Descubra o plano ideal para você</h2>
-      <p class="lead">Conte seu perfil. Um consultor estuda as opções das seis operadoras, consulta a rede que você usa e volta com a comparação — sem proposta pronta antes da análise.</p>
+      <p class="lead">Conte seu perfil. Um consultor estuda as opções das seis operadoras, consulta a rede que você usa e volta com a comparação.</p>
     </div>
 
     <div class="caixa-estudo">
       <div class="estudo-lado">
         <h3>O que o consultor analisa</h3>
         <ul class="checklist">
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E6A46" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Abrangência</b> — até onde o plano precisa atender</span></li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E6A46" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Acomodação</b> — enfermaria ou apartamento</span></li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E6A46" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Coparticipação</b> — compensa para o seu uso?</span></li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E6A46" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Rede credenciada</b> — seu hospital e seu médico</span></li>
-          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0E6A46" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Carências e CPT</b> — prazos e declaração de saúde</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Abrangência</b>: até onde o plano precisa atender</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Acomodação</b>: enfermaria ou apartamento</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Coparticipação</b>: compensa para o seu uso?</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Rede credenciada</b>: seu hospital e seu médico</span></li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span><b>Carências e CPT</b>: prazos e declaração de saúde</span></li>
         </ul>
         <div class="nota-custo">
           <b>Sem custo para você</b>
@@ -551,7 +687,7 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
         </label>
 
         <button class="btn btn-verde btn-bloco" type="submit" id="btnEnviar">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C131D" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>
           Falar com Especialista
         </button>
         <p class="rodape-form">Seus dados são usados apenas para montar o estudo e não vão para nenhuma operadora sem sua autorização (LGPD).</p>
@@ -562,28 +698,26 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
 </section>
 
 <!-- ============ REDE ============ -->
-<section class="seccao seccao-escura" id="rede">
-  <div class="container centro">
-    <p class="sobre claro">Rede credenciada</p>
-    <h2 class="t-seccao" style="max-width:680px;margin:0 auto 16px">Comece pelo hospital, não pelo preço</h2>
-    <p class="lead claro" style="max-width:640px;margin:0 auto 34px">Diga o hospital, o laboratório ou o médico que você quer manter. Consultamos a rede nas seis operadoras e mostramos quais planos atendem — e o que você perderia nos outros.</p>
+<section class="seccao seccao-menta" id="rede">
+  <div class="container">
+    <div class="cabecalho cabecalho-centro">
+      <h2 class="t-seccao">Comece pelo hospital, não pelo preço</h2>
+      <p class="lead">Diga o hospital, o laboratório ou o médico que você quer manter. Consultamos a rede nas seis operadoras e mostramos quais planos atendem.</p>
+    </div>
     <form class="busca" id="formRede">
       <input type="search" id="buscaRede" aria-label="Hospital, laboratório ou médico" placeholder="Ex.: Hospital São Luiz" required>
       <button class="btn btn-verde" type="submit">Consultar</button>
     </form>
-    <p style="margin-top:16px;font-size:14px;color:rgba(255,255,255,.55)">A rede muda entre produtos da mesma operadora. Confirmamos cada atendimento antes de você assinar.</p>
+    <p class="nota-rede">A rede muda entre produtos da mesma operadora. Confirmamos cada atendimento antes de você assinar.</p>
   </div>
 </section>
 
-<!-- ============ DEPOIMENTOS ============ -->
+<!-- ============ DEPOIMENTO ============ -->
 <section class="seccao" id="prova">
   <div class="container">
-    <div class="cabecalho">
-      <p class="sobre">Depoimentos reais</p>
-      <h2 class="t-seccao">Quem escolheu a The Smart Corretora, não se arrependeu</h2>
-    </div>
-    <div class="grade-3">
-      <figure class="depo">
+    <figure class="citacao" data-revelar>
+      <span class="citacao-marca" aria-hidden="true">&ldquo;</span>
+      <div>
         <div class="estrelas" aria-label="5 de 5 estrelas">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
           <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
@@ -591,33 +725,34 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
           <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
           <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
         </div>
-        <blockquote>“Contratei meu seguro de vida e o plano de saúde da família com a The Smart Corretora. Tudo em uma única conversa, sem enrolação. Atendimento excelente e preço justo.”</blockquote>
-        <figcaption><span class="avatar" aria-hidden="true">CS</span><span><b>Carlos Santos</b><span>Plano de saúde familiar</span></span></figcaption>
-      </figure>
-      <figure class="depo vazio">
-        <blockquote>[DEPOIMENTO DE CLIENTE PME — de preferência citando a rede mantida e a economia por vida]</blockquote>
-        <figcaption><span class="avatar vago" aria-hidden="true">—</span><span><b>[NOME]</b><span>[PLANO PME · nº de vidas]</span></span></figcaption>
-      </figure>
-      <figure class="depo vazio">
-        <blockquote>[DEPOIMENTO SOBRE PÓS-VENDA — reajuste, portabilidade ou reembolso resolvido pelo consultor]</blockquote>
-        <figcaption><span class="avatar vago" aria-hidden="true">—</span><span><b>[NOME]</b><span>[TIPO DE PLANO]</span></span></figcaption>
-      </figure>
-    </div>
+        <blockquote>Contratei meu seguro de vida e o plano de saúde da família com a The Smart Corretora. Tudo em uma única conversa, sem enrolação.</blockquote>
+        <figcaption>
+          <span class="avatar" aria-hidden="true">CS</span>
+          <span><b>Carlos Santos</b><span class="papel">Plano de saúde familiar</span></span>
+        </figcaption>
+      </div>
+    </figure>
+    <!-- PRÓXIMOS DEPOIMENTOS
+         Faltam dois, listados no README: um de cliente PME (citando a
+         rede mantida e a economia por vida) e um sobre pós-venda
+         (reajuste, portabilidade ou reembolso resolvido pelo
+         consultor). Quando chegarem, duplique o bloco da citação e
+         troque .citacao por uma grade de duas colunas. Cartão vazio com
+         texto entre colchetes não fica no ar, por isso saíram daqui. -->
   </div>
 </section>
 
 <!-- ============ PARCERIA ============ -->
-<section style="padding-bottom:clamp(60px,8vw,96px)" id="parceria">
+<section style="padding-bottom:clamp(58px,7.5vw,96px)" id="parceria">
   <div class="container">
-    <div class="parceria">
-      <div class="parceria-texto">
-        <p class="sobre" style="color:var(--ambar)">Parceria exclusiva</p>
+    <div class="parceria" data-revelar>
+      <div>
         <h2>The Smart Corretora e Travus Capital, juntas</h2>
-        <p class="lead claro">Além de proteger a saúde da sua família, oferecemos assessoria especializada em alavancagem patrimonial com imóveis. Faça seu patrimônio crescer com segurança e inteligência.</p>
+        <p class="lead">Além de proteger a saúde da sua família, oferecemos assessoria especializada em alavancagem patrimonial com imóveis.</p>
         <div class="marcas-lista">
-          <span class="prova"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5B731" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Alavancagem patrimonial</span>
-          <span class="prova"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5B731" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Assessoria especializada</span>
-          <span class="prova"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#F5B731" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Ativos reais e seguros</span>
+          <span class="prova"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Alavancagem patrimonial</span>
+          <span class="prova"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Assessoria especializada</span>
+          <span class="prova"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Ativos reais e seguros</span>
         </div>
       </div>
       <a class="btn btn-contorno" href="https://travuscapital.com.br/" target="_blank" rel="noopener">Conhecer a Travus Capital</a>
@@ -626,77 +761,93 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
 </section>
 
 <!-- ============ ESPECIALISTAS ============ -->
-<section class="seccao seccao-branca" id="especialistas">
+<section class="seccao seccao-clara" id="especialistas">
   <div class="container">
-    <div class="cabecalho">
+    <div class="cabecalho" data-revelar>
       <p class="sobre">Nossa equipe</p>
       <h2 class="t-seccao">Consultores certificados prontos para te atender</h2>
-      <p class="lead">Cada cliente é único. Por isso, nossos especialistas analisam seu perfil e objetivos antes de apresentar qualquer proposta — garantindo a solução certa, não a mais cara.</p>
+      <p class="lead">Cada caso é analisado antes de qualquer proposta. O mesmo consultor que monta o estudo acompanha o contrato depois da assinatura.</p>
     </div>
-    <div class="grade-equipe">
-      <article class="pessoa"><span class="avatar" aria-hidden="true">LM</span><h3>Luiz Filippe Muniz</h3><p>Consultor Sênior</p></article>
-      <article class="pessoa"><span class="avatar" aria-hidden="true">SO</span><h3>Samara Oliveira</h3><p>Especialista em Saúde e Seguros</p></article>
-      <article class="pessoa"><span class="avatar" aria-hidden="true">CT</span><h3>Cleiton Teixeira</h3><p>Especialista em Veículos</p></article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CTA FINAL ============ -->
-<section class="seccao" style="background:var(--noite);color:#fff" id="final">
-  <div class="container centro" style="max-width:728px">
-    <h2 style="font-size:clamp(30px,4.4vw,50px);margin-bottom:18px">Pronto para tomar a<br>decisão certa?</h2>
-    <p class="lead claro" style="margin-bottom:36px">Fale agora com um especialista em saúde da The Smart Corretora e receba um estudo personalizado, sem compromisso e sem enrolação.</p>
-    <div class="hero-botoes" style="margin:0">
-      <a class="btn btn-verde" href="#estudo">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0C131D" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>
-        Falar com Especialista
-      </a>
-      <a class="btn btn-contorno" href="tel:+5511959990322">(11) 95999-0322</a>
+    <!-- As fotos entram salvando os arquivos abaixo em imagens/.
+         Enquanto não existirem, o JavaScript remove a <img> e ficam as
+         iniciais, sem imagem quebrada. Recomendado: 320x320, enquadrada
+         no rosto.                                                      -->
+    <div class="equipe" data-revelar>
+      <article class="pessoa">
+        <span class="pessoa-foto pessoa-foto-rosto" style="--foto-x:-50%;--foto-y:0%;--foto-zoom:220%"><span aria-hidden="true">CT</span><img src="imagens/cleitonteixeira.jpeg" alt="Cleiton Teixeira" width="400" height="406" loading="lazy" data-foto></span>
+        <div><h3>Cleiton Teixeira</h3><p>Especialista em Veículos</p></div>
+      </article>
+      <!-- Cargo pendente: o cliente mandou só os nomes. "Especialista"
+           é rótulo de espera, não inventado. Trocar pelo título real. -->
+      <article class="pessoa">
+        <span class="pessoa-foto pessoa-foto-rosto" style="--foto-x:-16%;--foto-y:-6%;--foto-zoom:200%"><span aria-hidden="true">CN</span><img src="imagens/cesarnieto.jpeg" alt="Cesar Nieto" width="400" height="400" loading="lazy" data-foto></span>
+        <div><h3>Cesar Nieto</h3><p>Especialista</p></div>
+      </article>
+      <article class="pessoa">
+        <span class="pessoa-foto"><span aria-hidden="true">RF</span><img src="imagens/rodrigofrancheli.jpeg" alt="Rodrigo Francheli" width="400" height="401" loading="lazy" data-foto></span>
+        <div><h3>Rodrigo Francheli</h3><p>Especialista</p></div>
+      </article>
     </div>
   </div>
 </section>
 
 <!-- ============ FAQ ============ -->
-<section class="seccao" style="background:var(--branco)" id="faq">
+<section class="seccao" id="faq">
   <div class="container faq">
-    <div class="cabecalho">
-      <p class="sobre">Dúvidas frequentes</p>
-      <h2 class="t-seccao" style="margin-bottom:16px">Perguntas Frequentes</h2>
-      <p class="lead">Não achou a sua? <a href="#estudo">Pergunte a um especialista</a> — respondemos mesmo que você não contrate.</p>
+    <div class="cabecalho" data-revelar>
+      <h2 class="t-seccao">Perguntas frequentes</h2>
+      <p class="lead">Não achou a sua? <a href="#estudo">Pergunte a um especialista</a>. Respondemos mesmo que você não contrate.</p>
     </div>
 
     <details open>
-      <summary><span style="flex-grow:1">Quanto tempo de carência vou cumprir?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3A5A5C" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <summary><span>Quanto tempo de carência vou cumprir?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
       <p>Varia por operadora e por tipo de contratação: urgência e emergência costumam ter prazo curto, consultas e exames simples prazos intermediários, e internação e parto os maiores. Em plano empresarial com número mínimo de vidas é comum haver redução ou isenção. O estudo traz a tabela de carências de cada opção, antes de você escolher.</p>
     </details>
     <details>
-      <summary><span style="flex-grow:1">Tenho uma doença preexistente. Posso contratar?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3A5A5C" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <summary><span>Tenho uma doença preexistente. Posso contratar?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
       <p>Sim. A condição é informada na declaração de saúde e pode gerar cobertura parcial temporária para procedimentos de alta complexidade relacionados a ela, por prazo definido em contrato. O erro grave é omitir: isso dá à operadora motivo para negar cobertura ou rescindir depois. Preenchemos a declaração junto com você.</p>
     </details>
     <details>
-      <summary><span style="flex-grow:1">Já tenho plano. Consigo trocar sem cumprir carência de novo?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3A5A5C" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-      <p>Em muitos casos sim, pela portabilidade de carências, que tem regras de tempo de permanência, compatibilidade de cobertura e faixa de preço. Analisamos se o seu caso se encaixa e, quando não se encaixa, dizemos — em vez de vender uma troca que te faria recomeçar os prazos.</p>
+      <summary><span>Já tenho plano. Consigo trocar sem cumprir carência de novo?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <p>Em muitos casos sim, pela portabilidade de carências, que tem regras de tempo de permanência, compatibilidade de cobertura e faixa de preço. Analisamos se o seu caso se encaixa e, quando não se encaixa, dizemos, em vez de vender uma troca que te faria recomeçar os prazos.</p>
     </details>
     <details>
-      <summary><span style="flex-grow:1">Coparticipação vale a pena?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3A5A5C" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <summary><span>Coparticipação vale a pena?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
       <p>Depende de quanto você usa. A mensalidade cai, mas cada consulta e exame tem um percentual ou valor fixo. Para quem usa pouco, economiza no ano. Para quem tem tratamento contínuo, criança pequena ou terapias semanais, costuma sair mais caro. Fazemos essa conta com o seu histórico de uso antes de recomendar.</p>
     </details>
     <details>
-      <summary><span style="flex-grow:1">Por que o plano reajusta todo ano?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3A5A5C" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <summary><span>Por que o plano reajusta todo ano?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
       <p>Existem dois reajustes diferentes: o anual, ligado a custos e, em planos coletivos, à sinistralidade do contrato, e o por mudança de faixa etária, previsto em contrato. Explicamos qual é qual na sua fatura e, em contrato empresarial, negociamos o anual com a operadora na renovação.</p>
     </details>
     <details>
-      <summary><span style="flex-grow:1">Consigo manter meu médico atual?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3A5A5C" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-      <p>Só dá para responder consultando a rede. Diga o nome do profissional, do hospital ou do laboratório e verificamos em quais das seis operadoras ele é credenciado — e em qual categoria de plano, porque a rede muda entre produtos da mesma operadora. Planos com reembolso são a alternativa quando o médico não é credenciado em nenhum.</p>
+      <summary><span>Consigo manter meu médico atual?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <p>Só dá para responder consultando a rede. Diga o nome do profissional, do hospital ou do laboratório e verificamos em quais das seis operadoras ele é credenciado e em qual categoria de plano, porque a rede muda entre produtos da mesma operadora. Planos com reembolso são a alternativa quando o médico não é credenciado em nenhum.</p>
     </details>
     <details>
-      <summary><span style="flex-grow:1">Quanto custa o serviço da corretora?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3A5A5C" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <summary><span>Quanto custa o serviço da corretora?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
       <p>Nada para você. A corretora é remunerada pela operadora, por contrato de representação, e a mensalidade que você paga é a mesma da contratação direta. Não cobramos taxa de consultoria, de proposta nem de acompanhamento.</p>
     </details>
     <details>
-      <summary><span style="flex-grow:1">Vocês também trabalham com seguros e consórcio?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3A5A5C" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-      <p>Sim. Seguro de vida, auto, residencial e empresarial com as maiores seguradoras, e consórcio de veículos leves e pesados sem juros. Nosso foco principal é saúde, mas o mesmo consultor atende as outras frentes — você não recomeça a relação do zero.</p>
+      <summary><span>Vocês também trabalham com seguros e consórcio?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
+      <p>Sim. Seguro de vida, auto, residencial e empresarial com as maiores seguradoras, e consórcio de veículos leves e pesados sem juros. Nosso foco principal é saúde, mas o mesmo consultor atende as outras frentes, sem recomeçar a relação do zero.</p>
     </details>
+  </div>
+</section>
+
+<!-- ============ FECHO ============ -->
+<section class="seccao fecho" id="final">
+  <div class="container">
+    <div>
+      <h2>Pronto para tomar a decisão certa?</h2>
+      <p class="lead">Fale com um especialista em saúde da The Smart Corretora e receba um estudo personalizado, sem compromisso.</p>
+    </div>
+    <div class="fecho-botoes">
+      <a class="btn btn-verde" href="#estudo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+        Falar com Especialista
+      </a>
+      <a class="btn btn-contorno" href="tel:+5511959990322">(11) 95999-0322</a>
+    </div>
   </div>
 </section>
 
@@ -708,10 +859,10 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
     <div class="rodape-grade">
       <div class="rodape-sobre">
         <a class="marca" href="#topo" style="margin-bottom:16px">
-          <img src="imagens/logo-thesmart.png" alt="" width="40" height="40">
+          <img src="imagens/logo-thesmart.png" alt="" width="38" height="38">
           <span class="marca-nome"><b>The Smart</b><span>CORRETORA</span></span>
         </a>
-        <p>Planos de saúde, seguros e consórcios com atendimento especializado. Nove anos representando operadoras — a escolha inteligente para proteger quem importa.</p>
+        <p>Planos de saúde, seguros e consórcios com atendimento especializado. Nove anos representando operadoras, a escolha inteligente para proteger quem importa.</p>
         <p class="cnpj">CNPJ 27.542.242/0001-63<br>São Paulo, SP</p>
       </div>
       <nav class="rodape-col" aria-label="Planos de saúde">
@@ -734,7 +885,7 @@ details p{padding-bottom:24px;font-size:16px;line-height:1.7;color:var(--secunda
       <div class="rodape-col">
         <h3>Contato</h3>
         <ul>
-          <li><a href="tel:+5511959990322" style="font-weight:700;color:#fff">(11) 95999-0322</a></li>
+          <li><a class="rodape-tel" href="tel:+5511959990322">(11) 95999-0322</a></li>
           <li><a href="mailto:contato@thesmartcorretora.com.br">contato@thesmartcorretora.com.br</a></li>
           <li><a href="https://www.instagram.com/thesmartcorretora/" target="_blank" rel="noopener">@thesmartcorretora</a></li>
           <li>Segunda a sábado</li>
@@ -1113,6 +1264,41 @@ document.getElementById("formRede").addEventListener("submit", function (e) {
     "busca_rede"
   );
 });
+/* ============ FOTOS DA EQUIPE ============
+   As fotos são opcionais. Se o arquivo não existir, a <img> sai do ar
+   e ficam as iniciais que já estão na marcação, sem imagem quebrada. */
+(function () {
+  function cair() { if (this.parentNode) this.parentNode.removeChild(this); }
+  var fotos = document.querySelectorAll("img[data-foto]");
+  for (var i = 0; i < fotos.length; i++) {
+    fotos[i].addEventListener("error", cair);
+    // Se a imagem falhou antes deste script rodar, o evento não vem mais.
+    if (fotos[i].complete && !fotos[i].naturalWidth) cair.call(fotos[i]);
+  }
+})();
+
+/* ============ REVELAÇÃO NA ENTRADA ============
+   Uma entrada por bloco, uma única vez, para o olho acompanhar a
+   leitura em vez de receber a página inteira de uma vez. A classe é
+   aplicada aqui e não na marcação: sem JavaScript, ou com movimento
+   reduzido no sistema, tudo aparece normalmente.                      */
+(function () {
+  var alvos = document.querySelectorAll("[data-revelar]");
+  if (!alvos.length || !("IntersectionObserver" in window)) return;
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  for (var i = 0; i < alvos.length; i++) alvos[i].classList.add("revelar");
+
+  var observador = new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add("visto");
+      observador.unobserve(e.target);
+    });
+  }, { threshold: .18, rootMargin: "0px 0px -8% 0px" });
+
+  for (var j = 0; j < alvos.length; j++) observador.observe(alvos[j]);
+})();
 </script>
 </body>
 </html>

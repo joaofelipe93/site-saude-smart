@@ -149,13 +149,161 @@ a ser opcional — é uma linha.
 
 ## 5. O que ainda falta de conteúdo
 
-Está marcado entre colchetes no `index.html`:
+### Fotos da equipe
 
-- dois depoimentos de clientes de **plano de saúde** (hoje só há o do
-  Carlos Santos, aproveitado do site antigo)
-- logo da NotreDame Intermédica, se você tiver o lockup próprio no portal
-  do corretor — hoje está a marca **Hapvida**, que é a do grupo
+As três estão no ar:
+
+| Consultor | Arquivo | Observação |
+|---|---|---|
+| Cleiton Teixeira | `cleitonteixeira.jpeg` | ampliada no rosto |
+| Cesar Nieto | `cesarnieto.jpeg` | ampliada no rosto |
+| Rodrigo Francheli | `rodrigofrancheli.jpeg` | entra direto |
+
+**Duas delas precisaram de recorte.** A do Rodrigo já é um retrato de
+rosto e entrou como estava. As do Cleiton e do Cesar não são: a do
+Cleiton é de meio corpo e a do Cesar é um card de marca, com fundo roxo
+e o logotipo do lado. Como esses arquivos são quadrados e o círculo
+também, a imagem inteira entraria no avatar de 72px e a pessoa sairia
+minúscula. As duas entram ampliadas e deslocadas, enquadrando a cabeça.
+
+Fica funcionando, mas vale saber: **o círculo do Cesar fica roxo e
+escuro** ao lado dos outros dois, que têm fundo claro. Se existir um
+retrato comum dele, como o do Rodrigo, me mande que eu troco e os três
+ficam iguais.
+
+Trocando qualquer uma dessas fotos, me avise: o recorte é medido no
+arquivo e precisa ser refeito.
+
+**Falta o cargo de dois deles.** Você mandou os nomes, mas não os
+títulos do Cesar e do Rodrigo. Os dois estão aparecendo como
+"Especialista", que é rótulo de espera — me diga como cada um deve ser
+apresentado. O Cleiton continua como "Especialista em Veículos", que já
+estava na página.
+
+### Fotos em uso
+
+| Arquivo | Onde aparece |
+|---|---|
+| `hero2.jpg` | metade esquerda da primeira tela |
+| `maos.jpg` | faixa embaixo dos cartões em "Nossas soluções em saúde" |
+
+`imagens/hero1.jpg` **não é mais usada** e ocupa 842 KB. Pode apagar —
+não comprimi essa porque não vai para a tela. Se quiser que eu apague,
+é só dizer.
+
+### Compressão: já feita
+
+As imagens já foram comprimidas. A pasta `imagens/` saiu de **4,4 MB
+para 420 KB** nas imagens que a página carrega — 90% a menos, sem
+diferença visível na tela.
+
+| Arquivo | Antes | Agora |
+|---|---|---|
+| `hero2.jpg` | 3,1 MB, 5363x3575 | **164 KB**, 1600x1067 |
+| `maos.jpg` | 737 KB, 3000x2000 | **86 KB**, 1200x800 |
+| `operadora-sulamerica.png` | 268 KB, 2560x590 | **50 KB**, 572x132 |
+| `logo-thesmart.png` | 57 KB, 1261x1561 | **33 KB**, 414x512 |
+| `rodrigofrancheli.jpeg` | 55 KB | **19 KB**, 400x401 |
+| `cleitonteixeira.jpeg` | 43 KB | **16 KB**, 400x406 |
+| `cesarnieto.jpeg` | 43 KB | **15 KB**, 400x400 |
+
+Cada arquivo foi reduzido para pouco mais que o dobro do tamanho em que
+aparece na tela, que é o que uma tela de celular de alta densidade
+precisa. Formato e nome continuam os mesmos, então nada mudou na
+publicação.
+
+`operadora-seguros-unimed.png` e `operadora-hapvida.png` ficaram como
+estavam: recomprimir a primeira deixava o arquivo **maior**, e a
+segunda já tem 4 KB.
+
+**Se um dia você trocar alguma dessas imagens**, mande o arquivo
+original e me avise, em vez de subir direto: o arquivo que sai da
+câmera ou do banco de imagens costuma ter vários megabytes e é isso que
+derruba a nota do site no Google.
+
+Dá para cortar mais uns 40% trocando para o formato **WebP**
+(a `hero2.jpg` iria de 164 KB para 92 KB), mas aí os nomes dos arquivos
+mudam de extensão. Se quiser, me peça.
+
+### Um produto saiu da seção de planos
+
+A pedido seu, "Nossas soluções em saúde" ficou com **três cartões**:
+"PME · 2 a 29 vidas", "Individual e familiar" e "Empresarial 30+".
+Saiu só o cartão de **"Adesão por entidade"**.
+
+Esse produto **não sumiu do site**: continua nos links do rodapé, e
+"Adesão por entidade de classe" segue como uma das três opções do
+formulário, então o lead continua chegando no CRM com esse perfil. O que
+saiu foi a explicação dele nessa seção.
+
+Se quiser o cartão de volta, é rápido — é só pedir.
+
+### Depoimentos
+
+Faltam dois: um de cliente **PME** (de preferência citando a rede
+mantida e a economia por vida) e um sobre **pós-venda** (reajuste,
+portabilidade ou reembolso resolvido pelo consultor). Hoje a página
+mostra só o do Carlos Santos, tratado como citação em destaque.
+
+Os cartões vazios com texto entre colchetes **saíram do ar**: cartão
+tracejado dizendo `[NOME]` passa impressão de site inacabado. O lugar
+deles está marcado num comentário dentro da seção `#prova` no
+`index.html`, com a instrução de como voltar para duas colunas.
+
+### Logo da The Smart para fundo claro
+
+O arquivo `imagens/logo-thesmart.png` que temos hoje foi feito para
+**fundo escuro**: quase dois terços dele são branco. Sobre a barra do
+topo, que é clara, o símbolo praticamente desaparecia — sobravam só os
+traços verdes.
+
+Por enquanto ele aparece dentro de uma plaquinha verde-escura, que
+devolve o fundo para o qual ele foi desenhado. Funciona e fica bonito,
+mas é um remendo.
+
+Se você tiver no material da marca a **versão para fundo claro** (a que
+tem o símbolo em verde-escuro ou preto, sem branco), me mande: eu troco
+o arquivo e tiro a plaquinha.
+
+### Logo da NotreDame Intermédica
+
+Se você tiver o lockup próprio no portal do corretor, ele substitui a
+marca **Hapvida** que está lá hoje, que é a do grupo.
 
 Recomendação: pegue os kits de marca oficiais no portal do corretor de
 cada operadora antes de publicar. Várias têm regras de área de respiro,
 tamanho mínimo e exigem versão aprovada para uso por corretoras.
+
+---
+
+## 6. Tema claro, sempre
+
+A página é de **tema claro** do começo ao fim: fundo branco-menta,
+texto em verde-escuro e o verde da marca como único acento. **Não há
+nenhum bloco escuro.** O verde-petróleo ficou só em detalhes pequenos:
+a fita "MAIS PROCURADO", os círculos de iniciais e o texto dos botões
+verdes.
+
+O cartão PME continua sendo o destaque, mas por tinta de menta mais
+forte, fio verde e a fita, não por peso. O rodapé é branco com um fio
+em cima; a faixa do "Pronto para tomar a decisão certa?" é de menta,
+para os dois não virarem uma mancha só.
+
+A primeira tela é dividida ao meio: `imagens/hero2.jpg` ocupa a metade
+esquerda inteira até a borda da tela e a mensagem fica à direita, sobre
+um degradê de menta. No celular o texto vem primeiro e a foto entra
+logo abaixo dos botões, em 3:2.
+
+**A página ignora o modo escuro do aparelho.** Quem abrir o site com o
+celular ou o Chrome no modo escuro vê exatamente a mesma página clara.
+Antes ela acompanhava o aparelho; isso saiu a pedido seu.
+
+Isso vale também para as partes que o navegador pinta sozinho — os
+campos do formulário, a lista suspensa, a barra de rolagem e o
+preenchimento automático. Sem isso, o visitante no modo escuro veria
+caixas pretas no meio de uma página branca justamente no formulário,
+que é onde o lead acontece.
+
+São dois pontos no `index.html`, caso um dia queira o modo escuro de
+volta: a linha `color-scheme:light` no `:root` e os blocos
+`@media (prefers-color-scheme:dark)`, que foram removidos.
