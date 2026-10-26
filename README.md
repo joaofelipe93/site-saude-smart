@@ -147,39 +147,198 @@ a ser opcional — é uma linha.
 
 ---
 
-## 5. O que ainda falta
+## 5. O que ainda falta de conteúdo
+
+### Fotos da equipe
+
+As três estão no ar:
+
+| Consultor | Arquivo | Observação |
+|---|---|---|
+| Cleiton Teixeira | `cleitonteixeira.jpeg` | ampliada no rosto |
+| Cesar Nieto | `cesarnieto.jpeg` | ampliada no rosto |
+| Rodrigo Francheli | `rodrigofrancheli.jpeg` | entra direto |
+
+**Duas delas precisaram de recorte.** A do Rodrigo já é um retrato de
+rosto e entrou como estava. As do Cleiton e do Cesar não são: a do
+Cleiton é de meio corpo e a do Cesar é um card de marca, com fundo roxo
+e o logotipo do lado. Como esses arquivos são quadrados e o círculo
+também, a imagem inteira entraria no avatar de 72px e a pessoa sairia
+minúscula. As duas entram ampliadas e deslocadas, enquadrando a cabeça.
+
+Fica funcionando, mas vale saber: **o círculo do Cesar fica roxo e
+escuro** ao lado dos outros dois, que têm fundo claro. Se existir um
+retrato comum dele, como o do Rodrigo, me mande que eu troco e os três
+ficam iguais.
+
+Trocando qualquer uma dessas fotos, me avise: o recorte é medido no
+arquivo e precisa ser refeito.
+
+**Os cargos saíram.** A página mostra só os nomes, acompanhando a
+decisão que já estava no repositório. Se quiser os títulos de volta,
+me mande como cada um deve ser apresentado.
+
+Esses três arquivos substituem `equipe-1.jpg`, `equipe-2.jpg` e
+`equipe-3.jpg`, que estavam no repositório: eram **exatamente as mesmas
+fotos** (conferido byte a byte), só sem compressão e com nome que não
+dizia de quem era. As versões aqui pesam um terço.
+
+### Fotos em uso
+
+| Arquivo | Onde aparece |
+|---|---|
+| `hero2.jpg` | metade esquerda da primeira tela |
+| `maos.jpg` | faixa embaixo dos cartões em "Nossas soluções em saúde" |
+
+`imagens/hero1.jpg` **não é mais usada** e ocupa 842 KB. Pode apagar —
+não comprimi essa porque não vai para a tela. Se quiser que eu apague,
+é só dizer.
+
+### Compressão: já feita
+
+As imagens já foram comprimidas. A pasta `imagens/` saiu de **4,4 MB
+para 433 KB** nas imagens que a página carrega — 90% a menos, sem
+diferença visível na tela.
+
+| Arquivo | Antes | Agora |
+|---|---|---|
+| `hero2.jpg` | 3,1 MB, 5363x3575 | **164 KB**, 1600x1067 |
+| `maos.jpg` | 737 KB, 3000x2000 | **86 KB**, 1200x800 |
+| `operadora-sulamerica.png` | 268 KB, 2560x590 | **50 KB**, 572x132 |
+| `logo-thesmart.png` | 57 KB, 1261x1561 | **33 KB**, 414x512 |
+| `rodrigofrancheli.jpeg` | 55 KB | **19 KB**, 400x401 |
+| `cleitonteixeira.jpeg` | 43 KB | **16 KB**, 400x406 |
+| `cesarnieto.jpeg` | 43 KB | **15 KB**, 400x400 |
+| `travus-capital.jpg` | 41 KB, 2000x1125 | **9 KB**, 364x115 |
+
+Cada arquivo foi reduzido para pouco mais que o dobro do tamanho em que
+aparece na tela, que é o que uma tela de celular de alta densidade
+precisa. Formato e nome continuam os mesmos, então nada mudou na
+publicação.
+
+A `travus-capital.jpg` era uma peça inteira de fundo preto, 2000x1125,
+com a logo ocupando um pedaço do meio. Ela foi **recortada na logo**:
+o que vai para a tela é só o lockup, com uma margem de preto em volta.
+
+`operadora-seguros-unimed.png` ficou como estava: recomprimir deixava o
+arquivo **maior** que o original.
+
+**Se um dia você trocar alguma dessas imagens**, mande o arquivo
+original e me avise, em vez de subir direto: o arquivo que sai da
+câmera ou do banco de imagens costuma ter vários megabytes e é isso que
+derruba a nota do site no Google.
+
+Dá para cortar mais uns 40% trocando para o formato **WebP**
+(a `hero2.jpg` iria de 164 KB para 92 KB), mas aí os nomes dos arquivos
+mudam de extensão. Se quiser, me peça.
+
+### Um produto saiu da seção de planos
+
+A pedido seu, "Nossas soluções em saúde" ficou com **três cartões**:
+"PME · 2 a 29 vidas", "Individual e familiar" e "Empresarial 30+".
+Saiu só o cartão de **"Adesão por entidade"**.
+
+⚠️ **Atenção, isso mudou.** Quando eu tirei o cartão, deixei o produto
+no rodapé e no formulário de propósito, para o lead desse perfil
+continuar chegando. Mas no `main` do repositório ele já tinha sido
+removido **também do formulário** e do rodapé, e eu segui essa decisão
+para não desfazer o que estava lá.
+
+Na prática: o formulário tem **duas** opções de perfil, "Eu ou família"
+e "Minha empresa". Ninguém consegue mais se identificar como adesão por
+entidade, e o CRM não recebe mais esse perfil. Se isso não era para ter
+acontecido, me peça que eu devolvo as três opções — é uma linha.
+
+### Dois nomes de depoimento
+
+A página tem três depoimentos: o do Carlos Santos como citação em
+destaque e, abaixo de um fio, dois menores — um de cliente PME e um
+sobre portabilidade. Os textos desses dois vieram prontos do
+repositório, mas a assinatura está como **`[NOME DO CLIENTE]`**.
+
+⚠️ **Esses textos são rascunhos para validar com clientes reais, não
+para publicar como estão.** Depoimento inventado atribuído a pessoa
+inventada é propaganda enganosa, e quem responde é a corretora. Use o
+texto como roteiro: mostre ao cliente, ajuste com as palavras dele,
+peça autorização e só então troque o `[NOME DO CLIENTE]`.
+
+Enquanto os colchetes estiverem ali, a página não deve ir para o ar.
+
+Sobre o **Carlos Santos**: no repositório o texto dele tinha sido
+reescrito para falar só de plano de saúde. Aqui ficou o **texto
+original**, o mesmo do site antigo, porque é o que ele de fato disse e
+é o nome dele que está embaixo. Se a versão reescrita foi combinada com
+ele, me avise que eu troco.
+
+### Logo da The Smart para fundo claro
+
+O arquivo `imagens/logo-thesmart.png` que temos hoje foi feito para
+**fundo escuro**: quase dois terços dele são branco. Sobre a barra do
+topo, que é clara, o símbolo praticamente desaparecia — sobravam só os
+traços verdes.
+
+Por enquanto ele aparece dentro de uma plaquinha verde-escura, que
+devolve o fundo para o qual ele foi desenhado. Funciona e fica bonito,
+mas é um remendo.
+
+Se você tiver no material da marca a **versão para fundo claro** (a que
+tem o símbolo em verde-escuro ou preto, sem branco), me mande: eu troco
+o arquivo e tiro a plaquinha.
 
 ### Três logos de operadora
 
-A parede de operadoras tem oito posições. Cinco já têm arquivo oficial;
-**três estão como cartão tracejado** esperando o arquivo:
+A parede de operadoras tem **oito** posições. Cinco têm arquivo
+oficial; três estão como **cartão tracejado**, esperando o arquivo:
 
 | Operadora | Situação |
 |---|---|
 | Amil, Porto, SulAmérica, Seguros Unimed, Alice | arquivo oficial no repositório |
-| **Bradesco Saúde** | falta — o site público da Bradesco só publica o lockup "Bradesco Seguros" |
-| **Omint** | falta — o servidor deles bloqueia download direto (WAF) |
+| **Bradesco Saúde** | falta — o site público só publica o lockup "Bradesco Seguros" |
+| **Omint** | falta — o servidor deles bloqueia download direto |
 | **NotreDame Saúde** | falta — a marca foi absorvida pelo grupo Hapvida e não há lockup próprio público |
 
-Pegue os três no **portal do corretor** de cada operadora, que é a fonte
-certa de qualquer jeito: lá vem a versão aprovada para uso por
+Pegue os três no **portal do corretor** de cada operadora, que é a
+fonte certa de qualquer jeito: lá vem a versão aprovada para uso por
 corretoras, com as regras de área de respiro e tamanho mínimo. Salve em
 `imagens/` como `operadora-bradesco-saude.*`, `operadora-omint.*` e
 `operadora-notredame.*`, e me avise que eu troco os cartões.
 
 Preferência de formato: SVG > PNG com fundo transparente > PNG comum.
 
-### Dois nomes de depoimento
+O cartão tracejado é melhor que logo errado: ele registra que a
+operadora é representada sem exibir a marca de outra empresa. O logo da
+**Hapvida**, que estava no lugar da NotreDame, saiu por isso.
 
-Os três depoimentos têm texto pronto, mas **dois estão com
-`[NOME DO CLIENTE]`** no lugar da assinatura.
+---
 
-⚠️ **Esses textos são rascunhos para você validar com clientes reais,
-não para publicar como estão.** Depoimento inventado atribuído a pessoa
-inventada é propaganda enganosa e o cliente é quem responde por isso.
-Use o texto como roteiro: mostre ao cliente, ajuste com as palavras
-dele, peça autorização e só então troque o `[NOME DO CLIENTE]`.
+## 6. Tema claro, sempre
 
-O mesmo vale para o depoimento do **Carlos Santos**: o texto original
-falava de seguro de vida e foi reescrito para falar só de plano de
-saúde. Confirme com ele antes de publicar — é o nome dele que está ali.
+A página é de **tema claro** do começo ao fim: fundo branco-menta,
+texto em verde-escuro e o verde da marca como único acento. **Não há
+nenhum bloco escuro.** O verde-petróleo ficou só em detalhes pequenos:
+a fita "MAIS PROCURADO", os círculos de iniciais e o texto dos botões
+verdes.
+
+O cartão PME continua sendo o destaque, mas por tinta de menta mais
+forte, fio verde e a fita, não por peso. O rodapé é branco com um fio
+em cima; a faixa do "Pronto para tomar a decisão certa?" é de menta,
+para os dois não virarem uma mancha só.
+
+A primeira tela é dividida ao meio: `imagens/hero2.jpg` ocupa a metade
+esquerda inteira até a borda da tela e a mensagem fica à direita, sobre
+um degradê de menta. No celular o texto vem primeiro e a foto entra
+logo abaixo dos botões, em 3:2.
+
+**A página ignora o modo escuro do aparelho.** Quem abrir o site com o
+celular ou o Chrome no modo escuro vê exatamente a mesma página clara.
+Antes ela acompanhava o aparelho; isso saiu a pedido seu.
+
+Isso vale também para as partes que o navegador pinta sozinho — os
+campos do formulário, a lista suspensa, a barra de rolagem e o
+preenchimento automático. Sem isso, o visitante no modo escuro veria
+caixas pretas no meio de uma página branca justamente no formulário,
+que é onde o lead acontece.
+
+São dois pontos no `index.html`, caso um dia queira o modo escuro de
+volta: a linha `color-scheme:light` no `:root` e os blocos
+`@media (prefers-color-scheme:dark)`, que foram removidos.

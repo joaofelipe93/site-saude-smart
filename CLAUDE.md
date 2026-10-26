@@ -1,0 +1,277 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## O que é este repositório
+
+Landing page única e **estática** de planos de saúde da The Smart Corretora.
+Sem build, sem Node, sem dependências, sem banco. Praticamente todo o
+projeto é o `index.html` (~1300 linhas), nesta ordem: CSS em `<style>`,
+marcação, e o JavaScript num único `<script>` no fim. Os marcos são os
+comentários de cabeçalho (`/* ====== TOKENS ====== */`,
+`<!-- ====== HERO ====== -->`); procure por eles em vez de decorar linha.
+
+## Comandos
+
+Não há build, lint nem testes. Para desenvolver:
+
+```bash
+python3 -m http.server 8000    # servir a pasta e abrir http://localhost:8000
+```
+
+Servir por HTTP (e não abrir o `file://`) importa porque o widget do CRM e
+as fontes do Google são carregados de terceiros.
+
+Publicação: copiar `index.html` e `imagens/` para a raiz do Apache,
+guardando cópia do `index.html` anterior. `teste-widget.html` é uma página
+de inspeção do formulário do CRM e **não** vai para produção.
+
+Teste é manual, pelo navegador: enviar o formulário com dados reais e
+conferir a oportunidade no funil; `?Tag=Teste&utm_source=teste` para checar
+atribuição; console (F12) para o aviso `[The Smart] Formulário do CRM sem
+action`, que indica que o widget mudou de formato.
+
+## Arquitetura do fluxo de lead
+
+O ponto central é o objeto `CONFIG` no topo do `<script>` — número de
+WhatsApp, chave do CRM, GA4 e Meta Pixel. **É o único lugar que se mexe
+para ligar integrações**; o resto do JS lê dele.
+
+O caminho de um lead:
+
+1. O visitante preenche o formulário bonito da página (`#formEstudo`),
+   validado por `validar()`/`coletar()`.
+2. `enviarAoCrm()` copia os dados para o formulário do widget do Funil de
+   Vendas (`#validation`), que está **oculto** no fim da página (`div
+   #FormFunildeVendas`, fora da tela), e o submete para dentro de um
+   `<iframe>` oculto. É POST de formulário real, não `fetch`, para não
+   depender de CORS e não navegar a página embora.
+3. Em seguida abre o WhatsApp com a mensagem montada por `mensagem()`.
+
+Duas consequências a respeitar em qualquer alteração:
+
+- **Fail-open:** o lead nunca se perde por causa do CRM. Widget desligado,
+  ausente, ou sem atributo `action` → aviso no console e segue direto para
+  o WhatsApp. Todo o envio ao CRM está dentro de `try/catch`.
+- **`perfil` tem dois valores**, não três: `Eu ou minha família` e
+  `Minha empresa (2 a 29 vidas)`. São chave de busca em
+  `tituloParaCrm()` — mexer na string muda o título da oportunidade.
+  `Adesão por entidade de classe` **saiu** junto com o produto, do
+  cartão, do rodapé e do mapa de `tituloParaCrm()`; a remoção veio do
+  `main` do repositório e foi seguida na reconciliação. Esse perfil já
+  não chega ao CRM.
+- **A qualificação viaja no campo `Tag`.** O widget tem só nome, e-mail e
+  telefone (mais os personalizados `Idades`, `cep` e um `textarea` de
+  hospital) e nenhum campo de observação. `tituloParaCrm()` monta uma
+  string tipo `Site - Planos de Saúde · PME · 3 vidas · CEP 01310-100`, que
+  o CRM usa como **título da oportunidade**. Mexer nesse formato muda o que
+  o consultor vê no card do funil.
+
+`acharCampo()` localiza os campos do widget por regex sobre `id`/`name`/
+`placeholder`, com fallback por `type`, justamente porque o gerador do CRM
+pode mudar os nomes. Não troque isso por seletores fixos.
+
+`UTM` é um IIFE que lê `utm_*`, `Tag` e `ForceCodeChannel` da URL, mescla
+com o que já estava em `sessionStorage` (`ts_rastreio`) e devolve o
+acumulado — é o que faz a atribuição sobreviver à navegação interna até o
+envio. Os ocultos do widget que vêm com a string literal `"null"` são
+limpos antes do submit.
+
+`medir()` é a camada única de eventos (`whatsapp_click`, `generate_lead`).
+GA4 e Pixel só são injetados se os IDs em `CONFIG` estiverem preenchidos.
+
+## Composição da página
+
+Cada seção usa uma família de layout diferente, de propósito: hero em
+divisão assimétrica, faixa de números com fios, muro de logos, três cartões
+sobre uma faixa de foto, cartão partido do formulário, banda de busca centrada, citação
+editorial, cartão de parceria, lista da equipe sem caixas, acordeão e
+faixa de fecho. Repetir uma família em duas seções é o que faz a página
+parecer template, então ao acrescentar seção escolha uma família nova.
+
+Sobrancelhas (`.sobre`, o rótulo maiúsculo acima do título) são
+**racionadas**: três na página inteira, no hero, em `#planos` e em
+`#especialistas`. Uma por seção é o tique visual mais fácil de cometer.
+
+A ordem das seções é funil: prova (operadoras) logo abaixo do hero,
+objeções (FAQ) antes do pedido final (`#final`), e o fecho de menta
+encostado no rodapé branco, separados por um fio. Os `id` e os rótulos
+do menu não mudam: são âncora, `getElementById` e, no caso dos campos,
+contrato com o CRM.
+
+## Convenções
+
+- Identificadores, comentários e textos em **português**; os comentários do
+  `index.html` explicam o *porquê* das decisões e são parte da entrega para
+  o cliente — mantenha esse tom ao editar.
+- JavaScript em estilo ES5: `var`, `function`, nenhum arrow, template
+  literal, `?.` ou framework. Nada de ferramenta nova sem necessidade real.
+- A página é de **tema claro e só**, escolha do cliente: é um site de
+  saúde e a leitura precisa ser branca e arejada. Não reintroduza
+  blocos escuros largos. **Não existe modo escuro**: os dois blocos
+  `@media (prefers-color-scheme:dark)` foram removidos e o `:root`
+  declara `color-scheme:light`, que também impede o navegador de pintar
+  campos, listas, barra de rolagem e preenchimento automático no
+  escuro. Sem essa linha o formulário ganha caixas pretas no meio de
+  uma página branca.
+- Cores, espaçamentos e tipografia saem dos custom properties em `:root`.
+  Não embuta hex novo. Os tokens vêm em duas famílias: os de **marca**
+  (`--verde`, `--profundo`, `--profundo-2`) são fixos nos dois modos; os
+  **semânticos** (`--superficie`, `--cartao`, `--menta`, `--texto`,
+  `--texto-2`, `--linha`, `--nav`, `--acento-texto`) formam o esqueleto
+  claro. Hoje nenhum token troca de valor: há um tema só.
+- **Não existe bloco escuro na página.** O cliente pediu a paleta mais
+  clara **três** vezes seguidas; o cartão PME, o cartão da parceria e o
+  rodapé já foram escuros e deixaram de ser, um de cada vez. Não
+  reintroduza nenhum. `--profundo` sobrou para detalhes pequenos (fita,
+  círculos de iniciais, texto dos botões verdes, placa da logo).
+- **Mas não clareie mais.** Depois que o modo escuro saiu, o cliente viu
+  a página clara pela primeira vez e achou lavada. A superfície saiu de
+  `#FBFDFC` para `#EEF5F1`, a menta e a menta forte desceram junto, os
+  fios subiram de .10/.18 para .14/.24 e `--texto-2` firmou em `#456159`.
+  O desenho depende dessa diferença: o cartão branco e a faixa branca
+  precisam **subir** sobre a superfície. Clarear a superfície de novo
+  achata a página inteira, que foi exatamente a reclamação.
+- A hierarquia agora é feita por tinta e fio, não por peso: o cartão em
+  destaque usa `--menta-forte` + fio verde + fita. `--menta` é a faixa
+  suave (busca de rede, fecho, painel do formulário). O rodapé é branco
+  com fio em cima, e o fecho é de menta: se os dois ficarem na mesma
+  cor, viram uma mancha só.
+- As fotos de conteúdo são duas: `hero2.jpg` (a família na cama)
+  dividindo o hero ao meio e `maos.jpg` como célula da grade de
+  `#planos`. Já estiveram trocadas, uma no lugar da outra; o cliente
+  pediu a inversão. A `maos.jpg` também já esteve no depoimento e no
+  fecho, recusada nas duas, e já dividiu `#planos` ao meio antes de
+  virar célula.
+- `#planos` tem **três cartões numa linha e uma faixa de foto
+  embaixo**, em grade de três colunas; a foto ocupa as três
+  (`grid-column:1/-1`). Medido: cartões 339x350, faixa 1056x330.
+- **A proporção da caixa é o que define o tamanho do motivo**, e essa
+  seção já errou isso duas vezes. Com a foto dividindo a seção ao meio,
+  apareciam 40% da largura; como célula em pé numa grade de três
+  colunas, 33%, e a mão virou um close de dedo. A foto é 3:2 e o
+  `cover` amplia até preencher a altura, então **caixa alta = motivo
+  grande**. Deitada acontece o contrário: a largura inteira aparece e o
+  corte é no alto e embaixo, que é o que a foto tem sobrando. Se um dia
+  for estreitar a faixa, saiba que a mão volta a crescer.
+- `object-position:50% 62%` desce a janela até a aliança caber inteira
+  sem cortar o entrelace. Testados 35/50/62/75 lado a lado: em 35% a
+  aliança some, em 75% sai o alto do gesto.
+- Entre 760px e 1040px a grade vira duas colunas e o **terceiro cartão
+  passa a ocupar a linha inteira** (`.plano:last-of-type{grid-column:
+  1/-1}`); sem isso sobra um buraco ao lado dele. Abaixo de 760px é uma
+  coluna só, o span é desfeito e a faixa volta a 3:2, a proporção do
+  arquivo, sem corte nenhum. A foto é o último filho no HTML, então vem
+  depois dos cartões sem precisar de `order`.
+- **Saiu um cartão a pedido do cliente**: "Adesão por entidade".
+  Ficaram PME, Individual e familiar e Empresarial 30+. O Empresarial
+  chegou a sair junto e voltou no pedido seguinte, com o texto e a
+  classe `.plano-tinta` originais. O produto saiu **inteiro** da
+  página na reconciliação com o `main` do repositório: cartão, link do
+  rodapé, opção do formulário e entrada em `tituloParaCrm()`.
+- A parede de operadoras (`.muro`) tem **oito** posições em quatro
+  colunas. Cinco têm arquivo; três são `.muro-item.falta`, cartão
+  tracejado com o nome da operadora, à espera do arquivo oficial do
+  portal do corretor. O tracejado registra a representação sem exibir
+  marca de outra empresa — foi o que aconteceu com o logo da Hapvida
+  no lugar da NotreDame, e por isso ele saiu.
+- O verde é o **único acento**. O âmbar não é um segundo acento: cobre
+  dois usos semânticos, o aviso da ANS e as estrelas da avaliação.
+- `imagens/travus-capital.jpg` é dourado sobre **preto**: o arquivo
+  original era uma peça de fundo preto inteiro, 2000x1125, recortada na
+  logo. Sobre o cartão claro da parceria ela leva placa de
+  `--profundo`, pelo mesmo motivo da logo da nav. O cartão da parceria
+  **continua claro**: o preto e ouro que está no `main` do repositório
+  não foi trazido, porque o cliente recusou bloco escuro três vezes.
+- Um sistema de formas só: interativo = pílula (`--r-pilula`),
+  contêiner = `--r-caixa` (16px), campo = `--r-campo` (12px).
+- Acessibilidade é explícita no markup existente (link "pular",
+  `aria-expanded` no menu, `aria-invalid` nos campos, `role="status"` no
+  recibo). Preserve ao mexer.
+
+## Armadilhas conhecidas
+
+- A chave do CRM está **duplicada**: no `data-name` do `<script>` do widget
+  e em `CONFIG.crm.chave`. Trocar de conta exige mudar nos dois.
+- O `Forms.js` do Funil de Vendas instala um Pixel do Facebook por conta
+  própria se houver Pixel configurado dentro do CRM. Preencher
+  `CONFIG.metaPixel` com o mesmo ID conta `PageView` duas vezes — use um
+  dos dois, nunca ambos.
+- O e-mail é obrigatório no formulário da página porque o widget do CRM
+  exige esse campo, não por decisão de UX.
+- Se o modo escuro um dia voltar, as **sobrescritas vão no fim da folha
+  de estilo**. Media query não soma especificidade: posta antes das
+  regras de componente, ela perde na cascata e não vale nada. Já
+  aconteceu enquanto o modo escuro existia.
+- As fotos da equipe continuam **opcionais**: são `<img data-foto>` que
+  o JavaScript remove no `error`, deixando as iniciais. Mexer aí precisa
+  manter a ausência silenciosa, nunca uma imagem quebrada. Hoje as três
+  existem: Cleiton Teixeira (`cleitonteixeira.jpeg`), Cesar Nieto
+  (`cesarnieto.jpeg`) e Rodrigo Francheli (`rodrigofrancheli.jpeg`).
+  **Ninguém tem cargo**: a lista é só de nomes, acompanhando a decisão
+  que veio do `main` do repositório. `.pessoa p` foi removida junto.
+  Os três arquivos substituem `equipe-1/2/3.jpg`, que eram as mesmas
+  fotos (idênticas por SHA-256) sem compressão.
+- Duas dessas fotos não são retratos de rosto: a do Cleiton é de meio
+  corpo e a do Cesar é um card de marca com fundo roxo e logotipo ao
+  lado. Arquivo quadrado em avatar quadrado significa que o `cover` não
+  corta nada, então a pessoa sai minúscula. Daí `.pessoa-foto-rosto`,
+  que amplia e desloca; os três valores (`--foto-x`, `--foto-y`,
+  `--foto-zoom`) vão no `style` de cada foto porque são **medidos** no
+  arquivo, não estimados: a cabeça do Cleiton ocupa 31%–60% da largura,
+  e no card do Cesar o verde do logotipo começa em 59%, o que define a
+  borda direita da janela. Trocando o arquivo, remeça.
+- Essa regra depende de `max-width:none`. Sem ele o `img{max-width:100%}`
+  da base trava a largura em 72px e a foto sai esticada em vez de
+  ampliada. Já aconteceu, e é a mesma armadilha que `.recorte img` já
+  resolve nos logos das operadoras.
+- O hero é uma divisão real: `.hero` é um grid de duas colunas,
+  `imagens/hero2.jpg` preenchendo a metade esquerda inteira até a borda
+  e o texto à direita sobre degradê de menta. A célula é quase quadrada
+  e a foto é deitada, então o recorte centrado tira cerca de um quarto
+  das laterais e ainda segura a família inteira. Sem cartão e sem
+  moldura; o cliente recusou painel contido.
+- O bloco de texto do hero é alinhado à esquerda da sua metade e
+  limitado a `calc(var(--container)/2)`. É isso que faz a margem direita
+  bater com a das outras seções **sem usar `100vw`**, que conta a barra
+  de rolagem e desalinha por alguns pixels. O título é dimensionado para
+  fechar em 2 linhas nessa meia-coluna, não na largura da página.
+- No celular a foto do hero vai para depois do texto por `order`, para o
+  CTA continuar perto do topo.
+- As imagens **já estão comprimidas** (a pasta saiu de 4,4 MB para
+  420 KB carregados). Não existe ImageMagick, ffmpeg, cwebp nem PIL
+  neste ambiente: a compressão foi feita pelo próprio Chrome, com
+  `canvas` redimensionando em etapas (cada passo no máximo pela metade,
+  porque um salto único de 5363 para 1600 borra o detalhe) e
+  `toBlob('image/jpeg', .80)`. O arquivo volta para o disco por POST
+  num servidor local de uma linha, guardado no diretório de rascunho da
+  sessão — base64 pelo chat custaria dezenas de milhares de tokens.
+  Os originais estão lá também, em `originais/`.
+- Ao trocar qualquer imagem, **atualize os atributos `width`/`height`**
+  do `<img>` para o tamanho real do novo arquivo. Eles reservam o
+  espaço antes da imagem carregar; errados, a página salta.
+- `operadora-seguros-unimed.png` ficou **sem recomprimir de propósito**:
+  o encoder PNG do Chrome devolve um arquivo maior que o original.
+  Medir antes de gravar. `hero1.jpg` continua órfã (842 KB) e sem
+  compressão, porque não vai para a tela.
+- Ícone dentro de botão usa `stroke="currentColor"`, nunca hex: assim
+  acompanha a cor do botão quando o tema muda. Já houve ícone branco
+  invisível em nav claro por causa disso.
+- `#prova` tem três depoimentos: a citação editorial do Carlos Santos
+  e, abaixo de um fio, o par `.depo-par`. Os dois do par vieram escritos
+  do `main` do repositório **com `[NOME DO CLIENTE]` na assinatura** e
+  são rascunho para validar com cliente real — não publique assim, e
+  não invente o nome. É a única coisa entre colchetes na página.
+  O texto do Carlos Santos aqui é o **original**, não a reescrita que
+  está no `main`: é o nome de uma pessoa real embaixo.
+- `imagens/logo-thesmart.png` é um lockup para **fundo escuro**: 64% dos
+  pixels opacos são brancos e 28% são o verde da marca. Sobre a nav
+  clara sobravam só os traços verdes e a logo sumia. Por isso
+  `.marca img` leva placa de `--profundo` com `--r-campo` e 5px de
+  respiro; o `box-sizing` global segura a placa em 38px, então a altura
+  da nav não muda. Chegando a versão para fundo claro, tira-se a placa.
+  Isso **não** vale para o favicon nem para a `og:image`, que aparecem
+  sobre fundo do navegador e da rede social, fora do nosso controle.
+
+O `README.md` é o manual do cliente (operação do CRM, campanhas, medição,
+checklist pós-publicação) — consulte-o antes de mexer nas integrações.
