@@ -298,14 +298,21 @@ contrato com o CRM.
   borda direita da janela não pode passar. Trocando o arquivo, remeça.
 - No card do Cesar a cabeça vai de 24,5% a 55,1% da largura (eixo do
   rosto em 40,9%), o alto do cabelo está em 7,5% e o queixo em 48%. A
-  janela de `--foto-zoom:315%` tem 31,75% de lado: **não cabe a cabeça
-  inteira**, então o corte escolhe o que sacrificar. Sacrifica o alto
-  do cabelo, não o queixo — com `--foto-y:-28%` a janela ia de 8,9% a
-  40,6%, cortava o queixo e deixava os olhos a 57% da altura, que é o
-  que fazia o rosto parecer jogado para um canto. Em `-46%` ela vai de
-  14,6% a 46,4% e os olhos ficam a 43%, a mesma altura dos outros dois
-  avatares da fila. Baixar mais (testados -43/-46/-49 lado a lado)
-  começa a achatar o alto da cabeça.
+  janela de `--foto-zoom:250%` tem 40% de lado e vai de 19,2% a 59,2%
+  na largura e de 10,8% a 50,8% na altura: a cabeça inteira cabe, com
+  o colarinho entrando embaixo, e os olhos ficam a 43% da altura do
+  avatar, a mesma altura dos outros dois da fila. A versão apertada
+  anterior (315%) não cabia em altura: guardava o alto do cabelo,
+  cortava o queixo e punha os olhos a 57%, que é o que fazia o rosto
+  parecer jogado para um canto.
+- **O zoom do Cesar é limitado pelo logotipo, não pelo gosto.** O
+  cliente pediu menos zoom duas vezes (testados 315/300/290/280 e
+  depois 265/250/240 lado a lado) e 250% é o chão: a borda direita da
+  janela está em 59,2% e o verde do logotipo começa em 59,3%. Medido
+  varrendo os pixels de dentro do círculo: em `--foto-x:-50%` (borda
+  em 60,0%) o verde já aparece. Tirar mais zoom alarga a janela e só
+  há folga do lado esquerdo, então a cabeça começa a sair do eixo para
+  a direita — que foi justamente a queixa que originou este recorte.
 - Essa regra depende de `max-width:none`. Sem ele o `img{max-width:100%}`
   da base trava a largura em 72px e a foto sai esticada em vez de
   ampliada. Já aconteceu, e é a mesma armadilha que `.recorte img` já
