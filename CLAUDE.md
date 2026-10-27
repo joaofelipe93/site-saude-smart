@@ -180,17 +180,41 @@ contrato com o CRM.
   classe `.plano-tinta` originais. O produto saiu **inteiro** da
   página na reconciliação com o `main` do repositório: cartão, link do
   rodapé, opção do formulário e entrada em `tituloParaCrm()`.
-- A parede de operadoras (`.muro`) tem **oito** posições em quatro
-  colunas. Seis têm arquivo; duas são `.muro-item.falta`, cartão
-  tracejado com o nome da operadora, à espera do arquivo oficial do
-  portal do corretor (Bradesco Saúde e Omint). O tracejado registra a
-  representação sem exibir marca de outra empresa.
-- O logo da **Hapvida** voltou, e desta vez o rótulo acompanha: o
-  cartão, o rodapé e a `meta description` dizem **"Hapvida NotreDame
-  Intermédica"**, o nome do grupo. Foi decisão do cliente depois de
-  constatado que a NotreDame não tem lockup próprio nem no site do
-  grupo. O erro anterior não era o arquivo, era o arquivo de uma marca
-  embaixo do nome de outra — não separe os dois de novo.
+- A parede (`.muro`) tem **nove** posições em grade de **três
+  colunas**, 3x3 — com quatro colunas sobravam três buracos na última
+  fila. Oito têm arquivo; só a Omint é `.muro-item.falta`, cartão
+  tracejado, à espera do arquivo do portal do corretor. Abaixo de
+  760px vira duas colunas e o último cartão ocupa a linha inteira
+  (`.muro-item:last-child{grid-column:1/-1}`), senão fica sozinho.
+- **A Qualicorp não é operadora, é administradora de benefícios**:
+  administra planos coletivos por adesão, e quem assume o risco e tem
+  registro de operadora é a Amil, a SulAmérica e as outras. Por isso,
+  no rodapé, a linha pequena dela diz "Administradora de benefícios"
+  no lugar do número da ANS. Não invente um registro de operadora para
+  ela. Repare também que o produto "Adesão por entidade" saiu da
+  página, e adesão é justamente o que ela administra — se um dia a
+  seção for revista, os dois fatos conversam.
+- `.muro-item img` leva `object-fit:contain`, e isso **não é enfeite**:
+  a altura ali é fixa e a largura é limitada pelo `max-width:100%` da
+  base, então um lockup largo (o da Bradesco) era comprimido na
+  horizontal em tela estreita em vez de diminuir. Já aconteceu.
+- O lockup da Bradesco é largo e baixo: na altura padrão o texto sai
+  bem menor que o dos vizinhos, daí `img.b{height:46px}`. Foram
+  comparadas 34/40/46/52 lado a lado na própria grade.
+- **Dois logos do muro são a marca do grupo, não da operadora**, e em
+  ambos o rótulo acompanha a arte: o nome escrito tem de ser o nome
+  que está desenhado no logo. A Hapvida entra no lugar da NotreDame
+  Intermédica, que foi absorvida, e o rótulo virou "Hapvida NotreDame
+  Intermédica" no cartão, no rodapé e na `meta description`; o
+  "Bradesco Seguros" entra no lugar da Bradesco Saúde, com o `alt` da
+  própria arte. Foram decisões do cliente, depois de confirmado que
+  nenhuma das duas operadoras tem lockup próprio publicado. O erro
+  antigo não era o arquivo, era a marca de uma empresa embaixo do nome
+  de outra — não separe os dois de novo.
+- **No rodapé é diferente de propósito.** Lá a lista é de operadoras
+  com registro na ANS, então o nome continua **"Bradesco Saúde"**, que
+  é a razão social dona do registro 005711. Trocar por "Bradesco
+  Seguros" ali colaria o número ao nome errado.
 - O verde é o **único acento**. O âmbar não é um segundo acento: cobre
   dois usos semânticos, o aviso da ANS e as estrelas da avaliação.
 - `imagens/travus-capital.png` é a arte da Travus **recolorida para

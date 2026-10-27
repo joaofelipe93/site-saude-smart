@@ -334,22 +334,35 @@ carteirinha de qualquer beneficiário.
 
 ### Três logos de operadora
 
-A parede de operadoras tem **oito** posições. Seis têm arquivo
-oficial; **duas** estão como cartão tracejado, esperando o arquivo:
+A parede tem **nove** posições, em grade de 3x3. Oito têm arquivo;
+**só a Omint** está como cartão tracejado:
 
-| Operadora | Situação |
+| Logo | Situação |
 |---|---|
 | Amil, Porto, SulAmérica, Seguros Unimed, Alice | arquivo oficial no repositório |
+| Qualicorp | arquivo oficial, pego no site deles |
 | Hapvida NotreDame Intermédica | logo da **Hapvida**, com o nome do grupo (veja abaixo) |
-| **Bradesco Saúde** | falta — o site público só publica o lockup "Bradesco Seguros", que é a marca do grupo |
+| Bradesco Seguros | logo do **grupo**, com o nome do grupo (veja abaixo) |
 | **Omint** | falta — o servidor deles bloqueia download automatizado |
 
-**Sobre a NotreDame:** a seu pedido, o cartão passou a exibir o logo da
-Hapvida e o rótulo virou **"Hapvida NotreDame Intermédica"**, no muro,
-no rodapé e na descrição do site. Assim o logo corresponde ao nome que
-está escrito, que é o problema que existia antes — logo de uma empresa
-embaixo do nome de outra. A NotreDame Intermédica foi absorvida pelo
-grupo e não tem lockup próprio nem no site dele.
+**Atenção à Qualicorp:** ela não é operadora, é **administradora de
+benefícios** — administra planos coletivos por adesão, e quem assume o
+risco e tem registro de operadora é a Amil, a SulAmérica e as demais.
+Por isso, no rodapé, a linha pequena dela diz "Administradora de
+benefícios" em vez de um número de ANS. Se você quiser separá-la das
+operadoras de forma visível no muro, é só pedir.
+
+**Sobre a NotreDame e a Bradesco:** a seu pedido, os dois cartões
+passaram a exibir o logo do **grupo**, com o rótulo acompanhando a
+arte. A NotreDame mostra a marca Hapvida e virou "Hapvida NotreDame
+Intermédica" no muro, no rodapé e na descrição do site; a Bradesco
+Saúde mostra o lockup "Bradesco Seguros", que é como a arte se
+apresenta. Assim o logo corresponde ao nome escrito, que é o problema
+que existia antes — logo de uma empresa embaixo do nome de outra.
+
+No **rodapé**, a Bradesco continua como "Bradesco Saúde": lá a lista é
+de operadoras com registro na ANS, e 005711 é o registro da Bradesco
+Saúde S.A. Pôr "Bradesco Seguros" ali colaria o número ao nome errado.
 
 Procurei os três na internet antes disso, e vale registrar o resultado:
 o site da Bradesco serve só o SVG "Bradesco Seguros"; o domínio
@@ -360,13 +373,16 @@ iconape) têm os arquivos, mas a licença deles é **não comercial** ou
 exige autorização por escrito — e um site de corretora é uso
 comercial.
 
-Pegue as duas que faltam no **portal do corretor** de cada operadora,
-que é a fonte certa de qualquer jeito: lá vem a versão aprovada para
-uso por corretoras, com as regras de área de respiro e tamanho mínimo.
-Salve em `imagens/` como `operadora-bradesco-saude.*` e
-`operadora-omint.*`, e me avise que eu troco os cartões. No caso da
-Omint, baixar pelo seu navegador funciona — o bloqueio é contra
+Falta só a **Omint**. Pegue no **portal do corretor**, que é a fonte
+certa de qualquer jeito: lá vem a versão aprovada para uso por
+corretoras, com as regras de área de respiro e tamanho mínimo. Salve em
+`imagens/` como `operadora-omint.*` e me avise que eu troco o cartão.
+Baixar pelo seu navegador funciona — o bloqueio deles é contra
 automação, não contra você.
+
+Se um dia chegar o lockup próprio da **Bradesco Saúde** ou da
+**NotreDame**, melhor ainda: aí o logo e o nome da operadora voltam a
+ser os mesmos, e é só trocar arquivo e rótulo.
 
 Preferência de formato: SVG > PNG com fundo transparente > PNG comum.
 
