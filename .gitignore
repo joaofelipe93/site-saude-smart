@@ -7,3 +7,6 @@ Thumbs.db
 
 # foto antiga do hero, fora da pagina e sem compressao
 imagens/hero1.jpg
+
+# worktrees que o Claude Code cria para trabalhar em paralelo
+.claude/
