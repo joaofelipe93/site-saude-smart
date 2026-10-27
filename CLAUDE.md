@@ -294,8 +294,18 @@ contrato com o CRM.
   que amplia e desloca; os três valores (`--foto-x`, `--foto-y`,
   `--foto-zoom`) vão no `style` de cada foto porque são **medidos** no
   arquivo, não estimados: a cabeça do Cleiton ocupa 31%–60% da largura,
-  e no card do Cesar o verde do logotipo começa em 59%, o que define a
-  borda direita da janela. Trocando o arquivo, remeça.
+  e no card do Cesar o verde do logotipo começa em 59,3% — limite que a
+  borda direita da janela não pode passar. Trocando o arquivo, remeça.
+- No card do Cesar a cabeça vai de 24,5% a 55,1% da largura (eixo do
+  rosto em 40,9%), o alto do cabelo está em 7,5% e o queixo em 48%. A
+  janela de `--foto-zoom:315%` tem 31,75% de lado: **não cabe a cabeça
+  inteira**, então o corte escolhe o que sacrificar. Sacrifica o alto
+  do cabelo, não o queixo — com `--foto-y:-28%` a janela ia de 8,9% a
+  40,6%, cortava o queixo e deixava os olhos a 57% da altura, que é o
+  que fazia o rosto parecer jogado para um canto. Em `-46%` ela vai de
+  14,6% a 46,4% e os olhos ficam a 43%, a mesma altura dos outros dois
+  avatares da fila. Baixar mais (testados -43/-46/-49 lado a lado)
+  começa a achatar o alto da cabeça.
 - Essa regra depende de `max-width:none`. Sem ele o `img{max-width:100%}`
   da base trava a largura em 72px e a foto sai esticada em vez de
   ampliada. Já aconteceu, e é a mesma armadilha que `.recorte img` já
