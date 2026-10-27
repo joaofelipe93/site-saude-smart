@@ -329,14 +329,16 @@ levantei em documentos públicos, não no seu contrato. Registro ANS é
 identificação regulatória: número errado na página é problema seu, não
 meu.
 
-A **Omint** é 359661, informada por você.
+Os outros três vieram de você, do credenciamento: **Omint** 359661,
+**Qualicorp** 417173 e **Porto** 000582.
 
-**Falta um, e eu não chutei: a Porto.** O grupo tem *duas* operadoras
-de saúde registradas, a Porto Seguro - Seguro Saúde e a Portomed, com
-números diferentes, e daqui não dá para saber qual você representa.
-Ela aparece no rodapé só com o nome. Me mande o número — está no
-credenciamento e na carteirinha de qualquer beneficiário — e eu
-completo.
+O da Porto bate com o que eu tinha encontrado: o relatório IDSS da
+própria Porto traz `00058-2` para a **Porto Seguro - Seguro Saúde**.
+Fica o registro de que o grupo tem uma segunda operadora de saúde, a
+**Portomed**, com número diferente — se um dia o produto representado
+mudar, o número muda junto.
+
+**A lista está completa: os nove têm número.**
 
 ### Três logos de operadora
 

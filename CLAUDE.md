@@ -241,11 +241,13 @@ contrato com o CRM.
   para a tarja não ser o único preto de uma página sem preto nenhum.
   O `<li>` é `flex-direction:column`: com `inline-block` solto a
   tarja encostava ao lado dos nomes curtos.
-  Seis números vieram de documento público e o da Omint (359661) foi
-  informado pelo cliente. **Só a Porto está sem número, de propósito**:
-  o grupo tem duas operadoras de saúde registradas, com números
-  diferentes, e daqui não dá para saber qual é a representada. Não
-  preencha por dedução — é identificação regulatória.
+  **Os nove têm número.** Seis vieram de documento público; Omint
+  (359661), Qualicorp (417173) e Porto (000582) vieram do
+  credenciamento da corretora. O da Porto é o da Porto Seguro -
+  Seguro Saúde, e bate com o relatório IDSS da própria Porto; o grupo
+  tem uma segunda operadora de saúde registrada, a Portomed, com
+  número diferente. Trocando de produto, remeça — é identificação
+  regulatória, não se deduz.
 - Um sistema de formas só: interativo = pílula (`--r-pilula`),
   contêiner = `--r-caixa` (16px), campo = `--r-campo` (12px).
 - Acessibilidade é explícita no markup existente (link "pular",
