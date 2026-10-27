@@ -187,13 +187,15 @@ contrato com o CRM.
   760px vira duas colunas e o último cartão ocupa a linha inteira
   (`.muro-item:last-child{grid-column:1/-1}`), senão fica sozinho.
 - **A Qualicorp não é operadora, é administradora de benefícios**:
-  administra planos coletivos por adesão, e quem assume o risco e tem
-  registro de operadora é a Amil, a SulAmérica e as outras. Por isso,
-  no rodapé, a linha pequena dela diz "Administradora de benefícios"
-  no lugar do número da ANS. Não invente um registro de operadora para
-  ela. Repare também que o produto "Adesão por entidade" saiu da
-  página, e adesão é justamente o que ela administra — se um dia a
-  seção for revista, os dois fatos conversam.
+  administra planos coletivos por adesão, e quem assume o risco é a
+  Amil, a SulAmérica e as outras. No rodapé ela leva **duas** linhas,
+  e é o par que conta a história certa: a descritiva ("Administradora
+  de benefícios") e a tarja `ANS nº 417173`, porque administradora
+  também é registrada na ANS — mas como administradora, não como
+  operadora. Tirar a linha descritiva faria o 417173 passar por
+  registro de operadora. Repare também que o produto "Adesão por
+  entidade" saiu da página, e adesão é justamente o que ela
+  administra — se um dia a seção for revista, os dois fatos conversam.
 - `.muro-item img` leva `object-fit:contain`, e isso **não é enfeite**:
   a altura ali é fixa e a largura é limitada pelo `max-width:100%` da
   base, então um lockup largo (o da Bradesco) era comprimido na
@@ -228,12 +230,24 @@ contrato com o CRM.
   disputa com o CTA principal.
 - O **registro na ANS** fica no rodapé, embaixo do nome de cada
   operadora (`.rodape-operadoras .ans`), não no muro de logos — o
-  cliente pediu assim depois de ver nos dois lugares. Seis estão
-  preenchidos a partir de documento público e o da Omint (359661) foi
-  informado pelo cliente. **Só a Porto está sem número, de propósito**:
-  o grupo tem duas operadoras de saúde registradas, com números
-  diferentes, e daqui não dá para saber qual é a representada. Não
-  preencha por dedução — é identificação regulatória.
+  cliente pediu assim depois de ver nos dois lugares. O formato é a
+  **tarja**: retângulo escuro, número em branco, fio claro por dentro
+  e canto reto. É a convenção que as próprias operadoras usam (a da
+  Bradesco é um retângulo preto de 133x34 com "ANS - nº 005711"), e a
+  exigência legal é exibir o número, não o desenho. O canto reto é
+  deliberado: o sistema de formas descreve interface, e isto é marca
+  regulatória, não controle — `--r-campo` num bloco de 27px viraria
+  pílula e sugeriria clique. O fundo é `--profundo`, não preto puro,
+  para a tarja não ser o único preto de uma página sem preto nenhum.
+  O `<li>` é `flex-direction:column`: com `inline-block` solto a
+  tarja encostava ao lado dos nomes curtos.
+  **Os nove têm número.** Seis vieram de documento público; Omint
+  (359661), Qualicorp (417173) e Porto (000582) vieram do
+  credenciamento da corretora. O da Porto é o da Porto Seguro -
+  Seguro Saúde, e bate com o relatório IDSS da própria Porto; o grupo
+  tem uma segunda operadora de saúde registrada, a Portomed, com
+  número diferente. Trocando de produto, remeça — é identificação
+  regulatória, não se deduz.
 - Um sistema de formas só: interativo = pílula (`--r-pilula`),
   contêiner = `--r-caixa` (16px), campo = `--r-campo` (12px).
 - Acessibilidade é explícita no markup existente (link "pular",

@@ -307,7 +307,12 @@ o arquivo e tiro a plaquinha.
 ### Dois registros ANS
 
 O **registro na ANS** aparece no rodapé, embaixo do nome de cada
-operadora. Seis saíram de documento oficial da própria operadora ou de
+operadora, na **tarja** preta e branca que as próprias operadoras usam.
+Vale saber: a exigência legal é exibir o número — o retângulo escuro é
+convenção de mercado, não formato obrigatório. Seguimos a convenção
+porque quem já viu um contrato reconhece o dado de imediato.
+
+Seis números saíram de documento oficial da própria operadora ou de
 lista da ANS:
 
 | Operadora | Registro ANS |
@@ -324,14 +329,16 @@ levantei em documentos públicos, não no seu contrato. Registro ANS é
 identificação regulatória: número errado na página é problema seu, não
 meu.
 
-A **Omint** é 359661, informada por você.
+Os outros três vieram de você, do credenciamento: **Omint** 359661,
+**Qualicorp** 417173 e **Porto** 000582.
 
-**Falta um, e eu não chutei: a Porto.** O grupo tem *duas* operadoras
-de saúde registradas, a Porto Seguro - Seguro Saúde e a Portomed, com
-números diferentes, e daqui não dá para saber qual você representa.
-Ela aparece no rodapé só com o nome. Me mande o número — está no
-credenciamento e na carteirinha de qualquer beneficiário — e eu
-completo.
+O da Porto bate com o que eu tinha encontrado: o relatório IDSS da
+própria Porto traz `00058-2` para a **Porto Seguro - Seguro Saúde**.
+Fica o registro de que o grupo tem uma segunda operadora de saúde, a
+**Portomed**, com número diferente — se um dia o produto representado
+mudar, o número muda junto.
+
+**A lista está completa: os nove têm número.**
 
 ### Três logos de operadora
 
@@ -348,10 +355,16 @@ A parede tem **nove** posições, em grade de 3x3. Oito têm arquivo;
 
 **Atenção à Qualicorp:** ela não é operadora, é **administradora de
 benefícios** — administra planos coletivos por adesão, e quem assume o
-risco e tem registro de operadora é a Amil, a SulAmérica e as demais.
-Por isso, no rodapé, a linha pequena dela diz "Administradora de
-benefícios" em vez de um número de ANS. Se você quiser separá-la das
-operadoras de forma visível no muro, é só pedir.
+risco é a Amil, a SulAmérica e as demais.
+
+No rodapé ela aparece com **duas** linhas: "Administradora de
+benefícios" e a tarja `ANS nº 417173`. As duas juntas é que contam a
+história certa — administradora também é registrada na ANS, mas como
+administradora, não como operadora. Se a linha descritiva sumir, o
+número passa a parecer registro de operadora.
+
+Se você quiser separá-la das operadoras de forma visível no muro
+também, é só pedir.
 
 **Sobre a NotreDame e a Bradesco:** a seu pedido, os dois cartões
 passaram a exibir o logo do **grupo**, com o rótulo acompanhando a
