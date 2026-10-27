@@ -228,8 +228,18 @@ contrato com o CRM.
   disputa com o CTA principal.
 - O **registro na ANS** fica no rodapé, embaixo do nome de cada
   operadora (`.rodape-operadoras .ans`), não no muro de logos — o
-  cliente pediu assim depois de ver nos dois lugares. Seis estão
-  preenchidos a partir de documento público e o da Omint (359661) foi
+  cliente pediu assim depois de ver nos dois lugares. O formato é a
+  **tarja**: retângulo escuro, número em branco, fio claro por dentro
+  e canto reto. É a convenção que as próprias operadoras usam (a da
+  Bradesco é um retângulo preto de 133x34 com "ANS - nº 005711"), e a
+  exigência legal é exibir o número, não o desenho. O canto reto é
+  deliberado: o sistema de formas descreve interface, e isto é marca
+  regulatória, não controle — `--r-campo` num bloco de 27px viraria
+  pílula e sugeriria clique. O fundo é `--profundo`, não preto puro,
+  para a tarja não ser o único preto de uma página sem preto nenhum.
+  O `<li>` é `flex-direction:column`: com `inline-block` solto a
+  tarja encostava ao lado dos nomes curtos.
+  Seis números vieram de documento público e o da Omint (359661) foi
   informado pelo cliente. **Só a Porto está sem número, de propósito**:
   o grupo tem duas operadoras de saúde registradas, com números
   diferentes, e daqui não dá para saber qual é a representada. Não

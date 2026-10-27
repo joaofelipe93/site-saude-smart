@@ -442,15 +442,34 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
   margin-bottom:16px;text-transform:uppercase}
 .rodape-col li{margin-bottom:11px;font-size:15px;color:var(--texto-2)}
 .rodape-col a{color:var(--texto-2)}
-/* Registro na ANS embaixo do nome da operadora. Era letra miúda
-   apagada e o cliente pediu destaque: agora leva o verde da marca e
-   um fio, que é a linguagem de hierarquia da página inteira — a
-   mesma do cartão em destaque e do selo do hero. Tabular-nums deixa
-   os números com a mesma largura de dígito, um sob o outro.      */
-.rodape-operadoras li{margin-bottom:15px}
-.rodape-operadoras .ans{display:block;margin-top:5px;font-size:13px;font-weight:700;
-  font-variant-numeric:tabular-nums;color:var(--acento-texto);
-  border-left:2px solid var(--verde);padding-left:8px}
+/* Tarja do registro na ANS: retângulo escuro, número em branco e um
+   fio claro por dentro. É a convenção que as próprias operadoras
+   usam — a tarja da Bradesco, por exemplo, é um retângulo preto de
+   133x34 com "ANS - nº 005711" em branco. A exigência legal é exibir
+   o número; o formato é convenção de mercado, e segui-la faz o dado
+   ser reconhecido de imediato por quem já viu um contrato.
+
+   Canto reto, e isso é deliberado: o sistema de formas da página
+   (pílula para interativo, --r-campo para campo) descreve interface,
+   e esta é uma marca regulatória, não um controle. Arredondar com
+   --r-campo num bloco de 24px viraria pílula e sugeriria clique.
+
+   O fundo é --profundo, não preto puro: é a mesma tinta da placa da
+   logo e dos círculos de iniciais, então a tarja não vira o único
+   preto de uma página que não tem preto nenhum.                  */
+/* Coluna, não linha: com `inline-block` solto a tarja encostava ao
+   lado dos nomes curtos ("Amil", "Alice") e caía embaixo dos
+   longos. Em coluna ela fica sempre sob o nome, e o
+   `align-items:flex-start` a mantém do tamanho do conteúdo.  */
+.rodape-operadoras li{display:flex;flex-direction:column;align-items:flex-start;margin-bottom:15px}
+/* A Qualicorp não entra na tarja: tarja é selo de registro, e texto
+   descritivo dentro dela sugeriria um número que ela não tem. Linha
+   simples, como era antes.                                        */
+.rodape-operadoras .papel-ans{margin-top:4px;font-size:12.5px;color:var(--texto-2)}
+.rodape-operadoras .ans{display:inline-block;margin-top:7px;padding:4px 10px;
+  background:var(--profundo);color:#fff;font-size:12px;font-weight:800;
+  letter-spacing:.02em;font-variant-numeric:tabular-nums;
+  box-shadow:inset 0 0 0 1px var(--profundo),inset 0 0 0 2px rgba(255,255,255,.72)}
 .rodape-rede{display:inline-flex;gap:8px;align-items:center}
 .rodape-rede svg{flex-shrink:0}
 .rodape-col a:hover{color:var(--texto)}
@@ -1006,7 +1025,7 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
           <li>Hapvida NotreDame Intermédica<span class="ans">ANS nº 359017</span></li>
           <li>Seguros Unimed<span class="ans">ANS nº 000701</span></li>
           <li>Alice<span class="ans">ANS nº 421928</span></li>
-          <li>Qualicorp<span class="ans">Administradora de benefícios</span></li>
+          <li>Qualicorp<span class="papel-ans">Administradora de benefícios</span></li>
           <li>Omint<span class="ans">ANS nº 359661</span></li>
         </ul>
       </div>

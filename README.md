@@ -307,7 +307,12 @@ o arquivo e tiro a plaquinha.
 ### Dois registros ANS
 
 O **registro na ANS** aparece no rodapé, embaixo do nome de cada
-operadora. Seis saíram de documento oficial da própria operadora ou de
+operadora, na **tarja** preta e branca que as próprias operadoras usam.
+Vale saber: a exigência legal é exibir o número — o retângulo escuro é
+convenção de mercado, não formato obrigatório. Seguimos a convenção
+porque quem já viu um contrato reconhece o dado de imediato.
+
+Seis números saíram de documento oficial da própria operadora ou de
 lista da ANS:
 
 | Operadora | Registro ANS |
