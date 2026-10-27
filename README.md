@@ -342,16 +342,16 @@ mudar, o número muda junto.
 
 ### Três logos de operadora
 
-A parede tem **nove** posições, em grade de 3x3. Oito têm arquivo;
-**só a Omint** está como cartão tracejado:
+A parede tem **nove** posições, em grade de 3x3, e **as nove têm
+logo**. Nenhum cartão tracejado sobrou.
 
-| Logo | Situação |
+| Logo | Origem |
 |---|---|
-| Amil, Porto, SulAmérica, Seguros Unimed, Alice | arquivo oficial no repositório |
+| Amil, Porto, SulAmérica, Seguros Unimed, Alice | arquivo oficial, já no repositório |
 | Qualicorp | arquivo oficial, pego no site deles |
+| Omint | você baixou do site deles e colocou na pasta |
 | Hapvida NotreDame Intermédica | logo da **Hapvida**, com o nome do grupo (veja abaixo) |
 | Bradesco Seguros | logo do **grupo**, com o nome do grupo (veja abaixo) |
-| **Omint** | falta — o servidor deles bloqueia download automatizado |
 
 **Atenção à Qualicorp:** ela não é operadora, é **administradora de
 benefícios** — administra planos coletivos por adesão, e quem assume o
@@ -387,12 +387,14 @@ iconape) têm os arquivos, mas a licença deles é **não comercial** ou
 exige autorização por escrito — e um site de corretora é uso
 comercial.
 
-Falta só a **Omint**. Pegue no **portal do corretor**, que é a fonte
-certa de qualquer jeito: lá vem a versão aprovada para uso por
-corretoras, com as regras de área de respiro e tamanho mínimo. Salve em
-`imagens/` como `operadora-omint.*` e me avise que eu troco o cartão.
-Baixar pelo seu navegador funciona — o bloqueio deles é contra
-automação, não contra você.
+A **Omint** foi resolvida do jeito simples: você abriu o site deles e
+salvou a imagem. O bloqueio é contra automação, não contra pessoa.
+
+Vale um cuidado para depois: a logo que está no ar veio do site
+institucional, não do portal do corretor. Se a Omint tiver regra de uso
+de marca para corretoras — área de respiro, tamanho mínimo, versão
+aprovada —, o arquivo certo está no portal. Vale conferir numa próxima
+visita e, se for diferente, me mandar que eu troco.
 
 Se um dia chegar o lockup próprio da **Bradesco Saúde** ou da
 **NotreDame**, melhor ainda: aí o logo e o nome da operadora voltam a

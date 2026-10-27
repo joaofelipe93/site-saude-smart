@@ -182,10 +182,13 @@ contrato com o CRM.
   rodapé, opção do formulário e entrada em `tituloParaCrm()`.
 - A parede (`.muro`) tem **nove** posições em grade de **três
   colunas**, 3x3 — com quatro colunas sobravam três buracos na última
-  fila. Oito têm arquivo; só a Omint é `.muro-item.falta`, cartão
-  tracejado, à espera do arquivo do portal do corretor. Abaixo de
-  760px vira duas colunas e o último cartão ocupa a linha inteira
+  fila. **As nove têm arquivo.** Abaixo de 760px vira duas colunas e o
+  último cartão ocupa a linha inteira
   (`.muro-item:last-child{grid-column:1/-1}`), senão fica sozinho.
+  Entrando operadora sem logo, existiu aqui um `.muro-item.falta` —
+  cartão tracejado com o nome dela, que registra o credenciamento sem
+  exibir marca de outra empresa. Saiu com a chegada da última, para
+  não deixar CSS sem uso; está no histórico do git.
 - **A Qualicorp não é operadora, é administradora de benefícios**:
   administra planos coletivos por adesão, e quem assume o risco é a
   Amil, a SulAmérica e as outras. No rodapé ela leva **duas** linhas,

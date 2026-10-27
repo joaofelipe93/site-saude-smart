@@ -227,10 +227,6 @@ ul{margin:0;padding:0;list-style:none}
    34/40/46/52 lado a lado na própria grade.                        */
 .muro-item img.b{height:46px}
 .muro-item img.q{height:40px}
-/* Operadora representada cujo arquivo oficial ainda não chegou: o
-   cartão tracejado registra o credenciamento sem fingir logo. */
-.muro-item.falta{border-style:dashed;background:var(--menta)}
-.muro-item.falta span{font-size:14px;font-weight:700;line-height:1.25;text-align:center;color:var(--texto-2)}
 /* Recortes que corrigem o excesso de margem embutido nos dois PNGs. */
 .recorte{display:block;position:relative;overflow:hidden}
 .recorte img{position:absolute;max-width:none;height:auto}
@@ -653,20 +649,23 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
            005711. Trocar por "Bradesco Seguros" ali colaria o número
            ao nome errado.
 
-           Omint segue em cartão tracejado: só o ARQUIVO do logo
-           falta, porque o registro na ANS dela já está no rodapé. O
-           arquivo sai do portal do corretor.
+           As nove têm arquivo. Se um dia entrar operadora sem logo,
+           existiu aqui um `.muro-item.falta` — cartão tracejado com o
+           nome dela, que registra o credenciamento sem exibir marca
+           de outra empresa. Saiu quando a última chegou, para não
+           ficar CSS sem uso; está no histórico do git.
 
            A Qualicorp não é operadora, é ADMINISTRADORA DE BENEFÍCIOS:
            ela administra planos coletivos por adesão, e quem assume o
            risco e tem registro de operadora é a Amil, a SulAmérica e
            as outras. Por isso, no rodapé, a linha pequena dela diz
-           "Administradora de benefícios" em vez de um número de ANS.
-           Não invente um registro de operadora para ela.             -->
+           "Administradora de benefícios" ACIMA da tarja. O 417173 é
+           registro de administradora: sem a linha descritiva, passaria
+           por registro de operadora.                                -->
       <div class="muro-item"><img class="p" src="imagens/operadora-hapvida.png" alt="Hapvida NotreDame Intermédica" width="243" height="46" loading="lazy"></div>
       <div class="muro-item"><img class="b" src="imagens/operadora-bradesco-seguros.svg" alt="Bradesco Seguros" loading="lazy"></div>
       <div class="muro-item"><img class="q" src="imagens/qualicorp.png" alt="Qualicorp" width="263" height="96" loading="lazy"></div>
-      <div class="muro-item falta"><span>Omint</span></div>
+      <div class="muro-item"><img src="imagens/operadora-omint.png" alt="Omint" width="170" height="47" loading="lazy"></div>
     </div>
     <div class="aviso">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-5M12 8h.01"/></svg>
