@@ -182,10 +182,13 @@ contrato com o CRM.
   rodapé, opção do formulário e entrada em `tituloParaCrm()`.
 - A parede (`.muro`) tem **nove** posições em grade de **três
   colunas**, 3x3 — com quatro colunas sobravam três buracos na última
-  fila. Oito têm arquivo; só a Omint é `.muro-item.falta`, cartão
-  tracejado, à espera do arquivo do portal do corretor. Abaixo de
-  760px vira duas colunas e o último cartão ocupa a linha inteira
+  fila. **As nove têm arquivo.** Abaixo de 760px vira duas colunas e o
+  último cartão ocupa a linha inteira
   (`.muro-item:last-child{grid-column:1/-1}`), senão fica sozinho.
+  Entrando operadora sem logo, existiu aqui um `.muro-item.falta` —
+  cartão tracejado com o nome dela, que registra o credenciamento sem
+  exibir marca de outra empresa. Saiu com a chegada da última, para
+  não deixar CSS sem uso; está no histórico do git.
 - **A Qualicorp não é operadora, é administradora de benefícios**:
   administra planos coletivos por adesão, e quem assume o risco é a
   Amil, a SulAmérica e as outras. No rodapé ela leva **duas** linhas,
@@ -291,8 +294,25 @@ contrato com o CRM.
   que amplia e desloca; os três valores (`--foto-x`, `--foto-y`,
   `--foto-zoom`) vão no `style` de cada foto porque são **medidos** no
   arquivo, não estimados: a cabeça do Cleiton ocupa 31%–60% da largura,
-  e no card do Cesar o verde do logotipo começa em 59%, o que define a
-  borda direita da janela. Trocando o arquivo, remeça.
+  e no card do Cesar o verde do logotipo começa em 59,3% — limite que a
+  borda direita da janela não pode passar. Trocando o arquivo, remeça.
+- No card do Cesar a cabeça vai de 24,5% a 55,1% da largura (eixo do
+  rosto em 40,9%), o alto do cabelo está em 7,5% e o queixo em 48%. A
+  janela de `--foto-zoom:250%` tem 40% de lado e vai de 19,2% a 59,2%
+  na largura e de 10,8% a 50,8% na altura: a cabeça inteira cabe, com
+  o colarinho entrando embaixo, e os olhos ficam a 43% da altura do
+  avatar, a mesma altura dos outros dois da fila. A versão apertada
+  anterior (315%) não cabia em altura: guardava o alto do cabelo,
+  cortava o queixo e punha os olhos a 57%, que é o que fazia o rosto
+  parecer jogado para um canto.
+- **O zoom do Cesar é limitado pelo logotipo, não pelo gosto.** O
+  cliente pediu menos zoom duas vezes (testados 315/300/290/280 e
+  depois 265/250/240 lado a lado) e 250% é o chão: a borda direita da
+  janela está em 59,2% e o verde do logotipo começa em 59,3%. Medido
+  varrendo os pixels de dentro do círculo: em `--foto-x:-50%` (borda
+  em 60,0%) o verde já aparece. Tirar mais zoom alarga a janela e só
+  há folga do lado esquerdo, então a cabeça começa a sair do eixo para
+  a direita — que foi justamente a queixa que originou este recorte.
 - Essa regra depende de `max-width:none`. Sem ele o `img{max-width:100%}`
   da base trava a largura em 72px e a foto sai esticada em vez de
   ampliada. Já aconteceu, e é a mesma armadilha que `.recorte img` já
