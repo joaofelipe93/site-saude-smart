@@ -267,24 +267,27 @@ e "Minha empresa". Ninguém consegue mais se identificar como adesão por
 entidade, e o CRM não recebe mais esse perfil. Se isso não era para ter
 acontecido, me peça que eu devolvo as três opções — é uma linha.
 
-### Dois nomes de depoimento
+### Depoimentos: confira a autorização
 
-A página tem três depoimentos: o do Carlos Santos como citação em
-destaque e, abaixo de um fio, dois menores — um de cliente PME de 5
-vidas e um de troca de plano, PME de 85 vidas.
+A página tem três: o do **Carlos Santos** como citação em destaque e,
+abaixo de um fio, o do **João Felipe** (PME, 5 vidas) e o do **Ricardo
+Melo** (troca de plano, PME 85 vidas).
 
-Os dois menores estão assinados como **"Cliente PME"**, sem nome.
-Não é esquecimento: o nome real não chegou, e **nome inventado não
-entra**. Depoimento sem nome é honesto e pode ir para o ar assim;
-depoimento assinado por uma pessoa que não existe é declaração falsa
-ao consumidor, e na reclamação quem responde é a corretora.
+⚠️ **Antes de publicar, confirme que os três autorizaram.** Depoimento
+é fala atribuída a uma pessoa real, com nome e sobrenome visíveis. Se
+a pessoa não disse aquilo, ou disse e não autorizou a publicação, quem
+responde na reclamação é a corretora. O caminho é simples: mostre o
+texto, ajuste com as palavras dela se precisar, peça o ok.
 
-Quando o nome chegar — com autorização de quem falou — é trocar
-"Cliente PME" pelo nome e pôr as iniciais no círculo ao lado.
+Os textos do João Felipe e do Ricardo Melo foram escritos antes dos
+nomes chegarem. Vale a pena ler junto com cada um e ajustar para soar
+como a pessoa fala.
 
 Sobre o **Carlos Santos**: o texto dele perdeu a menção a seguro de
-vida, a pedido seu. O resto é o original do site antigo, porque é o
-nome de uma pessoa real que está embaixo.
+vida, a pedido seu. O resto é o original do site antigo.
+
+Trocando um nome, me avise — as iniciais do círculo ao lado mudam
+junto.
 
 ### Logo da The Smart para fundo claro
 
