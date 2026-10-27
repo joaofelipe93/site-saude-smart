@@ -147,6 +147,16 @@ a ser opcional — é uma linha.
 
 ---
 
+## 4.1 Número de WhatsApp
+
+O número está em **três** lugares do `index.html` e os três foram
+atualizados para **(11) 95262-7883**: o `CONFIG.whatsapp` (que monta o
+link do botão flutuante e do envio do formulário) e os dois links
+`tel:` — o botão da seção final e o do rodapé. Se a linha de telefone
+for diferente do WhatsApp, me avise que eu separo.
+
+---
+
 ## 5. O que ainda falta de conteúdo
 
 ### Fotos da equipe
@@ -206,19 +216,27 @@ diferença visível na tela.
 | `maos.jpg` | 737 KB, 3000x2000 | **86 KB**, 1200x800 |
 | `operadora-sulamerica.png` | 268 KB, 2560x590 | **50 KB**, 572x132 |
 | `logo-thesmart.png` | 57 KB, 1261x1561 | **33 KB**, 414x512 |
-| `rodrigofrancheli.jpeg` | 55 KB | **19 KB**, 400x401 |
-| `cleitonteixeira.jpeg` | 43 KB | **16 KB**, 400x406 |
-| `cesarnieto.jpeg` | 43 KB | **15 KB**, 400x400 |
-| `travus-capital.jpg` | 41 KB, 2000x1125 | **9 KB**, 364x115 |
+| `rodrigofrancheli.jpeg` | 55 KB | **35 KB**, 555x557 |
+| `cleitonteixeira.jpeg` | 43 KB | **28 KB**, 551x559 |
+| `cesarnieto.jpeg` | 43 KB | **27 KB**, 548x548 |
+| `travus-capital.png` | 41 KB, 2000x1125 | **23 KB**, 364x110 |
 
 Cada arquivo foi reduzido para pouco mais que o dobro do tamanho em que
 aparece na tela, que é o que uma tela de celular de alta densidade
 precisa. Formato e nome continuam os mesmos, então nada mudou na
 publicação.
 
-A `travus-capital.jpg` era uma peça inteira de fundo preto, 2000x1125,
-com a logo ocupando um pedaço do meio. Ela foi **recortada na logo**:
-o que vai para a tela é só o lockup, com uma margem de preto em volta.
+As três fotos da equipe foram **refeitas maiores** quando os retratos
+cresceram na página: saíram de 400px para o tamanho do original,
+~555px. Em tela de celular de alta densidade, o enquadramento amplia a
+imagem e 400px ficava mole.
+
+A logo da Travus era uma peça inteira de fundo preto, 2000x1125, com o
+lockup no meio. Ela foi recortada e **recolorida para fundo claro**: o
+dourado da marca ficou, o branco virou o verde-petróleo do site e o
+preto virou transparente. Virou `travus-capital.png` (PNG por causa da
+transparência). Chegando a versão oficial para fundo claro, é trocar o
+arquivo.
 
 `operadora-seguros-unimed.png` ficou como estava: recomprimir deixava o
 arquivo **maior** que o original.
@@ -252,23 +270,21 @@ acontecido, me peça que eu devolvo as três opções — é uma linha.
 ### Dois nomes de depoimento
 
 A página tem três depoimentos: o do Carlos Santos como citação em
-destaque e, abaixo de um fio, dois menores — um de cliente PME e um
-sobre portabilidade. Os textos desses dois vieram prontos do
-repositório, mas a assinatura está como **`[NOME DO CLIENTE]`**.
+destaque e, abaixo de um fio, dois menores — um de cliente PME de 5
+vidas e um de troca de plano, PME de 85 vidas.
 
-⚠️ **Esses textos são rascunhos para validar com clientes reais, não
-para publicar como estão.** Depoimento inventado atribuído a pessoa
-inventada é propaganda enganosa, e quem responde é a corretora. Use o
-texto como roteiro: mostre ao cliente, ajuste com as palavras dele,
-peça autorização e só então troque o `[NOME DO CLIENTE]`.
+Os dois menores estão assinados como **"Cliente PME"**, sem nome.
+Não é esquecimento: o nome real não chegou, e **nome inventado não
+entra**. Depoimento sem nome é honesto e pode ir para o ar assim;
+depoimento assinado por uma pessoa que não existe é declaração falsa
+ao consumidor, e na reclamação quem responde é a corretora.
 
-Enquanto os colchetes estiverem ali, a página não deve ir para o ar.
+Quando o nome chegar — com autorização de quem falou — é trocar
+"Cliente PME" pelo nome e pôr as iniciais no círculo ao lado.
 
-Sobre o **Carlos Santos**: no repositório o texto dele tinha sido
-reescrito para falar só de plano de saúde. Aqui ficou o **texto
-original**, o mesmo do site antigo, porque é o que ele de fato disse e
-é o nome dele que está embaixo. Se a versão reescrita foi combinada com
-ele, me avise que eu troco.
+Sobre o **Carlos Santos**: o texto dele perdeu a menção a seguro de
+vida, a pedido seu. O resto é o original do site antigo, porque é o
+nome de uma pessoa real que está embaixo.
 
 ### Logo da The Smart para fundo claro
 
@@ -285,29 +301,78 @@ Se você tiver no material da marca a **versão para fundo claro** (a que
 tem o símbolo em verde-escuro ou preto, sem branco), me mande: eu troco
 o arquivo e tiro a plaquinha.
 
+### Dois registros ANS
+
+O **registro na ANS** aparece no rodapé, embaixo do nome de cada
+operadora. Seis saíram de documento oficial da própria operadora ou de
+lista da ANS:
+
+| Operadora | Registro ANS |
+|---|---|
+| Amil Assistência Médica Internacional | 326305 |
+| Bradesco Saúde | 005711 |
+| SulAmérica Cia. de Seguro Saúde | 006246 |
+| Unimed Seguros Saúde | 000701 |
+| Alice | 421928 |
+| Notre Dame Intermédica Saúde | 359017 |
+
+⚠️ **Confira os seis no seu credenciamento antes de publicar.** Eu os
+levantei em documentos públicos, não no seu contrato. Registro ANS é
+identificação regulatória: número errado na página é problema seu, não
+meu.
+
+**Faltam dois, e eu não chutei:**
+
+- **Porto** — o grupo tem *duas* operadoras de saúde registradas, a
+  Porto Seguro - Seguro Saúde e a Portomed, com números diferentes.
+  Qual delas você representa está no credenciamento.
+- **Omint** — não achei em fonte confiável.
+
+Esses dois aparecem no rodapé só com o nome, sem a linha do registro.
+Me mande os números e eu completo — eles estão no credenciamento e na
+carteirinha de qualquer beneficiário.
+
 ### Três logos de operadora
 
-A parede de operadoras tem **oito** posições. Cinco têm arquivo
-oficial; três estão como **cartão tracejado**, esperando o arquivo:
+A parede de operadoras tem **oito** posições. Seis têm arquivo
+oficial; **duas** estão como cartão tracejado, esperando o arquivo:
 
 | Operadora | Situação |
 |---|---|
 | Amil, Porto, SulAmérica, Seguros Unimed, Alice | arquivo oficial no repositório |
-| **Bradesco Saúde** | falta — o site público só publica o lockup "Bradesco Seguros" |
-| **Omint** | falta — o servidor deles bloqueia download direto |
-| **NotreDame Saúde** | falta — a marca foi absorvida pelo grupo Hapvida e não há lockup próprio público |
+| Hapvida NotreDame Intermédica | logo da **Hapvida**, com o nome do grupo (veja abaixo) |
+| **Bradesco Saúde** | falta — o site público só publica o lockup "Bradesco Seguros", que é a marca do grupo |
+| **Omint** | falta — o servidor deles bloqueia download automatizado |
 
-Pegue os três no **portal do corretor** de cada operadora, que é a
-fonte certa de qualquer jeito: lá vem a versão aprovada para uso por
-corretoras, com as regras de área de respiro e tamanho mínimo. Salve em
-`imagens/` como `operadora-bradesco-saude.*`, `operadora-omint.*` e
-`operadora-notredame.*`, e me avise que eu troco os cartões.
+**Sobre a NotreDame:** a seu pedido, o cartão passou a exibir o logo da
+Hapvida e o rótulo virou **"Hapvida NotreDame Intermédica"**, no muro,
+no rodapé e na descrição do site. Assim o logo corresponde ao nome que
+está escrito, que é o problema que existia antes — logo de uma empresa
+embaixo do nome de outra. A NotreDame Intermédica foi absorvida pelo
+grupo e não tem lockup próprio nem no site dele.
+
+Procurei os três na internet antes disso, e vale registrar o resultado:
+o site da Bradesco serve só o SVG "Bradesco Seguros"; o domínio
+`notredameintermedica.com.br` não existe mais e o do grupo serve a
+marca Hapvida; o da Omint bloqueia qualquer cliente que não seja um
+navegador. Os agregadores de logo (seeklogo, cdnlogo, vectorseek,
+iconape) têm os arquivos, mas a licença deles é **não comercial** ou
+exige autorização por escrito — e um site de corretora é uso
+comercial.
+
+Pegue as duas que faltam no **portal do corretor** de cada operadora,
+que é a fonte certa de qualquer jeito: lá vem a versão aprovada para
+uso por corretoras, com as regras de área de respiro e tamanho mínimo.
+Salve em `imagens/` como `operadora-bradesco-saude.*` e
+`operadora-omint.*`, e me avise que eu troco os cartões. No caso da
+Omint, baixar pelo seu navegador funciona — o bloqueio é contra
+automação, não contra você.
 
 Preferência de formato: SVG > PNG com fundo transparente > PNG comum.
 
 O cartão tracejado é melhor que logo errado: ele registra que a
-operadora é representada sem exibir a marca de outra empresa. O logo da
-**Hapvida**, que estava no lugar da NotreDame, saiu por isso.
+operadora é representada sem exibir a marca de outra empresa debaixo do
+nome errado.
 
 ---
 

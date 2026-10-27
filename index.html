@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Planos de Saúde em São Paulo | The Smart Corretora</title>
-<meta name="description" content="Há 9 anos representamos Amil, Porto, Bradesco Saúde, SulAmérica, NotreDame Saúde, Seguros Unimed, Alice e Omint. Estudo personalizado e consultoria gratuita para escolher o plano de saúde certo.">
+<meta name="description" content="Há 9 anos representamos Amil, Porto, Bradesco Saúde, SulAmérica, Hapvida NotreDame Intermédica, Seguros Unimed, Alice e Omint. Estudo personalizado e consultoria gratuita para escolher o plano de saúde certo.">
 <link rel="canonical" href="https://www.thesmart.com.br/">
 <meta name="theme-color" content="#0C131D">
 <meta property="og:type" content="website">
@@ -169,10 +169,16 @@ ul{margin:0;padding:0;list-style:none}
    fechar em duas linhas nessa medida, não na largura da página.      */
 .hero h1{font-size:clamp(26px,2.6vw,35px);line-height:1.12;margin-bottom:18px;text-wrap:balance}
 .hero h1 em{font-style:normal;color:var(--acento-texto)}
-.selo{display:inline-flex;gap:9px;align-items:center;font-size:clamp(10px,1vw,11.5px);font-weight:700;letter-spacing:.14em;
-  color:var(--acento-texto);background:var(--cartao);border:1px solid var(--linha-forte);
-  padding:9px 16px;border-radius:var(--r-pilula);margin-bottom:26px}
-.selo svg{stroke:var(--acento-texto)}
+/* O tempo de casa é o argumento mais forte da corretora, então o selo
+   leva o mesmo tratamento do cartão em destaque: menta-forte e fio
+   verde. O número sobe de corpo e o resto da frase fica em texto
+   normal — maiúscula espaçada encolhe o que deveria crescer.       */
+.selo{display:inline-flex;gap:11px;align-items:center;font-size:14px;font-weight:600;line-height:1.25;
+  color:var(--texto);background:var(--menta-forte);border:1px solid rgba(11,99,66,.34);
+  padding:10px 20px 10px 16px;border-radius:var(--r-pilula);margin-bottom:26px}
+.selo svg{stroke:var(--acento-texto);flex-shrink:0}
+.selo b{font-size:clamp(20px,2.2vw,25px);font-weight:800;letter-spacing:-.03em;
+  color:var(--acento-texto);line-height:1;white-space:nowrap}
 .hero .lead{max-width:52ch}
 .hero-botoes{display:flex;flex-wrap:wrap;gap:13px;margin-top:34px}
 
@@ -355,9 +361,7 @@ legend{font-size:14px;font-weight:800;padding:0;margin-bottom:10px}
   display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,4vw,48px);align-items:center}
 .parceria h2{font-size:clamp(23px,2.8vw,32px);margin-bottom:14px}
 .parceria h2 .realce{color:var(--acento-texto)}
-.travus-marca{display:block;width:182px;background:var(--profundo);border-radius:var(--r-campo);
-  overflow:hidden;margin-bottom:20px}
-.travus-marca img{display:block;width:100%;height:auto}
+.travus-marca{display:block;width:182px;height:auto;margin-bottom:22px}
 .parceria .lead{margin-bottom:20px}
 .marcas-lista{display:flex;flex-wrap:wrap;gap:10px}
 .prova{display:flex;gap:8px;align-items:center;font-size:14px;font-weight:600;color:var(--texto);
@@ -369,11 +373,14 @@ legend{font-size:14px;font-weight:800;padding:0;margin-bottom:10px}
    sombra em volta de cada pessoa não acrescenta nada.
    A foto entra em .pessoa-foto img; sem o arquivo, ficam as iniciais. */
 .equipe{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.6vw,30px)}
-.pessoa{display:grid;grid-template-columns:72px minmax(0,1fr);gap:16px;align-items:center;
-  border-top:1px solid var(--linha-forte);padding-top:22px}
-.pessoa-foto{position:relative;width:72px;height:72px;border-radius:var(--r-pilula);overflow:hidden;background:var(--profundo);
+/* A foto empilhada sobre o nome, não ao lado: é quem a pessoa vai
+   procurar no WhatsApp depois, então o rosto é que tem de aparecer.
+   Continua sem caixa — o fio em cima é o único limite da célula.   */
+.pessoa{border-top:1px solid var(--linha-forte);padding-top:24px}
+.pessoa-foto{position:relative;width:clamp(116px,13vw,152px);aspect-ratio:1;border-radius:var(--r-pilula);
+  overflow:hidden;background:var(--profundo);margin-bottom:18px;
   color:var(--verde);display:flex;align-items:center;justify-content:center;
-  font-size:21px;font-weight:800;flex-shrink:0}
+  font-size:clamp(28px,3.4vw,38px);font-weight:800;flex-shrink:0}
 .pessoa-foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 /* Retrato de rosto entra pela regra acima e pronto. Esta classe é para
    arquivo que NÃO é retrato de rosto: card de marca, foto de meio
@@ -393,7 +400,7 @@ legend{font-size:14px;font-weight:800;padding:0;margin-bottom:10px}
   width:var(--foto-zoom);height:var(--foto-zoom);max-width:none}
 /* Sem cargo embaixo do nome: a lista é de nomes. O cliente pediu a
    remoção dos títulos, e nome sozinho centraliza no círculo.      */
-.pessoa h3{font-size:17px;margin:0}
+.pessoa h3{font-size:clamp(17px,1.8vw,19px);margin:0}
 
 /* ============ FECHO ============ */
 .fecho{background:var(--menta)}
@@ -425,6 +432,14 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
   margin-bottom:16px;text-transform:uppercase}
 .rodape-col li{margin-bottom:11px;font-size:15px;color:var(--texto-2)}
 .rodape-col a{color:var(--texto-2)}
+/* Registro na ANS embaixo do nome da operadora: linha menor, para o
+   nome continuar sendo o que se lê primeiro. Tabular-nums deixa os
+   números com a mesma largura de dígito, um debaixo do outro.     */
+.rodape-operadoras li{margin-bottom:14px}
+.rodape-operadoras .ans{display:block;margin-top:2px;font-size:12.5px;
+  font-variant-numeric:tabular-nums;color:var(--texto-2);opacity:.8}
+.rodape-rede{display:inline-flex;gap:8px;align-items:center}
+.rodape-rede svg{flex-shrink:0}
 .rodape-col a:hover{color:var(--texto)}
 .rodape-tel{font-weight:700;color:var(--texto)}
 .rodape-legal{border-top:1px solid var(--linha);padding-top:26px;display:flex;flex-wrap:wrap;
@@ -462,7 +477,6 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
   .planos-grade{grid-template-columns:repeat(2,minmax(0,1fr))}
   .plano:last-of-type{grid-column:1/-1}
   .caixa-estudo{grid-template-columns:1fr}
-  .equipe{grid-template-columns:1fr}
   .parceria{grid-template-columns:1fr}
   .fecho .container{grid-template-columns:1fr}
 }
@@ -493,6 +507,7 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
    O botão sai: o menu tem os mesmos destinos, o CTA do hero aparece
    logo abaixo e o botão flutuante do WhatsApp fica sempre à mão.    */
 @media (max-width:560px){
+  .equipe{grid-template-columns:1fr}
   .nav .container{gap:14px}
   .nav-cta{display:none}
 }
@@ -543,8 +558,8 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
   <div class="hero-texto-area">
     <div class="hero-texto">
       <p class="selo">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6l-8-4Z"/></svg>
-        9 ANOS REPRESENTANDO AS OPERADORAS
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 6v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10V6l-8-4Z"/></svg>
+        <b>9 anos</b> representando as operadoras
       </p>
       <h1>Plano de saúde escolhido com estudo, <em>não com pressa</em></h1>
       <p class="lead">Representamos oito operadoras. O consultor estuda sua rede, seu perfil e seu orçamento antes de qualquer proposta.</p>
@@ -582,12 +597,16 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
       <div class="muro-item"><span class="recorte recorte-sula"><img src="imagens/operadora-sulamerica.png" alt="SulAmérica" loading="lazy"></span></div>
       <div class="muro-item"><span class="recorte recorte-unimed"><img src="imagens/operadora-seguros-unimed.png" alt="Seguros Unimed" loading="lazy"></span></div>
       <div class="muro-item"><img class="a" src="imagens/operadora-alice.svg" alt="Alice" loading="lazy"></div>
-      <!-- Arquivos oficiais pendentes: pegar no portal do corretor de
-           cada uma. Enquanto não chegam, o cartão tracejado registra a
-           representação sem exibir logo errado nem deixar buraco.    -->
+      <!-- O logo exibido é o da Hapvida, marca do grupo: a NotreDame
+           Intermédica foi absorvida e não existe lockup próprio dela,
+           nem no site do grupo. Por isso o rótulo aqui e no rodapé é
+           "Hapvida NotreDame Intermédica", o nome do grupo inteiro —
+           assim o logo corresponde ao nome que está escrito.
+           Bradesco Saúde e Omint seguem em cartão tracejado: os
+           arquivos oficiais saem do portal do corretor de cada uma.  -->
+      <div class="muro-item"><img class="p" src="imagens/operadora-hapvida.png" alt="Hapvida NotreDame Intermédica" width="243" height="46" loading="lazy"></div>
       <div class="muro-item falta"><span>Bradesco<br>Saúde</span></div>
       <div class="muro-item falta"><span>Omint</span></div>
-      <div class="muro-item falta"><span>NotreDame<br>Saúde</span></div>
     </div>
     <div class="aviso">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-5M12 8h.01"/></svg>
@@ -751,21 +770,20 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
           <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
           <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
         </div>
-        <blockquote>Contratei meu seguro de vida e o plano de saúde da família com a The Smart Corretora. Tudo em uma única conversa, sem enrolação.</blockquote>
+        <blockquote>Contratei o plano de saúde da família com a The Smart Corretora. Tudo em uma única conversa, sem enrolação.</blockquote>
         <figcaption>
           <span class="avatar" aria-hidden="true">CS</span>
           <span><b>Carlos Santos</b><span class="papel">Plano de saúde familiar</span></span>
         </figcaption>
       </div>
     </figure>
-    <!-- RASCUNHOS, NÃO PUBLICAR ASSIM
-         Os dois depoimentos abaixo têm texto escrito e assinatura
-         "[NOME DO CLIENTE]". O texto é roteiro para validar com cliente
-         de verdade, não fala de cliente: mostre, ajuste com as palavras
-         dele, peça autorização e só então troque o nome. Depoimento
-         inventado com nome inventado é propaganda enganosa, e quem
-         responde é a corretora. Enquanto o colchete estiver aqui, a
-         página não vai para o ar. Detalhe no README, seção 5.       -->
+    <!-- ASSINATURA SEM NOME, DE PROPÓSITO
+         Estes dois estão assinados como "Cliente PME" porque o nome
+         real não chegou. Depoimento sem nome é honesto; nome inventado
+         é declaração falsa ao consumidor, e quem responde é a
+         corretora, não quem escreveu o HTML. Chegando o nome real,
+         com autorização de quem falou, troque "Cliente PME" pelo nome
+         e acrescente as iniciais no <span class="avatar">.        -->
     <div class="depo-par" data-revelar>
       <figure class="depo">
         <div class="estrelas" aria-label="5 de 5 estrelas">
@@ -778,7 +796,7 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
         <blockquote>Somos cinco na empresa e eu achava que plano empresarial era coisa de companhia grande. A The Smart comparou as operadoras, manteve na rede o hospital onde minha filha nasceu e a mensalidade por vida ficou abaixo do que eu pagava no plano individual.</blockquote>
         <figcaption>
           <span class="avatar" aria-hidden="true">&mdash;</span>
-          <span><b>[NOME DO CLIENTE]</b><span class="papel">PME &middot; 5 vidas</span></span>
+          <span><b>Cliente PME</b><span class="papel">5 vidas</span></span>
         </figcaption>
       </figure>
       <figure class="depo">
@@ -789,10 +807,10 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
           <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
           <svg width="17" height="17" viewBox="0 0 24 24" fill="#F5B731" aria-hidden="true"><path d="m12 2 3 6.5 7 .9-5 4.9 1.2 7L12 18l-6.2 3.3L7 14.3l-5-4.9 7-.9L12 2Z"/></svg>
         </div>
-        <blockquote>O reajuste da renovação veio alto e eu já ia aceitar. Liguei para o consultor, ele revisou o contrato e fez a portabilidade para outra operadora sem eu recomeçar carência. Continuei com os mesmos médicos pagando menos.</blockquote>
+        <blockquote>O reajuste da renovação veio alto e eu já ia aceitar. Recebi uma indicação do pessoal da Smart, liguei para o consultor César, ele revisou o contrato e mudamos para outra operadora sem eu recomeçar a carência. Continuei com os mesmos médicos pagando menos e com todos os funcionários satisfeitos.</blockquote>
         <figcaption>
           <span class="avatar" aria-hidden="true">&mdash;</span>
-          <span><b>[NOME DO CLIENTE]</b><span class="papel">Portabilidade &middot; plano familiar</span></span>
+          <span><b>Cliente PME</b><span class="papel">Troca de plano &middot; 85 vidas</span></span>
         </figcaption>
       </figure>
     </div>
@@ -804,19 +822,23 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
   <div class="container">
     <div class="parceria" data-revelar>
       <div>
-        <!-- A arte da Travus é dourada sobre preto: o arquivo é uma
-             peça de fundo preto inteiro. Sobre o cartão claro ela
-             precisa da própria placa, como a logo da nav.           -->
-        <span class="travus-marca"><img src="imagens/travus-capital.jpg" alt="Travus Capital" width="364" height="115" loading="lazy"></span>
+        <!-- A arte que veio da Travus é dourada sobre preto inteiro.
+             Aqui ela entra recolorida para fundo claro: o ouro fica, o
+             branco virou o verde-petróleo do site e o preto virou
+             transparente. Chegando a versão oficial para fundo claro,
+             é só trocar o arquivo.                                   -->
+        <img class="travus-marca" src="imagens/travus-capital.png" alt="Travus Capital" width="364" height="110" loading="lazy">
         <h2>Protegida a saúde, <span class="realce">construa o patrimônio</span></h2>
-        <p class="lead">A The Smart Corretora e a Travus Capital se uniram para cuidar das duas pontas. Enquanto a corretora protege a saúde da sua família, a Travus assessora a construção de patrimônio com imóveis — ativos reais, com estratégia e sem improviso.</p>
+        <p class="lead">A The Smart Corretora e a Travus Capital se uniram para cuidar das duas pontas. Enquanto a corretora protege a saúde da sua família, a Travus assessora a construção de patrimônio com imóveis. Ativos reais, com estratégia e sem improviso.</p>
         <div class="marcas-lista">
           <span class="prova"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Alavancagem patrimonial com imóveis</span>
           <span class="prova"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Assessoria do estudo à escritura</span>
           <span class="prova"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Ativos reais, fora da especulação</span>
         </div>
       </div>
-      <a class="btn btn-contorno" href="https://travuscapital.com.br/" target="_blank" rel="noopener">Conhecer a Travus Capital</a>
+      <a class="btn btn-verde" href="https://travuscapital.com.br/" target="_blank" rel="noopener">Conhecer a Travus Capital
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -827,7 +849,7 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
     <div class="cabecalho" data-revelar>
       <p class="sobre">Nossa equipe</p>
       <h2 class="t-seccao">Consultores certificados prontos para te atender</h2>
-      <p class="lead">Cada caso é analisado antes de qualquer proposta. O mesmo consultor que monta o estudo acompanha o contrato depois da assinatura.</p>
+      <p class="lead">Cada caso é analisado antes de qualquer proposta. O consultor monta o estudo e acompanha o contrato depois da assinatura junto com todo o time.</p>
     </div>
     <!-- As fotos são opcionais: o JavaScript remove a <img> no erro e
          ficam as iniciais, sem imagem quebrada. Os arquivos aqui são
@@ -835,16 +857,16 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
          e renomeados para a pessoa.                                   -->
     <div class="equipe" data-revelar>
       <article class="pessoa">
-        <span class="pessoa-foto pessoa-foto-rosto" style="--foto-x:-50%;--foto-y:0%;--foto-zoom:220%"><span aria-hidden="true">CT</span><img src="imagens/cleitonteixeira.jpeg" alt="Cleiton Teixeira" width="400" height="406" loading="lazy" data-foto></span>
-        <div><h3>Cleiton Teixeira</h3></div>
+        <span class="pessoa-foto pessoa-foto-rosto" style="--foto-x:-50%;--foto-y:0%;--foto-zoom:220%"><span aria-hidden="true">CT</span><img src="imagens/cleitonteixeira.jpeg" alt="Cleiton Teixeira" width="551" height="559" loading="lazy" data-foto></span>
+        <h3>Cleiton Teixeira</h3>
       </article>
       <article class="pessoa">
-        <span class="pessoa-foto pessoa-foto-rosto" style="--foto-x:-16%;--foto-y:-6%;--foto-zoom:200%"><span aria-hidden="true">CN</span><img src="imagens/cesarnieto.jpeg" alt="Cesar Nieto" width="400" height="400" loading="lazy" data-foto></span>
-        <div><h3>Cesar Nieto</h3></div>
+        <span class="pessoa-foto pessoa-foto-rosto" style="--foto-x:-16%;--foto-y:-6%;--foto-zoom:200%"><span aria-hidden="true">CN</span><img src="imagens/cesarnieto.jpeg" alt="Cesar Nieto" width="548" height="548" loading="lazy" data-foto></span>
+        <h3>Cesar Nieto</h3>
       </article>
       <article class="pessoa">
-        <span class="pessoa-foto"><span aria-hidden="true">RF</span><img src="imagens/rodrigofrancheli.jpeg" alt="Rodrigo Francheli" width="400" height="401" loading="lazy" data-foto></span>
-        <div><h3>Rodrigo Francheli</h3></div>
+        <span class="pessoa-foto"><span aria-hidden="true">RF</span><img src="imagens/rodrigofrancheli.jpeg" alt="Rodrigo Francheli" width="555" height="557" loading="lazy" data-foto></span>
+        <h3>Rodrigo Francheli</h3>
       </article>
     </div>
   </div>
@@ -858,7 +880,7 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
       <p class="lead">Não achou a sua? <a href="#estudo">Pergunte a um especialista</a>. Respondemos mesmo que você não contrate.</p>
     </div>
 
-    <details open>
+    <details>
       <summary><span>Quanto tempo de carência vou cumprir?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
       <p>Varia por operadora e por tipo de contratação: urgência e emergência costumam ter prazo curto, consultas e exames simples prazos intermediários, e internação e parto os maiores. Em plano empresarial com número mínimo de vidas é comum haver redução ou isenção. O estudo traz a tabela de carências de cada opção, antes de você escolher.</p>
     </details>
@@ -886,10 +908,6 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
       <summary><span>Quanto custa o serviço da corretora?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
       <p>Nada para você. A corretora é remunerada pela operadora, por contrato de representação, e a mensalidade que você paga é a mesma da contratação direta. Não cobramos taxa de consultoria, de proposta nem de acompanhamento.</p>
     </details>
-    <details>
-      <summary><span>Vocês também trabalham com seguros e consórcio?</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
-      <p>Sim. Seguro de vida, auto, residencial e empresarial com as maiores seguradoras, e consórcio de veículos leves e pesados sem juros. Nosso foco principal é saúde, mas o mesmo consultor atende as outras frentes, sem recomeçar a relação do zero.</p>
-    </details>
   </div>
 </section>
 
@@ -905,7 +923,7 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5Z"/></svg>
         Falar com Especialista
       </a>
-      <a class="btn btn-contorno" href="tel:+5511959990322">(11) 95999-0322</a>
+      <a class="btn btn-contorno" href="tel:+5511952627883">(11) 95262-7883</a>
     </div>
   </div>
 </section>
@@ -921,7 +939,7 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
           <img src="imagens/logo-thesmart.png" alt="" width="38" height="38">
           <span class="marca-nome"><b>The Smart</b><span>CORRETORA</span></span>
         </a>
-        <p>Planos de saúde, seguros e consórcios com atendimento especializado. Nove anos representando operadoras, a escolha inteligente para proteger quem importa.</p>
+        <p>Planos de saúde, com atendimento especializado. Nove anos representando operadoras, e ajudando na escolha inteligente para proteger quem importa.</p>
         <p class="cnpj">CNPJ 27.542.242/0001-63<br>São Paulo, SP</p>
       </div>
       <nav class="rodape-col" aria-label="Planos de saúde">
@@ -935,18 +953,29 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
       </nav>
       <div class="rodape-col">
         <h3>Operadoras</h3>
-        <ul>
-          <li>Amil</li><li>Porto</li><li>Bradesco Saúde</li><li>SulAmérica</li>
-          <li>NotreDame Saúde</li><li>Seguros Unimed</li><li>Alice</li><li>Omint</li>
+        <!-- O registro na ANS identifica a operadora e anda embaixo do
+             nome dela. Porto e Omint estão sem o número de propósito: o
+             grupo Porto tem duas operadoras de saúde registradas, com
+             números diferentes, e o da Omint não foi confirmado em
+             fonte confiável. Os dois estão no credenciamento e na
+             carteirinha do beneficiário — não deduza.               -->
+        <ul class="rodape-operadoras">
+          <li>Amil<span class="ans">ANS nº 326305</span></li>
+          <li>Porto</li>
+          <li>Bradesco Saúde<span class="ans">ANS nº 005711</span></li>
+          <li>SulAmérica<span class="ans">ANS nº 006246</span></li>
+          <li>Hapvida NotreDame Intermédica<span class="ans">ANS nº 359017</span></li>
+          <li>Seguros Unimed<span class="ans">ANS nº 000701</span></li>
+          <li>Alice<span class="ans">ANS nº 421928</span></li>
+          <li>Omint</li>
         </ul>
       </div>
       <div class="rodape-col">
         <h3>Contato</h3>
         <ul>
-          <li><a class="rodape-tel" href="tel:+5511959990322">(11) 95999-0322</a></li>
+          <li><a class="rodape-tel" href="tel:+5511952627883">(11) 95262-7883</a></li>
           <li><a href="mailto:contato@thesmartcorretora.com.br">contato@thesmartcorretora.com.br</a></li>
-          <li><a href="https://www.instagram.com/thesmartcorretora/" target="_blank" rel="noopener">@thesmartcorretora</a></li>
-          <li>Segunda a sábado</li>
+          <li><a class="rodape-rede" href="https://www.instagram.com/thesmartcorretora/" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/></svg>@thesmartcorretora</a></li>
         </ul>
       </div>
     </div>
@@ -975,7 +1004,7 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
    ===================================================================== */
 var CONFIG = {
   // Número que recebe as conversas (só dígitos, com DDI).
-  whatsapp: "5511959990322",
+  whatsapp: "5511952627883",
 
   // ---------------------------------------------------------------
   // CRM Funil de Vendas — Formulário de Captura (widget)
