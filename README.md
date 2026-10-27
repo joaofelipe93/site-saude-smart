@@ -353,10 +353,16 @@ A parede tem **nove** posições, em grade de 3x3. Oito têm arquivo;
 
 **Atenção à Qualicorp:** ela não é operadora, é **administradora de
 benefícios** — administra planos coletivos por adesão, e quem assume o
-risco e tem registro de operadora é a Amil, a SulAmérica e as demais.
-Por isso, no rodapé, a linha pequena dela diz "Administradora de
-benefícios" em vez de um número de ANS. Se você quiser separá-la das
-operadoras de forma visível no muro, é só pedir.
+risco é a Amil, a SulAmérica e as demais.
+
+No rodapé ela aparece com **duas** linhas: "Administradora de
+benefícios" e a tarja `ANS nº 417173`. As duas juntas é que contam a
+história certa — administradora também é registrada na ANS, mas como
+administradora, não como operadora. Se a linha descritiva sumir, o
+número passa a parecer registro de operadora.
+
+Se você quiser separá-la das operadoras de forma visível no muro
+também, é só pedir.
 
 **Sobre a NotreDame e a Bradesco:** a seu pedido, os dois cartões
 passaram a exibir o logo do **grupo**, com o rótulo acompanhando a

@@ -462,10 +462,12 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
    longos. Em coluna ela fica sempre sob o nome, e o
    `align-items:flex-start` a mantém do tamanho do conteúdo.  */
 .rodape-operadoras li{display:flex;flex-direction:column;align-items:flex-start;margin-bottom:15px}
-/* A Qualicorp não entra na tarja: tarja é selo de registro, e texto
-   descritivo dentro dela sugeriria um número que ela não tem. Linha
-   simples, como era antes.                                        */
+/* A Qualicorp tem as duas linhas: a descritiva, porque ela não é
+   operadora, e a tarja, porque administradora de benefícios também é
+   registrada na ANS. A descrição fica FORA da tarja — texto
+   descritivo dentro de um selo de registro sugeriria número.    */
 .rodape-operadoras .papel-ans{margin-top:4px;font-size:12.5px;color:var(--texto-2)}
+.rodape-operadoras .papel-ans + .ans{margin-top:5px}
 .rodape-operadoras .ans{display:inline-block;margin-top:7px;padding:4px 10px;
   background:var(--profundo);color:#fff;font-size:12px;font-weight:800;
   letter-spacing:.02em;font-variant-numeric:tabular-nums;
@@ -1015,8 +1017,11 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
              representada. Está no credenciamento e na carteirinha do
              beneficiário — não deduza.
 
-             A Qualicorp não tem registro de operadora porque não é
-             operadora: a linha pequena dela diz o que ela é.      -->
+             A Qualicorp leva duas linhas: a descritiva, porque ela
+             NÃO é operadora, e a tarja, porque administradora de
+             benefícios também é registrada na ANS. O 417173 é
+             registro de administradora, não de operadora — as duas
+             linhas juntas é que contam a história certa.          -->
         <ul class="rodape-operadoras">
           <li>Amil<span class="ans">ANS nº 326305</span></li>
           <li>Porto</li>
@@ -1025,7 +1030,7 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
           <li>Hapvida NotreDame Intermédica<span class="ans">ANS nº 359017</span></li>
           <li>Seguros Unimed<span class="ans">ANS nº 000701</span></li>
           <li>Alice<span class="ans">ANS nº 421928</span></li>
-          <li>Qualicorp<span class="papel-ans">Administradora de benefícios</span></li>
+          <li>Qualicorp<span class="papel-ans">Administradora de benefícios</span><span class="ans">ANS nº 417173</span></li>
           <li>Omint<span class="ans">ANS nº 359661</span></li>
         </ul>
       </div>

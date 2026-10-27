@@ -187,13 +187,15 @@ contrato com o CRM.
   760px vira duas colunas e o último cartão ocupa a linha inteira
   (`.muro-item:last-child{grid-column:1/-1}`), senão fica sozinho.
 - **A Qualicorp não é operadora, é administradora de benefícios**:
-  administra planos coletivos por adesão, e quem assume o risco e tem
-  registro de operadora é a Amil, a SulAmérica e as outras. Por isso,
-  no rodapé, a linha pequena dela diz "Administradora de benefícios"
-  no lugar do número da ANS. Não invente um registro de operadora para
-  ela. Repare também que o produto "Adesão por entidade" saiu da
-  página, e adesão é justamente o que ela administra — se um dia a
-  seção for revista, os dois fatos conversam.
+  administra planos coletivos por adesão, e quem assume o risco é a
+  Amil, a SulAmérica e as outras. No rodapé ela leva **duas** linhas,
+  e é o par que conta a história certa: a descritiva ("Administradora
+  de benefícios") e a tarja `ANS nº 417173`, porque administradora
+  também é registrada na ANS — mas como administradora, não como
+  operadora. Tirar a linha descritiva faria o 417173 passar por
+  registro de operadora. Repare também que o produto "Adesão por
+  entidade" saiu da página, e adesão é justamente o que ela
+  administra — se um dia a seção for revista, os dois fatos conversam.
 - `.muro-item img` leva `object-fit:contain`, e isso **não é enfeite**:
   a altura ali é fixa e a largura é limitada pelo `max-width:100%` da
   base, então um lockup largo (o da Bradesco) era comprimido na
