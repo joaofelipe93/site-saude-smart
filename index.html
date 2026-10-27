@@ -432,12 +432,15 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
   margin-bottom:16px;text-transform:uppercase}
 .rodape-col li{margin-bottom:11px;font-size:15px;color:var(--texto-2)}
 .rodape-col a{color:var(--texto-2)}
-/* Registro na ANS embaixo do nome da operadora: linha menor, para o
-   nome continuar sendo o que se lê primeiro. Tabular-nums deixa os
-   números com a mesma largura de dígito, um debaixo do outro.     */
-.rodape-operadoras li{margin-bottom:14px}
-.rodape-operadoras .ans{display:block;margin-top:2px;font-size:12.5px;
-  font-variant-numeric:tabular-nums;color:var(--texto-2);opacity:.8}
+/* Registro na ANS embaixo do nome da operadora. Era letra miúda
+   apagada e o cliente pediu destaque: agora leva o verde da marca e
+   um fio, que é a linguagem de hierarquia da página inteira — a
+   mesma do cartão em destaque e do selo do hero. Tabular-nums deixa
+   os números com a mesma largura de dígito, um sob o outro.      */
+.rodape-operadoras li{margin-bottom:15px}
+.rodape-operadoras .ans{display:block;margin-top:5px;font-size:13px;font-weight:700;
+  font-variant-numeric:tabular-nums;color:var(--acento-texto);
+  border-left:2px solid var(--verde);padding-left:8px}
 .rodape-rede{display:inline-flex;gap:8px;align-items:center}
 .rodape-rede svg{flex-shrink:0}
 .rodape-col a:hover{color:var(--texto)}
@@ -777,13 +780,11 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
         </figcaption>
       </div>
     </figure>
-    <!-- ASSINATURA SEM NOME, DE PROPÓSITO
-         Estes dois estão assinados como "Cliente PME" porque o nome
-         real não chegou. Depoimento sem nome é honesto; nome inventado
-         é declaração falsa ao consumidor, e quem responde é a
-         corretora, não quem escreveu o HTML. Chegando o nome real,
-         com autorização de quem falou, troque "Cliente PME" pelo nome
-         e acrescente as iniciais no <span class="avatar">.        -->
+    <!-- Os nomes destes dois vieram do cliente. Antes de publicar,
+         confirme que quem assina autorizou: depoimento é fala
+         atribuída a pessoa real, e na reclamação quem responde é a
+         corretora. Trocando um nome, troque também as iniciais do
+         <span class="avatar"> ao lado.                            -->
     <div class="depo-par" data-revelar>
       <figure class="depo">
         <div class="estrelas" aria-label="5 de 5 estrelas">
@@ -795,8 +796,8 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
         </div>
         <blockquote>Somos cinco na empresa e eu achava que plano empresarial era coisa de companhia grande. A The Smart comparou as operadoras, manteve na rede o hospital onde minha filha nasceu e a mensalidade por vida ficou abaixo do que eu pagava no plano individual.</blockquote>
         <figcaption>
-          <span class="avatar" aria-hidden="true">&mdash;</span>
-          <span><b>Cliente PME</b><span class="papel">5 vidas</span></span>
+          <span class="avatar" aria-hidden="true">JF</span>
+          <span><b>João Felipe</b><span class="papel">PME &middot; 5 vidas</span></span>
         </figcaption>
       </figure>
       <figure class="depo">
@@ -809,8 +810,8 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
         </div>
         <blockquote>O reajuste da renovação veio alto e eu já ia aceitar. Recebi uma indicação do pessoal da Smart, liguei para o consultor César, ele revisou o contrato e mudamos para outra operadora sem eu recomeçar a carência. Continuei com os mesmos médicos pagando menos e com todos os funcionários satisfeitos.</blockquote>
         <figcaption>
-          <span class="avatar" aria-hidden="true">&mdash;</span>
-          <span><b>Cliente PME</b><span class="papel">Troca de plano &middot; 85 vidas</span></span>
+          <span class="avatar" aria-hidden="true">RM</span>
+          <span><b>Ricardo Melo</b><span class="papel">Troca de plano &middot; PME 85 vidas</span></span>
         </figcaption>
       </figure>
     </div>

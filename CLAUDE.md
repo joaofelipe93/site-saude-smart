@@ -291,13 +291,13 @@ contrato com o CRM.
   acompanha a cor do botão quando o tema muda. Já houve ícone branco
   invisível em nav claro por causa disso.
 - `#prova` tem três depoimentos: a citação editorial do Carlos Santos
-  e, abaixo de um fio, o par `.depo-par`. Os dois do par estão
-  assinados **"Cliente PME", sem nome, de propósito**. O cliente
-  autorizou inventar nomes e isso foi recusado: assinar depoimento com
-  pessoa que não existe é declaração falsa ao consumidor, e quem
-  responde é a corretora. Sem nome é honesto e publicável. Chegando o
-  nome real com autorização, troca-se o texto e põem-se as iniciais no
-  `.avatar`.
+  e, abaixo de um fio, o par `.depo-par` (João Felipe e Ricardo Melo).
+  Os nomes do par ficaram um tempo como "Cliente PME" porque não
+  tinham chegado: o cliente pediu que fossem **inventados** e isso foi
+  recusado, já que assinar depoimento com pessoa que não existe é
+  declaração falsa ao consumidor e quem responde é a corretora. Os
+  nomes atuais foram informados pelo cliente. Trocando um nome, troque
+  também as iniciais do `.avatar` ao lado.
 - `imagens/logo-thesmart.png` é um lockup para **fundo escuro**: 64% dos
   pixels opacos são brancos e 28% são o verde da marca. Sobre a nav
   clara sobravam só os traços verdes e a logo sumia. Por isso
