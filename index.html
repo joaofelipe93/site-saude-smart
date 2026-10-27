@@ -210,13 +210,23 @@ ul{margin:0;padding:0;list-style:none}
 /* ============ MURO DE OPERADORAS ============
    Logos e nada mais. A placa é branca e fixa em #fff, não no token de
    cartão: a arte das operadoras é feita para fundo claro.             */
-.muro{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.6vw,18px);margin-bottom:30px}
+.muro{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,1.6vw,18px);margin-bottom:30px}
 .muro-item{height:88px;background:#fff;border:1px solid var(--linha-forte);border-radius:var(--r-campo);
   display:flex;align-items:center;justify-content:center;padding:14px}
-.muro-item img{height:30px;width:auto}
+/* `object-fit:contain` não é enfeite: a altura aqui é fixa e a
+   largura é limitada pelo `max-width:100%` da base, então um
+   lockup largo (o da Bradesco) era comprimido na horizontal em
+   tela estreita em vez de diminuir. Com `contain` ele encolhe
+   inteiro e mantém a proporção.                              */
+.muro-item img{height:30px;width:auto;object-fit:contain}
 .muro-item img.g{height:34px}
 .muro-item img.p{height:26px}
 .muro-item img.a{height:40px}
+/* O lockup da Bradesco é largo e baixo: na altura padrão o texto sai
+   bem menor que o dos vizinhos. 46px iguala o peso óptico. Comparadas
+   34/40/46/52 lado a lado na própria grade.                        */
+.muro-item img.b{height:46px}
+.muro-item img.q{height:40px}
 /* Operadora representada cujo arquivo oficial ainda não chegou: o
    cartão tracejado registra o credenciamento sem fingir logo. */
 .muro-item.falta{border-style:dashed;background:var(--menta)}
@@ -490,7 +500,10 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
   /* Numa coluna só, 16/5 viraria uma tira de 130px. A foto volta a
      ser 3:2, que é a proporção do arquivo: sem corte nenhum.        */
   .planos-foto{aspect-ratio:3/2}
+  /* Nove cartões em duas colunas deixam o último sozinho; ele passa
+     a ocupar a linha inteira e a grade fecha.                      */
   .muro{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .muro-item:last-child{grid-column:1/-1}
   .opcoes{grid-template-columns:1fr}
   .linha-campos{flex-direction:column;gap:16px}
   .campo-curto{flex:1 1 auto}
@@ -597,15 +610,38 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
       <div class="muro-item"><span class="recorte recorte-sula"><img src="imagens/operadora-sulamerica.png" alt="SulAmérica" loading="lazy"></span></div>
       <div class="muro-item"><span class="recorte recorte-unimed"><img src="imagens/operadora-seguros-unimed.png" alt="Seguros Unimed" loading="lazy"></span></div>
       <div class="muro-item"><img class="a" src="imagens/operadora-alice.svg" alt="Alice" loading="lazy"></div>
-      <!-- O logo exibido é o da Hapvida, marca do grupo: a NotreDame
-           Intermédica foi absorvida e não existe lockup próprio dela,
-           nem no site do grupo. Por isso o rótulo aqui e no rodapé é
-           "Hapvida NotreDame Intermédica", o nome do grupo inteiro —
-           assim o logo corresponde ao nome que está escrito.
-           Bradesco Saúde e Omint seguem em cartão tracejado: os
-           arquivos oficiais saem do portal do corretor de cada uma.  -->
+      <!-- Dois destes logos são a marca do GRUPO, não da operadora,
+           porque a operadora não tem lockup próprio publicado:
+
+           - Hapvida, no lugar da NotreDame Intermédica, que foi
+             absorvida. O rótulo acompanha e virou "Hapvida NotreDame
+             Intermédica", o nome do grupo inteiro.
+           - Bradesco Seguros, no lugar da Bradesco Saúde. Aqui o
+             rótulo é o da própria arte, "Bradesco Seguros".
+
+           A regra é a mesma: o nome escrito tem de ser o nome que
+           está desenhado no logo. Marca de uma empresa embaixo do
+           nome de outra foi o erro que tirou a Hapvida daqui antes.
+
+           No RODAPÉ é diferente de propósito: lá a lista é de
+           operadoras com registro na ANS, então o nome continua
+           "Bradesco Saúde", que é a razão social dona do registro
+           005711. Trocar por "Bradesco Seguros" ali colaria o número
+           ao nome errado.
+
+           Omint segue em cartão tracejado: só o ARQUIVO do logo
+           falta, porque o registro na ANS dela já está no rodapé. O
+           arquivo sai do portal do corretor.
+
+           A Qualicorp não é operadora, é ADMINISTRADORA DE BENEFÍCIOS:
+           ela administra planos coletivos por adesão, e quem assume o
+           risco e tem registro de operadora é a Amil, a SulAmérica e
+           as outras. Por isso, no rodapé, a linha pequena dela diz
+           "Administradora de benefícios" em vez de um número de ANS.
+           Não invente um registro de operadora para ela.             -->
       <div class="muro-item"><img class="p" src="imagens/operadora-hapvida.png" alt="Hapvida NotreDame Intermédica" width="243" height="46" loading="lazy"></div>
-      <div class="muro-item falta"><span>Bradesco<br>Saúde</span></div>
+      <div class="muro-item"><img class="b" src="imagens/operadora-bradesco-seguros.svg" alt="Bradesco Seguros" loading="lazy"></div>
+      <div class="muro-item"><img class="q" src="imagens/qualicorp.png" alt="Qualicorp" width="263" height="96" loading="lazy"></div>
       <div class="muro-item falta"><span>Omint</span></div>
     </div>
     <div class="aviso">
@@ -954,11 +990,14 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
       <div class="rodape-col">
         <h3>Operadoras</h3>
         <!-- O registro na ANS identifica a operadora e anda embaixo do
-             nome dela. Porto e Omint estão sem o número de propósito: o
-             grupo Porto tem duas operadoras de saúde registradas, com
-             números diferentes, e o da Omint não foi confirmado em
-             fonte confiável. Os dois estão no credenciamento e na
-             carteirinha do beneficiário — não deduza.               -->
+             nome dela. Só a Porto está sem o número, de propósito: o
+             grupo tem DUAS operadoras de saúde registradas, com
+             números diferentes, e daqui não dá para saber qual é a
+             representada. Está no credenciamento e na carteirinha do
+             beneficiário — não deduza.
+
+             A Qualicorp não tem registro de operadora porque não é
+             operadora: a linha pequena dela diz o que ela é.      -->
         <ul class="rodape-operadoras">
           <li>Amil<span class="ans">ANS nº 326305</span></li>
           <li>Porto</li>
@@ -967,7 +1006,8 @@ details p{padding-bottom:23px;font-size:16px;line-height:1.7;color:var(--texto-2
           <li>Hapvida NotreDame Intermédica<span class="ans">ANS nº 359017</span></li>
           <li>Seguros Unimed<span class="ans">ANS nº 000701</span></li>
           <li>Alice<span class="ans">ANS nº 421928</span></li>
-          <li>Omint</li>
+          <li>Qualicorp<span class="ans">Administradora de benefícios</span></li>
+          <li>Omint<span class="ans">ANS nº 359661</span></li>
         </ul>
       </div>
       <div class="rodape-col">
