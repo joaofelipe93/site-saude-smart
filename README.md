@@ -321,16 +321,14 @@ levantei em documentos públicos, não no seu contrato. Registro ANS é
 identificação regulatória: número errado na página é problema seu, não
 meu.
 
-**Faltam dois, e eu não chutei:**
+A **Omint** é 359661, informada por você.
 
-- **Porto** — o grupo tem *duas* operadoras de saúde registradas, a
-  Porto Seguro - Seguro Saúde e a Portomed, com números diferentes.
-  Qual delas você representa está no credenciamento.
-- **Omint** — não achei em fonte confiável.
-
-Esses dois aparecem no rodapé só com o nome, sem a linha do registro.
-Me mande os números e eu completo — eles estão no credenciamento e na
-carteirinha de qualquer beneficiário.
+**Falta um, e eu não chutei: a Porto.** O grupo tem *duas* operadoras
+de saúde registradas, a Porto Seguro - Seguro Saúde e a Portomed, com
+números diferentes, e daqui não dá para saber qual você representa.
+Ela aparece no rodapé só com o nome. Me mande o número — está no
+credenciamento e na carteirinha de qualquer beneficiário — e eu
+completo.
 
 ### Três logos de operadora
 

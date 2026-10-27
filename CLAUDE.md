@@ -229,10 +229,11 @@ contrato com o CRM.
 - O **registro na ANS** fica no rodapé, embaixo do nome de cada
   operadora (`.rodape-operadoras .ans`), não no muro de logos — o
   cliente pediu assim depois de ver nos dois lugares. Seis estão
-  preenchidos a partir de documento público; **Porto e Omint estão
-  sem número de propósito**: o grupo Porto tem duas operadoras de
-  saúde registradas, com números diferentes, e o da Omint não foi
-  confirmado. Não preencha por dedução — é identificação regulatória.
+  preenchidos a partir de documento público e o da Omint (359661) foi
+  informado pelo cliente. **Só a Porto está sem número, de propósito**:
+  o grupo tem duas operadoras de saúde registradas, com números
+  diferentes, e daqui não dá para saber qual é a representada. Não
+  preencha por dedução — é identificação regulatória.
 - Um sistema de formas só: interativo = pílula (`--r-pilula`),
   contêiner = `--r-caixa` (16px), campo = `--r-campo` (12px).
 - Acessibilidade é explícita no markup existente (link "pular",
