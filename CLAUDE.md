@@ -106,6 +106,12 @@ contrato com o CRM.
   o cliente — mantenha esse tom ao editar.
 - JavaScript em estilo ES5: `var`, `function`, nenhum arrow, template
   literal, `?.` ou framework. Nada de ferramenta nova sem necessidade real.
+- **A corretora fala só de plano de saúde.** Seguro de vida, auto,
+  residencial, empresarial e consórcio saíram da página inteira a
+  pedido do cliente: uma pergunta inteira do FAQ, a frase do rodapé e
+  a menção dentro do depoimento do Carlos Santos. Não reintroduza.
+- Nenhuma pergunta do FAQ abre sozinha: o `open` do primeiro
+  `<details>` foi removido a pedido do cliente.
 - A página é de **tema claro e só**, escolha do cliente: é um site de
   saúde e a leitura precisa ser branca e arejada. Não reintroduza
   blocos escuros largos. **Não existe modo escuro**: os dois blocos
@@ -143,6 +149,11 @@ contrato com o CRM.
   pediu a inversão. A `maos.jpg` também já esteve no depoimento e no
   fecho, recusada nas duas, e já dividiu `#planos` ao meio antes de
   virar célula.
+- O selo do hero (`.selo`) carrega o tempo de casa e leva o mesmo
+  tratamento do cartão em destaque: `--menta-forte` e fio verde, com o
+  número em corpo grande (`.selo b`) e o resto da frase em texto
+  normal. Era maiúscula espaçada de 11,5px, o menor texto da tela,
+  justamente no argumento mais forte da corretora.
 - `#planos` tem **três cartões numa linha e uma faixa de foto
   embaixo**, em grade de três colunas; a foto ocupa as três
   (`grid-column:1/-1`). Medido: cartões 339x350, faixa 1056x330.
@@ -170,19 +181,34 @@ contrato com o CRM.
   página na reconciliação com o `main` do repositório: cartão, link do
   rodapé, opção do formulário e entrada em `tituloParaCrm()`.
 - A parede de operadoras (`.muro`) tem **oito** posições em quatro
-  colunas. Cinco têm arquivo; três são `.muro-item.falta`, cartão
+  colunas. Seis têm arquivo; duas são `.muro-item.falta`, cartão
   tracejado com o nome da operadora, à espera do arquivo oficial do
-  portal do corretor. O tracejado registra a representação sem exibir
-  marca de outra empresa — foi o que aconteceu com o logo da Hapvida
-  no lugar da NotreDame, e por isso ele saiu.
+  portal do corretor (Bradesco Saúde e Omint). O tracejado registra a
+  representação sem exibir marca de outra empresa.
+- O logo da **Hapvida** voltou, e desta vez o rótulo acompanha: o
+  cartão, o rodapé e a `meta description` dizem **"Hapvida NotreDame
+  Intermédica"**, o nome do grupo. Foi decisão do cliente depois de
+  constatado que a NotreDame não tem lockup próprio nem no site do
+  grupo. O erro anterior não era o arquivo, era o arquivo de uma marca
+  embaixo do nome de outra — não separe os dois de novo.
 - O verde é o **único acento**. O âmbar não é um segundo acento: cobre
   dois usos semânticos, o aviso da ANS e as estrelas da avaliação.
-- `imagens/travus-capital.jpg` é dourado sobre **preto**: o arquivo
-  original era uma peça de fundo preto inteiro, 2000x1125, recortada na
-  logo. Sobre o cartão claro da parceria ela leva placa de
-  `--profundo`, pelo mesmo motivo da logo da nav. O cartão da parceria
-  **continua claro**: o preto e ouro que está no `main` do repositório
-  não foi trazido, porque o cliente recusou bloco escuro três vezes.
+- `imagens/travus-capital.png` é a arte da Travus **recolorida para
+  fundo claro**: o original era dourado sobre preto inteiro, e a placa
+  preta que resolvia isso foi recusada pelo cliente ("ficou estranha").
+  O recorte guarda o ouro da marca, troca o branco pelo `--profundo` e
+  zera o preto para transparente — por isso é PNG. O cartão da parceria
+  **continua claro**: o preto e ouro do `main` não foi trazido, porque
+  o cliente recusou bloco escuro três vezes. O botão da seção é
+  `btn-verde` sólido, a pedido dele: é a única ação da seção, então não
+  disputa com o CTA principal.
+- O **registro na ANS** fica no rodapé, embaixo do nome de cada
+  operadora (`.rodape-operadoras .ans`), não no muro de logos — o
+  cliente pediu assim depois de ver nos dois lugares. Seis estão
+  preenchidos a partir de documento público; **Porto e Omint estão
+  sem número de propósito**: o grupo Porto tem duas operadoras de
+  saúde registradas, com números diferentes, e o da Omint não foi
+  confirmado. Não preencha por dedução — é identificação regulatória.
 - Um sistema de formas só: interativo = pílula (`--r-pilula`),
   contêiner = `--r-caixa` (16px), campo = `--r-campo` (12px).
 - Acessibilidade é explícita no markup existente (link "pular",
@@ -210,6 +236,13 @@ contrato com o CRM.
   (`cesarnieto.jpeg`) e Rodrigo Francheli (`rodrigofrancheli.jpeg`).
   **Ninguém tem cargo**: a lista é só de nomes, acompanhando a decisão
   que veio do `main` do repositório. `.pessoa p` foi removida junto.
+  A foto é **empilhada sobre o nome**, não ao lado, e grande
+  (`clamp(116px,13vw,152px)`): o cliente pediu rosto grande para o
+  visitante reconhecer o consultor depois. Os arquivos foram refeitos
+  a partir do original em ~555px, porque o enquadramento amplia e
+  400px ficava mole em tela de alta densidade. A grade vira uma coluna
+  só em **560px**, não antes: com a foto empilhada a célula é estreita
+  e as três colunas cabem bem mais tempo.
   Os três arquivos substituem `equipe-1/2/3.jpg`, que eram as mesmas
   fotos (idênticas por SHA-256) sem compressão.
 - Duas dessas fotos não são retratos de rosto: a do Cleiton é de meio
@@ -258,12 +291,13 @@ contrato com o CRM.
   acompanha a cor do botão quando o tema muda. Já houve ícone branco
   invisível em nav claro por causa disso.
 - `#prova` tem três depoimentos: a citação editorial do Carlos Santos
-  e, abaixo de um fio, o par `.depo-par`. Os dois do par vieram escritos
-  do `main` do repositório **com `[NOME DO CLIENTE]` na assinatura** e
-  são rascunho para validar com cliente real — não publique assim, e
-  não invente o nome. É a única coisa entre colchetes na página.
-  O texto do Carlos Santos aqui é o **original**, não a reescrita que
-  está no `main`: é o nome de uma pessoa real embaixo.
+  e, abaixo de um fio, o par `.depo-par`. Os dois do par estão
+  assinados **"Cliente PME", sem nome, de propósito**. O cliente
+  autorizou inventar nomes e isso foi recusado: assinar depoimento com
+  pessoa que não existe é declaração falsa ao consumidor, e quem
+  responde é a corretora. Sem nome é honesto e publicável. Chegando o
+  nome real com autorização, troca-se o texto e põem-se as iniciais no
+  `.avatar`.
 - `imagens/logo-thesmart.png` é um lockup para **fundo escuro**: 64% dos
   pixels opacos são brancos e 28% são o verde da marca. Sobre a nav
   clara sobravam só os traços verdes e a logo sumia. Por isso
